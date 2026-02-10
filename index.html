@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>DISHA BRAND | ديشا براند</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -10,7 +10,15 @@
     
     <style>
         :root { --bg: #0f0f0f; --card-bg: #1a1a1a; --gold: #D4AF37; --green: #25D366; --blue: #007bff; --text: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        /* حماية الموقع (منع النسخ والتحديد) */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none; /* منع قائمة اللمس المطول الافتراضية */
+            user-select: none; /* منع تحديد النصوص */
+        }
+        
         body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; overflow-x: hidden; padding-bottom: 60px; }
 
         /* Header */
@@ -25,7 +33,7 @@
         .hero p { font-size: 1.3rem; color: #ddd; margin-bottom: 30px; }
         .btn-hero { padding: 12px 50px; background-color: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 30px; font-size: 1.2rem; transition: 0.3s; border: 2px solid var(--gold); }
 
-        /* Grid */
+        /* Products Grid */
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 30px; color: var(--gold); }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -33,8 +41,10 @@
 
         /* Card */
         .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
+        /* جعل الصورة هي الزرار أيضاً */
         .img-wrapper { position: relative; width: 100%; padding-top: 130%; overflow: hidden; cursor: pointer; }
-        .product-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .product-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; } /* حماية الصورة من السحب */
+        
         .badge { position: absolute; top: 8px; right: 8px; background: #d32f2f; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; z-index: 2; }
         .info { padding: 12px; text-align: center; }
         .name { font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -42,7 +52,6 @@
         .curr { color: var(--gold); font-size: 1.1rem; font-weight: 900; }
         .old { color: #777; font-size: 0.8rem; text-decoration: line-through; margin-right: 5px; }
         
-        /* Buttons */
         .btn-card { width: 100%; padding: 10px; background: var(--green); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1rem; }
         .btn-card:active { transform: scale(0.98); }
 
@@ -65,11 +74,57 @@
         .btn-call { background: var(--blue); width: 100%; padding: 10px; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-size: 1rem; }
         .btn-cancel { background: transparent; border: 1px solid #555; color: #aaa; padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 5px; }
 
+        /* Custom Context Menu (القائمة الخاصة عند الضغط المطول) */
+        .custom-menu {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 10px;
+            width: 250px;
+            z-index: 9999;
+            display: none; /* مخفي افتراضيا */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+        
+        .menu-header { color: var(--gold); font-weight: bold; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #333; }
+        
+        .menu-item {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .menu-item:hover { background: #333; color: var(--gold); }
+        .menu-item i { margin-left: 10px; }
+
         footer { margin-top: 50px; padding: 30px; background: #000; text-align: center; border-top: 1px solid #333; }
         .credit { color: var(--gold); text-decoration: none; font-weight: bold; }
     </style>
 </head>
-<body>
+<body oncontextmenu="showCustomMenu(event); return false;">
+
+    <div id="customContextMenu" class="custom-menu">
+        <div class="menu-header">DISHA BRAND MENU</div>
+        <button class="menu-item" onclick="location.reload()"><i class="fas fa-sync"></i> تحديث الموقع</button>
+        <a href="https://wa.me/201284381589" class="menu-item"><i class="fab fa-whatsapp"></i> تواصل معنا</a>
+        <a href="tel:01117943368" class="menu-item"><i class="fas fa-phone"></i> اتصل بنا</a>
+        <button class="menu-item" onclick="hideCustomMenu()" style="color: #ff4d4d;"><i class="fas fa-times"></i> إغلاق</button>
+    </div>
 
     <header>
         <div class="logo-container">
@@ -91,13 +146,23 @@
             
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(1)">
+                <div class="img-wrapper" 
+                     data-name="هودي أسود (Black Skull)" 
+                     data-price="600" 
+                     data-front="https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg" 
+                     data-back="https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي أسود (Black Skull)</div>
                     <div class="price-box"><span class="curr">600 ج.م</span><span class="old">750</span></div>
-                    <button class="btn-card" onclick="openViewer(1)">
+                    <button class="btn-card" 
+                            data-name="هودي أسود (Black Skull)" 
+                            data-price="600" 
+                            data-front="https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg" 
+                            data-back="https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -105,13 +170,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(2)">
+                <div class="img-wrapper"
+                     data-name="هودي أوف وايت (Graphic)" 
+                     data-price="600" 
+                     data-front="https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg" 
+                     data-back="https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي أوف وايت (Graphic)</div>
                     <div class="price-box"><span class="curr">600 ج.م</span><span class="old">750</span></div>
-                    <button class="btn-card" onclick="openViewer(2)">
+                    <button class="btn-card"
+                            data-name="هودي أوف وايت (Graphic)" 
+                            data-price="600" 
+                            data-front="https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg" 
+                            data-back="https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -119,13 +194,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(3)">
+                <div class="img-wrapper"
+                     data-name="هودي رصاصي طباعة" 
+                     data-price="600" 
+                     data-front="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" 
+                     data-back="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي رصاصي طباعة</div>
                     <div class="price-box"><span class="curr">600 ج.م</span><span class="old">700</span></div>
-                    <button class="btn-card" onclick="openViewer(3)">
+                    <button class="btn-card"
+                            data-name="هودي رصاصي طباعة" 
+                            data-price="600" 
+                            data-front="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" 
+                            data-back="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -133,13 +218,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(4)">
+                <div class="img-wrapper"
+                     data-name="سويت شيرت بيسك (أسود)" 
+                     data-price="650" 
+                     data-front="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg" 
+                     data-back="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (أسود)</div>
                     <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
-                    <button class="btn-card" onclick="openViewer(4)">
+                    <button class="btn-card"
+                            data-name="سويت شيرت بيسك (أسود)" 
+                            data-price="650" 
+                            data-front="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg" 
+                            data-back="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -147,13 +242,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(5)">
+                <div class="img-wrapper"
+                     data-name="سويت شيرت بيسك (رصاصي)" 
+                     data-price="650" 
+                     data-front="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg" 
+                     data-back="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (رصاصي)</div>
                     <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
-                    <button class="btn-card" onclick="openViewer(5)">
+                    <button class="btn-card"
+                            data-name="سويت شيرت بيسك (رصاصي)" 
+                            data-price="650" 
+                            data-front="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg" 
+                            data-back="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -161,13 +266,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(6)">
+                <div class="img-wrapper"
+                     data-name="سويت شيرت بيسك (أوف وايت)" 
+                     data-price="650" 
+                     data-front="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg" 
+                     data-back="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (أوف وايت)</div>
                     <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
-                    <button class="btn-card" onclick="openViewer(6)">
+                    <button class="btn-card"
+                            data-name="سويت شيرت بيسك (أوف وايت)" 
+                            data-price="650" 
+                            data-front="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg" 
+                            data-back="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -175,13 +290,23 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(7)">
+                <div class="img-wrapper"
+                     data-name="سويت شيرت بريميم (أسود)" 
+                     data-price="800" 
+                     data-front="https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg" 
+                     data-back="https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بريميم (أسود)</div>
                     <div class="price-box"><span class="curr">800 ج.م</span><span class="old">1000</span></div>
-                    <button class="btn-card" onclick="openViewer(7)">
+                    <button class="btn-card"
+                            data-name="سويت شيرت بريميم (أسود)" 
+                            data-price="800" 
+                            data-front="https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg" 
+                            data-back="https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
+                            onclick="openViewer(this)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -189,156 +314,15 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(8)">
+                <div class="img-wrapper"
+                     data-name="سويت شيرت بريميم (هافان)" 
+                     data-price="800" 
+                     data-front="https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg" 
+                     data-back="https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg"
+                     onclick="openViewer(this)">
                     <img src="https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بريميم (هافان)</div>
                     <div class="price-box"><span class="curr">800 ج.م</span><span class="old">1000</span></div>
-                    <button class="btn-card" onclick="openViewer(8)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(9)">
-                    <img src="https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg" class="product-img">
-                </div>
-                <div class="info">
-                    <div class="name">ترنج كامل (أسود)</div>
-                    <div class="price-box"><span class="curr">900 ج.م</span><span class="old">1000</span></div>
-                    <button class="btn-card" onclick="openViewer(9)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(10)">
-                    <img src="https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg" class="product-img">
-                </div>
-                <div class="info">
-                    <div class="name">ترنج كامل (رصاصي)</div>
-                    <div class="price-box"><span class="curr">900 ج.م</span><span class="old">1000</span></div>
-                    <button class="btn-card" onclick="openViewer(10)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(11)">
-                    <img src="https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg" class="product-img">
-                </div>
-                <div class="info">
-                    <div class="name">سويت شيرت هاي إند (أسود)</div>
-                    <div class="price-box"><span class="curr">1300 ج.م</span><span class="old">1500</span></div>
-                    <button class="btn-card" onclick="openViewer(11)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(12)">
-                    <img src="https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg" class="product-img">
-                </div>
-                <div class="info">
-                    <div class="name">سويت شيرت هاي إند (بيج)</div>
-                    <div class="price-box"><span class="curr">1300 ج.م</span><span class="old">1500</span></div>
-                    <button class="btn-card" onclick="openViewer(12)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(13)">
-                    <img src="https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg" class="product-img">
-                </div>
-                <div class="info">
-                    <div class="name">بنطلون كارجو/جينز</div>
-                    <div class="price-box"><span class="curr">700 ج.م</span><span class="old">800</span></div>
-                    <button class="btn-card" onclick="openViewer(13)">
-                        <i class="fas fa-eye"></i> عرض التفاصيل
-                    </button>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    <div class="viewer-overlay" id="viewer">
-        <div class="viewer-header">
-            <h3 id="vName" style="color: var(--gold);">اسم المنتج</h3>
-            <i class="fas fa-times" onclick="closeViewer()" style="font-size: 1.5rem; cursor: pointer; color: white;"></i>
-        </div>
-        <div class="viewer-body">
-            <div class="main-view-box" onclick="toggleZoom()">
-                <img src="" id="vImg" class="main-view-img">
-            </div>
-            <p style="color: #666; font-size: 0.8rem; margin-bottom: 10px;">اضغط على الصورة للتكبير</p>
-            
-            <div class="controls">
-                <button class="ctrl-btn active" onclick="setSide('front')">الوش</button>
-                <button class="ctrl-btn" onclick="setSide('back')">الضهر</button>
-            </div>
-
-            <h2 id="vPrice" style="color: var(--gold); margin-bottom: 20px;"></h2>
-
-            <button class="btn-card" style="padding: 15px; font-size: 1.2rem;" onclick="openForm()">
-                <i class="fas fa-shopping-cart"></i> تنفيذ الطلب
-            </button>
-        </div>
-    </div>
-
-    <div class="form-overlay" id="orderForm">
-        <div class="form-box">
-            <h3 style="color: var(--gold); text-align: center; margin-bottom: 15px;">إتمام الطلب</h3>
-            <p style="color: #aaa; text-align: center; font-size: 0.9rem; margin-bottom: 15px;">أدخل بياناتك واختر طريقة الطلب</p>
-            
-            <input type="text" id="cName" class="inp-field" placeholder="الاسم بالكامل">
-            <select id="cGov" class="inp-field" onchange="loadCities()">
-                <option value="">اختر المحافظة...</option>
-            </select>
-            <select id="cCity" class="inp-field" disabled>
-                <option value="">اختر المدينة...</option>
-            </select>
-            <input type="text" id="cAddress" class="inp-field" placeholder="العنوان بالتفصيل">
-            
-            <div class="action-buttons">
-                <button class="btn-card" onclick="sendWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> طلب عبر واتساب
-                </button>
-                
-                <a href="tel:01117943368" class="btn-call">
-                    <i class="fas fa-phone"></i> اتصال مباشر
-                </a>
-
-                <button class="btn-cancel" onclick="closeForm()">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
-        <p style="color: #555; margin-top: 10px;">Created by <a href="https://wa.me/201128381838" class="credit">Ahmed Mohamed</a></p>
-    </footer>
-
-    <script>
-        // التأكد من تشغيل الكود بأمان
-        try {
-            // بيانات البراند والمنتجات
-            const waPhone = "201284381589";
-            
-            const productsData = {
-                1: { name: "هودي أسود (Black Skull)", price: 600, front: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg", back: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg" },
-                2: { name: "هودي أوف وايت (Graphic)", price: 600, front: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg", back: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg" },
-                3: { name: "هودي رصاصي طباعة", price: 600, front: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg", back: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" },
-                4: { name: "سويت شيرت بيسك (أسود)", price: 650, front: "https://i.postim
+           
