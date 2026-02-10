@@ -26,6 +26,7 @@
             color: var(--text-main);
             font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
+            padding-bottom: 50px;
         }
 
         /* --- Header --- */
@@ -112,6 +113,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            min-height: 500px; /* ضمان ظهور المساحة حتى لو المنتجات لسه بتحمل */
         }
 
         .section-title {
@@ -395,186 +397,171 @@
     </footer>
 
     <script>
-        // رقم الواتساب الخاص بصاحب البراند (للأوردرات)
-        const brandPhone = "201284381589"; 
-
-        // بيانات المحافظات والمدن
-        const egyptData = {
-            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع الخامس", "الرحاب", "شبرا", "وسط البلد", "حلوان", "المرج", "عين شمس", "المطرية"],
-            "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق", "بولاق الدكرور"],
-            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر", "محطة الرمل", "العصافرة", "فيكتوريا"],
-            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "طوخ", "العبور"],
-            "الدقهلية": ["المنصورة", "ميت غمر", "السنبلاوين", "طلخا"],
-            "الشرقية": ["الزقازيق", "العشر من رمضان", "بلبيس", "فاقوس"],
-            "الغربية": ["طنطا", "المحلة الكبرى", "كفر الزيات"],
-            "المنوفية": ["شبين الكوم", "أشمون", "منوف", "السادات"],
-            "البحيرة": ["دمنهور", "كفر الدوار", "رشيد"],
-            "كفر الشيخ": ["كفر الشيخ", "دسوق", "بلطيم"],
-            "دمياط": ["دمياط", "رأس البر", "دمياط الجديدة"],
-            "بورسعيد": ["بورسعيد", "بورفؤاد"],
-            "الإسماعيلية": ["الإسماعيلية", "فايد", "التل الكبير"],
-            "السويس": ["السويس", "الأربعين"],
-            "بني سويف": ["بني سويف", "الواسطى"],
-            "المنيا": ["المنيا", "ملوي", "بني مزار"],
-            "أسيوط": ["أسيوط", "ديروط", "منفلوط"],
-            "سوهاج": ["سوهاج", "جرجا", "طمه"],
-            "قنا": ["قنا", "نجع حمادي", "أرمنت"],
-            "الأقصر": ["الأقصر", "إسنا"],
-            "أسوان": ["أسوان", "كوم أمبو", "إدفو"],
-            "مطروح": ["مرسى مطروح", "الساحل الشمالي"],
-            "البحر الأحمر": ["الغردقة", "الجونة", "سفاجا"],
-            "جنوب سيناء": ["شرم الشيخ", "دهب"],
-            "شمال سيناء": ["العريش"],
-            "الفيوم": ["الفيوم"],
-            "الوادي الجديد": ["الخارجة"]
-        };
-
-        // تعبئة قائمة المحافظات عند التحميل
-        const govSelect = document.getElementById('governorateSelect');
-        const citySelect = document.getElementById('citySelect');
-        
-        for (let gov in egyptData) {
-            let option = document.createElement('option');
-            option.value = gov;
-            option.text = gov;
-            govSelect.appendChild(option);
-        }
-
-        // تحديث المدن بناءً على المحافظة
-        function updateCities() {
-            const selectedGov = govSelect.value;
-            citySelect.innerHTML = '<option value="">اختر المدينة...</option>';
+        document.addEventListener('DOMContentLoaded', function() {
             
-            if (selectedGov && egyptData[selectedGov]) {
-                citySelect.disabled = false;
-                egyptData[selectedGov].forEach(city => {
+            // --- إعدادات البراند ---
+            const brandPhone = "201284381589"; 
+
+            // --- بيانات المحافظات ---
+            const egyptData = {
+                "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع الخامس", "الرحاب", "شبرا", "وسط البلد", "حلوان", "المرج", "عين شمس", "المطرية"],
+                "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق", "بولاق الدكرور"],
+                "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر", "محطة الرمل", "العصافرة", "فيكتوريا"],
+                "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "طوخ", "العبور"],
+                "الدقهلية": ["المنصورة", "ميت غمر", "السنبلاوين", "طلخا"],
+                "الشرقية": ["الزقازيق", "العشر من رمضان", "بلبيس", "فاقوس"],
+                "الغربية": ["طنطا", "المحلة الكبرى", "كفر الزيات"],
+                "المنوفية": ["شبين الكوم", "أشمون", "منوف", "السادات"],
+                "البحيرة": ["دمنهور", "كفر الدوار", "رشيد"],
+                "كفر الشيخ": ["كفر الشيخ", "دسوق", "بلطيم"],
+                "دمياط": ["دمياط", "رأس البر", "دمياط الجديدة"],
+                "بورسعيد": ["بورسعيد", "بورفؤاد"],
+                "الإسماعيلية": ["الإسماعيلية", "فايد", "التل الكبير"],
+                "السويس": ["السويس", "الأربعين"],
+                "بني سويف": ["بني سويف", "الواسطى"],
+                "المنيا": ["المنيا", "ملوي", "بني مزار"],
+                "أسيوط": ["أسيوط", "ديروط", "منفلوط"],
+                "سوهاج": ["سوهاج", "جرجا", "طمه"],
+                "قنا": ["قنا", "نجع حمادي", "أرمنت"],
+                "الأقصر": ["الأقصر", "إسنا"],
+                "أسوان": ["أسوان", "كوم أمبو", "إدفو"],
+                "مطروح": ["مرسى مطروح", "الساحل الشمالي"],
+                "البحر الأحمر": ["الغردقة", "الجونة", "سفاجا"],
+                "جنوب سيناء": ["شرم الشيخ", "دهب"],
+                "شمال سيناء": ["العريش"],
+                "الفيوم": ["الفيوم"],
+                "الوادي الجديد": ["الخارجة"]
+            };
+
+            // --- تعبئة المحافظات ---
+            const govSelect = document.getElementById('governorateSelect');
+            const citySelect = document.getElementById('citySelect');
+            
+            if (govSelect) {
+                for (let gov in egyptData) {
                     let option = document.createElement('option');
-                    option.value = city;
-                    option.text = city;
-                    citySelect.appendChild(option);
-                });
-            } else {
-                citySelect.disabled = true;
-            }
-        }
-
-        // متغير لتخزين المنتج الحالي المطلوب
-        let currentProduct = {};
-
-        // فتح النافذة
-        function openOrderModal(pName, pPrice) {
-            currentProduct = { name: pName, price: pPrice };
-            document.getElementById('orderModal').style.display = 'flex';
-        }
-
-        // إغلاق النافذة
-        function closeModal() {
-            document.getElementById('orderModal').style.display = 'none';
-        }
-
-        // إرسال البيانات للواتساب
-        function sendToWhatsApp() {
-            const name = document.getElementById('customerName').value;
-            const gov = document.getElementById('governorateSelect').value;
-            const city = document.getElementById('citySelect').value;
-            const address = document.getElementById('addressDetail').value;
-
-            if (!name || !gov || !city || !address) {
-                alert("من فضلك أكمل جميع البيانات المطلوبة");
-                return;
+                    option.value = gov;
+                    option.text = gov;
+                    govSelect.appendChild(option);
+                }
             }
 
-            const message = `السلام عليكم، طلب جديد من الموقع 🛒%0a%0a*المنتج:* ${currentProduct.name}%0a*السعر:* ${currentProduct.price} جنيه%0a------------------%0a*بيانات الشحن:*%0a👤 *الاسم:* ${name}%0a📍 *المحافظة:* ${gov}%0a🏙️ *المدينة:* ${city}%0a🏠 *العنوان:* ${address}%0a%0aممكن تأكيد الطلب ومعرفة مصاريف الشحن؟`;
+            // --- دالة تحديث المدن ---
+            window.updateCities = function() {
+                const selectedGov = govSelect.value;
+                citySelect.innerHTML = '<option value="">اختر المدينة...</option>';
+                
+                if (selectedGov && egyptData[selectedGov]) {
+                    citySelect.disabled = false;
+                    egyptData[selectedGov].forEach(city => {
+                        let option = document.createElement('option');
+                        option.value = city;
+                        option.text = city;
+                        citySelect.appendChild(option);
+                    });
+                } else {
+                    citySelect.disabled = true;
+                }
+            };
+
+            // --- إدارة النافذة (Modal) ---
+            window.currentProduct = {};
+
+            window.openOrderModal = function(pName, pPrice) {
+                window.currentProduct = { name: pName, price: pPrice };
+                const modal = document.getElementById('orderModal');
+                if(modal) modal.style.display = 'flex';
+            };
+
+            window.closeModal = function() {
+                const modal = document.getElementById('orderModal');
+                if(modal) modal.style.display = 'none';
+            };
+
+            window.sendToWhatsApp = function() {
+                const name = document.getElementById('customerName').value;
+                const gov = document.getElementById('governorateSelect').value;
+                const city = document.getElementById('citySelect').value;
+                const address = document.getElementById('addressDetail').value;
+
+                if (!name || !gov || !city || !address) {
+                    alert("من فضلك أكمل جميع البيانات المطلوبة");
+                    return;
+                }
+
+                const message = `السلام عليكم، طلب جديد من الموقع 🛒%0a%0a*المنتج:* ${window.currentProduct.name}%0a*السعر:* ${window.currentProduct.price} جنيه%0a------------------%0a*بيانات الشحن:*%0a👤 *الاسم:* ${name}%0a📍 *المحافظة:* ${gov}%0a🏙️ *المدينة:* ${city}%0a🏠 *العنوان:* ${address}%0a%0aممكن تأكيد الطلب ومعرفة مصاريف الشحن؟`;
+                
+                const waLink = `https://wa.me/${brandPhone}?text=${message}`;
+                window.open(waLink, '_blank');
+                window.closeModal();
+            };
+
+            // --- قائمة المنتجات ---
+            const products = [
+                {
+                    name: "هودي أسود (Black Skull)",
+                    price: 600,
+                    oldPrice: 750,
+                    imgFront: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg",
+                    imgBack: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
+                },
+                {
+                    name: "هودي أوف وايت (Graphic)",
+                    price: 600,
+                    oldPrice: 750,
+                    imgFront: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg",
+                    imgBack: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
+                },
+                {
+                    name: "هودي رصاصي طباعة",
+                    price: 600,
+                    oldPrice: 700,
+                    imgFront: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg",
+                    imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
+                },
+                {
+                    name: "سويت شيرت بيسك (أسود)",
+                    price: 650,
+                    oldPrice: 800,
+                    imgFront: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg",
+                    imgBack: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
+                },
+                {
+                    name: "سويت شيرت بيسك (رصاصي)",
+                    price: 650,
+                    oldPrice: 800,
+                    imgFront: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg",
+                    imgBack: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
+                },
+                {
+                    name: "سويت شيرت بيسك (أوف وايت)",
+                    price: 650,
+                    oldPrice: 800,
+                    imgFront: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg",
+                    imgBack: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
+                },
+                {
+                    name: "سويت شيرت بريميم (أسود)",
+                    price: 800,
+                    oldPrice: 1000,
+                    imgFront: "https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg",
+                    imgBack: "https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
+                },
+                {
+                    name: "سويت شيرت بريميم (هافان)",
+                    price: 800,
+                    oldPrice: 1000,
+                    imgFront: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg",
+                    imgBack: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg"
+                },
+                {
+                    name: "ترنج كامل (أسود)",
+                    price: 900,
+                    oldPrice: 1000,
+                    imgFront: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg",
+                    imgBack: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg"
+                },
+                {
+                    name: "ترنج كامل (رصاصي)",
+                    price: 900,
             
-            const waLink = `https://wa.me/${brandPhone}?text=${message}`;
-            window.open(waLink, '_blank');
-            closeModal();
-        }
-
-        // --- قائمة المنتجات (تم التأكد منها) ---
-        const products = [
-            {
-                name: "هودي أسود (Black Skull)",
-                price: 600,
-                oldPrice: 750,
-                imgFront: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg",
-                imgBack: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
-            },
-            {
-                name: "هودي أوف وايت (Graphic)",
-                price: 600,
-                oldPrice: 750,
-                imgFront: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg",
-                imgBack: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
-            },
-            {
-                name: "هودي رصاصي طباعة",
-                price: 600,
-                oldPrice: 700,
-                imgFront: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg",
-                imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
-            },
-            {
-                name: "سويت شيرت بيسك (أسود)",
-                price: 650,
-                oldPrice: 800,
-                imgFront: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg",
-                imgBack: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
-            },
-            {
-                name: "سويت شيرت بيسك (رصاصي)",
-                price: 650,
-                oldPrice: 800,
-                imgFront: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg",
-                imgBack: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
-            },
-            {
-                name: "سويت شيرت بيسك (أوف وايت)",
-                price: 650,
-                oldPrice: 800,
-                imgFront: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg",
-                imgBack: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
-            },
-            {
-                name: "سويت شيرت بريميم (أسود)",
-                price: 800,
-                oldPrice: 1000,
-                imgFront: "https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg",
-                imgBack: "https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
-            },
-            {
-                name: "سويت شيرت بريميم (هافان)",
-                price: 800,
-                oldPrice: 1000,
-                imgFront: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg",
-                imgBack: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg"
-            },
-            {
-                name: "ترنج كامل (أسود)",
-                price: 900,
-                oldPrice: 1000,
-                imgFront: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg",
-                imgBack: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg"
-            },
-            {
-                name: "ترنج كامل (رصاصي)",
-                price: 900,
-                oldPrice: 1000,
-                imgFront: "https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg",
-                imgBack: "https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg"
-            },
-            {
-                name: "سويت شيرت هاي إند (أسود)",
-                price: 1300,
-                oldPrice: 1500,
-                imgFront: "https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg",
-                imgBack: "https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg"
-            },
-            {
-                name: "سويت شيرت هاي إند (بيج)",
-                price: 1300,
-                oldPrice: 1500,
-                imgFront: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg",
-                imgBack: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg"
-            },
-      
