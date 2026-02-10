@@ -3,263 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DISHA BRAND</title>
+    <title>DISHA BRAND | ديشا براند</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #121212;
-            --card-bg: #1e1e1e;
-            --primary: #D4AF37; /* دهبي */
-            --green: #25D366;   /* أخضر الواتس */
+            --bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --gold: #D4AF37;
+            --green: #25D366;
             --text: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body { background-color: var(--bg); color: var(--text); padding-bottom: 60px; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
 
-        /* --- Header --- */
+        /* --- Header (اللوجو رجع كبير) --- */
         header {
-            background: rgba(18, 18, 18, 0.95);
-            padding: 15px;
+            background-color: rgba(15, 15, 15, 0.95);
+            padding: 10px 5%;
             position: fixed;
             width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid #333;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
         }
 
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-img { width: 40px; border-radius: 50%; border: 1px solid var(--primary); }
-        .brand-name { font-weight: 900; color: var(--primary); letter-spacing: 1px; }
-
-        /* --- Products Grid --- */
-        .container { padding: 80px 10px 20px 10px; max-width: 1200px; margin: 0 auto; }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
         
+        .logo-img {
+            height: 65px; /* كبرنا اللوجو */
+            width: auto;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+        }
+
+        .brand-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* --- Hero Section (الواجهة رجعت) --- */
+        .hero {
+            height: 85vh; /* واجهة طويلة وفخمة */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Oswald', sans-serif;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .btn-hero {
+            padding: 12px 50px;
+            background-color: var(--gold);
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-hero:hover { background-color: transparent; color: var(--gold); }
+
+        /* --- Products Section --- */
+        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 30px; color: var(--gold); }
+
+        /* الشبكة (Grid) */
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* عمودين للموبايل */
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr); /* 2 للموبايل */
+            gap: 12px;
         }
+        @media(min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
-        @media (min-width: 768px) {
-            .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        }
-
-        /* --- Card Design --- */
+        /* الكارت */
         .card {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #333;
-            display: flex;
-            flex-direction: column;
             position: relative;
         }
 
-        .img-box {
+        .img-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 125%; /* نسبة طول للصورة */
+            padding-top: 130%; /* طول الصورة */
             overflow: hidden;
             cursor: pointer;
         }
 
-        .card-img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
+        .product-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
         }
 
-        .details { padding: 10px; text-align: center; }
-        
-        .p-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
-        .price-box { margin-bottom: 8px; }
-        .curr-price { color: var(--primary); font-weight: 900; font-size: 1.1rem; }
-        .old-price { color: #777; font-size: 0.8rem; text-decoration: line-through; margin-right: 5px; }
-
-        .btn-green {
-            background: var(--green);
-            color: white;
-            border: none;
-            padding: 8px;
-            width: 100%;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 0.9rem;
+        .badge {
+            position: absolute; top: 8px; right: 8px;
+            background: #d32f2f; color: white;
+            padding: 4px 8px; border-radius: 4px;
+            font-size: 0.7rem; font-weight: bold; z-index: 2;
         }
 
-        /* --- Product Viewer Modal (التحديث الجديد) --- */
+        .info { padding: 12px; text-align: center; }
+
+        .name { font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .price-box { margin-bottom: 10px; }
+        .curr { color: var(--gold); font-size: 1.1rem; font-weight: 900; }
+        .old { color: #777; font-size: 0.8rem; text-decoration: line-through; margin-right: 5px; }
+
+        .btn-card {
+            width: 100%; padding: 8px;
+            background: var(--green); color: white;
+            border: none; border-radius: 6px;
+            font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+
+        /* --- Product Viewer (Modal) --- */
         .viewer-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 2000;
-            display: none;
-            flex-direction: column;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 2000;
+            display: none; flex-direction: column;
             overflow-y: auto;
         }
 
         .viewer-header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
+            padding: 15px; display: flex; justify-content: space-between; align-items: center;
+            background: #111; border-bottom: 1px solid #333;
         }
 
-        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .viewer-body { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; }
 
-        .viewer-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+        .main-view-box {
+            width: 100%; max-width: 500px; height: 450px;
+            border: 1px solid #333; border-radius: 10px;
+            margin-bottom: 15px; overflow: hidden; position: relative;
         }
 
-        .main-image-container {
-            width: 100%;
-            max-width: 500px;
-            height: 400px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            border: 1px solid #333;
-            margin-bottom: 20px;
-        }
+        .main-view-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
+        .zoomed { transform: scale(2.5); cursor: zoom-out; }
 
-        .main-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s ease;
+        .controls { display: flex; gap: 15px; margin-bottom: 20px; }
+        .ctrl-btn {
+            background: #333; color: white; border: 1px solid #555;
+            padding: 10px 25px; border-radius: 25px; cursor: pointer;
         }
-
-        /* كلاس الزوم */
-        .zoomed { transform: scale(2); cursor: zoom-out; }
-
-        .controls { display: flex; gap: 10px; margin-bottom: 20px; }
-        
-        .control-btn {
-            background: #333;
-            color: white;
-            border: 1px solid #555;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        
-        .control-btn.active { border-color: var(--primary); color: var(--primary); }
+        .ctrl-btn.active { border-color: var(--gold); color: var(--gold); }
 
         /* --- Order Form Modal --- */
-        .form-modal {
+        .form-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 3000;
-            display: none;
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.9); z-index: 3000;
+            display: none; justify-content: center; align-items: center;
             backdrop-filter: blur(5px);
         }
 
-        .form-content {
-            background: #222;
-            padding: 20px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            border: 1px solid var(--primary);
+        .form-box {
+            background: #222; padding: 25px; border-radius: 15px;
+            width: 90%; max-width: 400px; border: 1px solid var(--gold);
         }
 
-        .inp {
-            width: 100%; padding: 12px; margin-bottom: 15px;
-            background: #111; border: 1px solid #444;
-            color: white; border-radius: 8px;
+        .inp-field {
+            width: 100%; padding: 12px; margin-bottom: 12px;
+            background: #111; border: 1px solid #444; color: white; border-radius: 8px;
         }
 
-        .footer {
-            text-align: center; padding: 20px; font-size: 0.8rem; color: #777;
-            position: fixed; bottom: 0; width: 100%; background: #121212;
-            border-top: 1px solid #222;
+        /* --- Footer --- */
+        footer {
+            margin-top: 50px; padding: 30px; background: #000;
+            text-align: center; border-top: 1px solid #333;
         }
+        .credit { color: var(--gold); text-decoration: none; font-weight: bold; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-area">
-            <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" class="logo-img">
-            <span class="brand-name">DISHA BRAND</span>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" class="logo-img" alt="Logo">
+            <span class="brand-text">DISHA BRAND</span>
         </div>
-        <i class="fas fa-shopping-bag" style="color: white; font-size: 1.2rem;"></i>
+        <a href="#collection" style="color: white; font-size: 1.4rem;"><i class="fas fa-shopping-bag"></i></a>
     </header>
 
-    <div class="container">
+    <section class="hero">
+        <h1>STREETWEAR <br> <span style="color: var(--gold)">COLLECTION</span></h1>
+        <p>أقوى كولكشن شتوي بأسعار زمان</p>
+        <a href="#collection" class="btn-hero">تسوق الآن</a>
+    </section>
+
+    <section id="collection" class="container">
+        <h2 class="section-title">الكولكشن الجديد</h2>
         <div class="grid" id="productsGrid">
             </div>
-    </div>
+    </section>
 
-    <div class="viewer-overlay" id="productViewer">
+    <div class="viewer-overlay" id="viewer">
         <div class="viewer-header">
-            <h3 id="viewName">اسم المنتج</h3>
-            <button class="close-btn" onclick="closeViewer()"><i class="fas fa-times"></i></button>
+            <h3 id="vName" style="color: var(--gold);">اسم المنتج</h3>
+            <i class="fas fa-times" onclick="closeViewer()" style="font-size: 1.5rem; cursor: pointer; color: white;"></i>
         </div>
         <div class="viewer-body">
-            <div class="main-image-container" onclick="toggleZoom()">
-                <img src="" id="viewImage" class="main-image">
+            <div class="main-view-box" onclick="toggleZoom()">
+                <img src="" id="vImg" class="main-view-img">
             </div>
-            <p style="color: #777; font-size: 0.8rem; margin-bottom: 10px;">اضغط على الصورة للتكبير (Zoom)</p>
+            <p style="color: #666; font-size: 0.8rem; margin-bottom: 10px;">اضغط على الصورة للتكبير</p>
             
             <div class="controls">
-                <button class="control-btn active" onclick="switchView('front')">الوش</button>
-                <button class="control-btn" onclick="switchView('back')">الضهر</button>
+                <button class="ctrl-btn active" onclick="setSide('front')">الوش</button>
+                <button class="ctrl-btn" onclick="setSide('back')">الضهر</button>
             </div>
 
-            <div class="price-box">
-                <span class="curr-price" id="viewPrice" style="font-size: 1.5rem;"></span>
-            </div>
+            <h2 id="vPrice" style="color: var(--gold); margin-bottom: 20px;"></h2>
 
-            <button class="btn-green" style="padding: 15px; font-size: 1.1rem;" onclick="openFormFromViewer()">
+            <button class="btn-card" style="padding: 15px; font-size: 1.2rem;" onclick="openForm()">
                 <i class="fab fa-whatsapp"></i> اطلب الآن
             </button>
         </div>
     </div>
 
-    <div class="form-modal" id="orderForm">
-        <div class="form-content">
-            <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">بيانات الشحن</h3>
-            <input type="text" id="cName" class="inp" placeholder="الاسم بالكامل">
-            <select id="cGov" class="inp" onchange="loadCities()">
+    <div class="form-overlay" id="orderForm">
+        <div class="form-box">
+            <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">بيانات الشحن</h3>
+            <input type="text" id="cName" class="inp-field" placeholder="الاسم بالكامل">
+            <select id="cGov" class="inp-field" onchange="loadCities()">
                 <option value="">اختر المحافظة...</option>
             </select>
-            <select id="cCity" class="inp" disabled>
+            <select id="cCity" class="inp-field" disabled>
                 <option value="">اختر المدينة...</option>
             </select>
-            <input type="text" id="cAddress" class="inp" placeholder="العنوان بالتفصيل (الشارع / رقم البيت)">
+            <input type="text" id="cAddress" class="inp-field" placeholder="العنوان بالتفصيل">
             
-            <div style="display: flex; gap: 10px;">
-                <button class="btn-green" onclick="sendOrder()">إرسال الطلب</button>
-                <button class="btn-green" style="background: transparent; border: 1px solid #555;" onclick="closeForm()">إلغاء</button>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="btn-card" onclick="sendOrder()">تأكيد الطلب</button>
+                <button class="btn-card" style="background: transparent; border: 1px solid #555;" onclick="closeForm()">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-        Created by <a href="https://wa.me/201128381838" style="color: var(--primary); text-decoration: none;">Ahmed Mohamed</a>
-    </div>
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+        <p style="color: #555; margin-top: 10px;">
+            Created by <a href="https://wa.me/201128381838" class="credit">Ahmed Mohamed</a>
+        </p>
+    </footer>
 
     <script>
         // --- البيانات ---
@@ -303,87 +332,69 @@
             "أسوان": ["أسوان"]
         };
 
-        // --- عرض المنتجات ---
+        // --- Render Products ---
         const grid = document.getElementById('productsGrid');
         
         products.forEach(p => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <div class="img-box" onclick="openViewer(${p.id})">
-                    <img src="${p.front}" class="card-img" alt="${p.name}">
+                <div class="badge">SALE</div>
+                <div class="img-wrapper" onclick="openViewer(${p.id})">
+                    <img src="${p.front}" class="product-img" alt="${p.name}">
                 </div>
-                <div class="details">
-                    <div class="p-name">${p.name}</div>
+                <div class="info">
+                    <div class="name">${p.name}</div>
                     <div class="price-box">
-                        <span class="curr-price">${p.price} ج.م</span>
-                        <span class="old-price">${p.old}</span>
+                        <span class="curr">${p.price} ج.م</span>
+                        <span class="old">${p.old}</span>
                     </div>
-                    <button class="btn-green" onclick="openViewer(${p.id})">
-                        <i class="fas fa-cart-plus"></i> اطلب الآن
+                    <button class="btn-card" onclick="openViewer(${p.id})">
+                        <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
             `;
             grid.appendChild(card);
         });
 
-        // --- منطق عارض الصور (Viewer) ---
-        let currentP = null;
+        // --- Logic ---
+        let currP = null;
         let isFront = true;
 
         function openViewer(id) {
-            currentP = products.find(p => p.id === id);
-            if(!currentP) return;
-
-            document.getElementById('viewName').innerText = currentP.name;
-            document.getElementById('viewPrice').innerText = currentP.price + " ج.م";
-            document.getElementById('productViewer').style.display = 'flex';
-            
-            // إعادة تعيين الحالة
-            isFront = true;
-            resetZoom();
-            updateViewImage();
+            currP = products.find(p => p.id === id);
+            document.getElementById('vName').innerText = currP.name;
+            document.getElementById('vPrice').innerText = currP.price + " ج.م";
+            document.getElementById('viewer').style.display = 'flex';
+            setSide('front');
+            document.getElementById('vImg').classList.remove('zoomed');
         }
 
         function closeViewer() {
-            document.getElementById('productViewer').style.display = 'none';
+            document.getElementById('viewer').style.display = 'none';
         }
 
-        function switchView(side) {
+        function setSide(side) {
             isFront = (side === 'front');
-            updateViewImage();
-            // تحديث ستايل الزراير
-            const btns = document.querySelectorAll('.control-btn');
+            document.getElementById('vImg').src = isFront ? currP.front : currP.back;
+            const btns = document.querySelectorAll('.ctrl-btn');
             btns[0].classList.toggle('active', isFront);
             btns[1].classList.toggle('active', !isFront);
         }
 
-        function updateViewImage() {
-            const img = document.getElementById('viewImage');
-            img.src = isFront ? currentP.front : currentP.back;
-        }
-
         function toggleZoom() {
-            const img = document.getElementById('viewImage');
-            img.classList.toggle('zoomed');
-        }
-        
-        function resetZoom() {
-            document.getElementById('viewImage').classList.remove('zoomed');
+            document.getElementById('vImg').classList.toggle('zoomed');
         }
 
-        // --- منطق فورم الطلب ---
-        function openFormFromViewer() {
-            closeViewer(); // نقفل العارض
-            document.getElementById('orderForm').style.display = 'flex'; // نفتح الفورم
-            
-            // تحميل المحافظات
+        function openForm() {
+            closeViewer();
+            document.getElementById('orderForm').style.display = 'flex';
             const govSel = document.getElementById('cGov');
-            if (govSel.options.length === 1) { // لو فاضية بس
-                for (let g in egyptData) {
-                    let op = document.createElement('option');
-                    op.value = g; op.innerText = g;
-                    govSel.appendChild(op);
+            if(govSel.options.length === 1) {
+                for(let g in egyptData) {
+                    let opt = document.createElement('option');
+                    opt.value = g; opt.innerText = g;
+                    govSel.appendChild(opt);
                 }
             }
         }
@@ -396,13 +407,12 @@
             const gov = document.getElementById('cGov').value;
             const citySel = document.getElementById('cCity');
             citySel.innerHTML = '<option value="">اختر المدينة...</option>';
-            
-            if (gov && egyptData[gov]) {
+            if(gov && egyptData[gov]) {
                 citySel.disabled = false;
                 egyptData[gov].forEach(c => {
-                    let op = document.createElement('option');
-                    op.value = c; op.innerText = c;
-                    citySel.appendChild(op);
+                    let opt = document.createElement('option');
+                    opt.value = c; opt.innerText = c;
+                    citySel.appendChild(opt);
                 });
             } else {
                 citySel.disabled = true;
@@ -416,11 +426,11 @@
             const addr = document.getElementById('cAddress').value;
 
             if(!name || !gov || !city || !addr) {
-                alert('من فضلك أكمل البيانات');
+                alert('البيانات ناقصة يا ريس!');
                 return;
             }
 
-            const msg = `طلب جديد: ${currentP.name}%0aالسعر: ${currentP.price} جنيه%0a-- بيانات الشحن --%0aالاسم: ${name}%0aالعنوان: ${gov} - ${city} - ${addr}`;
+            const msg = `طلب جديد: ${currP.name}%0aالسعر: ${currP.price} جنيه%0a-- بيانات العميل --%0aالاسم: ${name}%0aالعنوان: ${gov} - ${city} - ${addr}`;
             window.open(`https://wa.me/201284381589?text=${msg}`, '_blank');
             closeForm();
         }
