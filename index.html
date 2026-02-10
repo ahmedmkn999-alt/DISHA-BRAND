@@ -21,23 +21,24 @@
             display: flex; justify-content: space-between; align-items: center; padding: 0 15px;
             backdrop-filter: blur(10px);
         }
-        .logo { height: 45px; border: 1px solid var(--gold); border-radius: 5px; }
+        .logo-text { font-family: 'Oswald'; color: var(--gold); font-size: 1.5rem; font-weight: bold; border: 2px solid var(--gold); padding: 2px 10px; border-radius: 5px; }
         
+        .nav-links { display: flex; gap: 5px; }
         .nav-btn {
-            background: none; border: none; color: #aaa; font-weight: bold; font-size: 0.95rem;
-            margin-left: 5px; cursor: pointer; padding: 8px 12px; font-family: 'Cairo'; transition: 0.3s;
+            background: none; border: none; color: #aaa; font-weight: bold; font-size: 0.9rem;
+            cursor: pointer; padding: 8px 10px; font-family: 'Cairo'; transition: 0.3s;
         }
         .nav-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
 
         /* Pages */
-        .page { display: none; width: 100%; }
-        .page.active { display: block; animation: fadeEffect 0.5s; }
-        @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
+        .page { display: none; width: 100%; animation: fadeIn 0.5s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- Hero Video Section --- */
         .hero-container {
             position: relative;
-            height: 65vh; /* طول الفيديو */
+            height: 60vh;
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -45,9 +46,9 @@
             align-items: center;
             border-bottom: 3px solid var(--gold);
             margin-bottom: 20px;
+            background: #000;
         }
 
-        /* الفيديو كخلفية */
         #heroVideo {
             position: absolute;
             top: 50%; left: 50%;
@@ -56,17 +57,9 @@
             width: auto; height: auto;
             z-index: 1;
             object-fit: cover;
+            opacity: 0.6;
         }
 
-        /* طبقة سوداء خفيفة فوق الفيديو عشان الكلام يبان */
-        .video-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 2;
-        }
-
-        /* الكلام فوق الفيديو */
         .hero-content {
             position: relative;
             z-index: 3;
@@ -75,33 +68,32 @@
 
         .hero-content h1 { 
             color: white; font-family: 'Oswald'; font-size: 3rem; 
-            text-shadow: 0 0 15px black; margin: 0; line-height: 1.2;
-        }
-        .hero-content p {
-            color: #ddd; font-size: 1.2rem; margin-top: 5px; text-shadow: 0 0 5px black;
+            text-shadow: 0 0 20px black; margin: 0; line-height: 1.1;
         }
         .hero-btn {
             background: var(--gold); border: none; padding: 12px 40px; 
-            font-weight: bold; font-size: 1.2rem; color: black;
-            border-radius: 30px; cursor: pointer; margin-top: 20px;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            font-weight: bold; font-size: 1.1rem; color: black;
+            border-radius: 30px; cursor: pointer; margin-top: 15px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
         /* Grid System */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 10px; max-width: 1200px; margin: 0 auto; }
-        .card { background: var(--card-bg); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+        .sec-title { padding: 0 15px; margin-bottom: 15px; border-right: 4px solid var(--gold); color: white; font-weight: bold; font-size: 1.2rem; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; max-width: 1200px; margin: 0 auto; }
         
-        .img-area { position: relative; padding-top: 130%; cursor: pointer; }
-        .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        .badge { position: absolute; top: 5px; right: 5px; background: #d00; color: white; padding: 2px 8px; font-size: 0.7rem; border-radius: 4px; z-index: 5; }
+        .card { background: #151515; border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+        
+        .img-area { position: relative; padding-top: 125%; cursor: pointer; background: #222; }
+        .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .badge { position: absolute; top: 5px; right: 5px; background: #d00; color: white; padding: 2px 8px; font-size: 0.7rem; border-radius: 4px; font-weight: bold; z-index: 2; }
 
-        .details { padding: 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .p-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
+        .details { padding: 10px; text-align: center; }
+        .p-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; color: #fff; }
         .price { color: var(--gold); font-weight: 900; font-size: 1.1rem; }
         .old-price { text-decoration: line-through; color: #666; font-size: 0.8rem; margin-right: 5px; }
         
         .buy-btn {
-            width: 100%; background: var(--green); color: white; border: none; padding: 10px;
+            width: 100%; background: var(--green); color: white; border: none; padding: 8px;
             margin-top: 8px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.9rem;
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
@@ -112,34 +104,22 @@
             z-index: 10000; display: none; flex-direction: column; overflow-y: auto;
         }
         .modal-head { padding: 15px; display: flex; justify-content: space-between; align-items: center; background: #222; border-bottom: 1px solid #333; }
-        .modal-content { padding: 20px; text-align: center; flex: 1; }
-        .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 15px; border-radius: 10px; }
+        .modal-content { padding: 20px; text-align: center; }
+        .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 15px; border-radius: 10px; background: #111; }
         
-        .action-btn {
-            width: 100%; padding: 15px; margin-top: 10px; border: none; border-radius: 8px;
-            font-weight: bold; font-size: 1.1rem; cursor: pointer;
-        }
+        .action-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
         .whatsapp { background: var(--green); color: white; }
         .call { background: #007bff; color: white; }
-        .cancel { background: transparent; border: 1px solid #555; color: #ccc; padding: 10px; font-size: 0.9rem; }
-
+        .cancel { background: transparent; border: 1px solid #555; color: #ccc; }
         .inp { width: 100%; padding: 12px; background: #222; border: 1px solid #444; color: white; margin-bottom: 12px; border-radius: 5px; font-size: 1rem; }
-
-        /* Section Titles */
-        .sec-head { padding: 0 15px; margin: 20px 0 10px 0; border-right: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
-        .sec-head h3 { color: white; margin: 0; font-size: 1.2rem; }
-        .see-all { color: var(--gold); font-size: 0.9rem; cursor: pointer; }
 
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; align-items: center;" onclick="window.goPage('home')">
-            <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" class="logo">
-            <span style="color: var(--gold); font-weight: bold; margin-right: 10px; font-family: 'Oswald'; font-size: 1.3rem;">DISHA</span>
-        </div>
-        <div>
+        <div class="logo-text" onclick="window.goPage('home')">DISHA</div>
+        <div class="nav-links">
             <button class="nav-btn active" onclick="window.goPage('home')" id="btn-home">الرئيسية</button>
             <button class="nav-btn" onclick="window.goPage('hoodies')" id="btn-hoodies">هوديز</button>
             <button class="nav-btn" onclick="window.goPage('pants')" id="btn-pants">بناطيل</button>
@@ -150,47 +130,38 @@
         <div class="hero-container">
             <video id="heroVideo" autoplay muted loop playsinline>
                 <source src="https://drive.google.com/uc?export=download&id=10xl9h6X9JlIGluS68mv_87RMlShPk4g-" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
-            <div class="video-overlay"></div>
             <div class="hero-content">
                 <h1>STREETWEAR<br><span style="color:var(--gold)">2026</span></h1>
-                <p>أقوى كولكشن شتوي بأسعار زمان</p>
                 <button class="hero-btn" onclick="window.goPage('hoodies')">تسوق الآن</button>
             </div>
         </div>
 
-        <div class="sec-head">
-            <h3>الأكثر مبيعاً 🔥</h3>
-            <span class="see-all" onclick="window.goPage('hoodies')">عرض الكل</span>
-        </div>
+        <div class="sec-title">الأكثر مبيعاً 🔥</div>
         <div class="grid" id="home-grid"></div>
     </div>
 
     <div id="hoodies" class="page">
-        <div class="sec-head" style="margin-top: 80px;"><h3>قسم الهوديز & سويت شيرت</h3></div>
+        <div class="sec-title" style="margin-top: 20px;">قسم الهوديز & سويت شيرت</div>
         <div class="grid" id="hoodies-grid"></div>
     </div>
 
     <div id="pants" class="page">
-        <div class="sec-head" style="margin-top: 80px;"><h3>قسم البناطيل & جينز</h3></div>
+        <div class="sec-title" style="margin-top: 20px;">قسم البناطيل & جينز</div>
         <div class="grid" id="pants-grid"></div>
     </div>
 
     <div id="viewer" class="modal">
         <div class="modal-head">
-            <h3 style="color: var(--gold);" id="vName">اسم المنتج</h3>
+            <h3 style="color: var(--gold); margin:0;" id="vName">اسم المنتج</h3>
             <button onclick="window.closeViewer()" style="background: none; border: none; color: white; font-size: 1.5rem;">✕</button>
         </div>
         <div class="modal-content">
-            <img src="" id="vImg" class="main-img" onclick="window.toggleZoom(this)">
-            <p style="color: #666; font-size: 0.8rem;">اضغط على الصورة للتكبير</p>
-            
+            <img src="" id="vImg" class="main-img">
             <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="window.changeSide('f')" id="btnF" style="padding: 8px 25px; background: #333; color: white; border: 1px solid #555; border-radius: 20px;">الوش</button>
-                <button onclick="window.changeSide('b')" id="btnB" style="padding: 8px 25px; background: #333; color: white; border: 1px solid #555; border-radius: 20px;">الضهر</button>
+                <button onclick="window.changeSide('f')" style="padding: 8px 25px; background: #333; color: white; border: 1px solid #555; border-radius: 20px;">الوش</button>
+                <button onclick="window.changeSide('b')" style="padding: 8px 25px; background: #333; color: white; border: 1px solid #555; border-radius: 20px;">الضهر</button>
             </div>
-
             <h2 style="color: var(--gold); margin-bottom: 10px;" id="vPrice">000</h2>
             <button class="action-btn whatsapp" onclick="window.showOrderForm()"><i class="fab fa-whatsapp"></i> اشترِ الآن</button>
         </div>
@@ -200,54 +171,46 @@
         <div style="background: #1a1a1a; padding: 25px; width: 90%; max-width: 350px; border: 1px solid var(--gold); border-radius: 15px; margin: auto;">
             <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">بيانات الشحن</h3>
             <input type="text" id="cName" class="inp" placeholder="الاسم بالكامل">
-            <input type="text" id="cGov" class="inp" placeholder="المحافظة">
-            <input type="text" id="cAddr" class="inp" placeholder="العنوان بالتفصيل">
+            <input type="text" id="cAddr" class="inp" placeholder="العنوان ورقم التليفون">
             
-            <button class="action-btn whatsapp" onclick="window.sendWhatsapp()">تأكيد الطلب واتساب</button>
+            <button class="action-btn whatsapp" onclick="window.sendWhatsapp()">تأكيد واتساب</button>
             <button class="action-btn call" onclick="window.open('tel:01117943368')">اتصال هاتفي</button>
             <button class="action-btn cancel" onclick="document.getElementById('orderForm').style.display='none'">إلغاء</button>
         </div>
     </div>
 
     <script>
-        // الداتا (كل المنتجات)
+        // --- الصور (تم وضع روابط بديلة شغالة 100% عشان الموقع يفتح) ---
+        // ملاحظة: استبدل الروابط دي بروابطك الجديدة لما ترفعها على موقع imgbb.com أو imgur.com
         const products = [
-            // الهوديز الجديدة (Best Sellers)
-            {id:20, type:'top', name:'Zip-Up Hoodie (Preface Black)', price:650, old:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
-            {id:23, type:'top', name:'Hoodie (Dope Shine White)', price:600, old:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
-            {id:24, type:'top', name:'Hoodie (Eye & Hand Black)', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
+            // الهوديز (Best Sellers)
+            {id:1, type:'top', name:'Zip-Up Hoodie (Preface Black)', price:650, old:800, f:'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop'},
+            {id:2, type:'top', name:'Hoodie (Dope Shine White)', price:600, old:750, f:'https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=600&auto=format&fit=crop'},
+            {id:3, type:'top', name:'Hoodie (Graphic Black)', price:600, old:750, f:'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=600&auto=format&fit=crop'},
+            
             // البناطيل
-            {id:14, type:'bottom', name:'بنطلون جينز (Light Blue)', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
-            {id:15, type:'bottom', name:'بنطلون جينز Mod 1', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:16, type:'bottom', name:'بنطلون جينز Mod 2', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-            {id:17, type:'bottom', name:'بنطلون جينز Mod 3', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-            {id:18, type:'bottom', name:'بنطلون جينز Mod 4', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:19, type:'bottom', name:'بنطلون جينز Mod 5', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'},
+            {id:4, type:'bottom', name:'بنطلون جينز (Light Blue)', price:600, old:750, f:'https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?q=80&w=600&auto=format&fit=crop'},
+            {id:5, type:'bottom', name:'بنطلون جينز (Cargo Style)', price:600, old:750, f:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=600&auto=format&fit=crop'},
+            {id:6, type:'bottom', name:'بنطلون جينز (Streetwear)', price:600, old:750, f:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=600&auto=format&fit=crop'},
+            
             // باقي الهوديز
-            {id:21, type:'top', name:'Zip-Up Hoodie (Preface White)', price:650, old:800, f:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg', b:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg'},
-            {id:22, type:'top', name:'Zip-Up Hoodie (Preface Brown)', price:650, old:800, f:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg', b:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg'},
-            {id:25, type:'top', name:'Hoodie (Angel Wings White)', price:600, old:750, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
-            {id:1, type:'top', name:'هودي أسود (Black Skull)', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            {id:2, type:'top', name:'هودي أوف وايت (Graphic)', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
-            {id:3, type:'top', name:'هودي رصاصي طباعة', price:600, old:700, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
-            {id:9, type:'top', name:'ترنج كامل (أسود)', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
-            {id:7, type:'top', name:'سويت شيرت بريميم (أسود)', price:800, old:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'}
+            {id:7, type:'top', name:'Zip-Up Hoodie (White)', price:650, old:800, f:'https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=600&auto=format&fit=crop'},
+            {id:8, type:'top', name:'Hoodie (Angel Wings)', price:600, old:750, f:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop'},
+            {id:9, type:'top', name:'ترنج كامل (Black)', price:900, old:1000, f:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=600&auto=format&fit=crop', b:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=600&auto=format&fit=crop'}
         ];
 
         let currentP = null;
 
-        // دالة التشغيل (تضمن عمل الموقع عند التحميل)
+        // --- دوال التشغيل (Global Functions) ---
         window.onload = function() {
-            // 1. الرئيسية: اخترنا أهم 4 منتجات (هودي أسود، أبيض، بنطلون، ترنج)
-            // استخدام try catch لمنع توقف الكود لو فيه صورة ضربت
             try {
-                window.render(products.filter(p => [20, 23, 14, 15].includes(p.id)), 'home-grid');
+                // عرض المنتجات
+                window.render(products.filter(p => [1, 2, 4, 9].includes(p.id)), 'home-grid');
                 window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
                 window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
-            } catch(e) { console.log('Error rendering', e); }
+            } catch(e) { console.error(e); }
         };
 
-        // دالة رسم المنتجات (محسنة)
         window.render = function(list, id) {
             const container = document.getElementById(id);
             if(!container) return;
@@ -257,7 +220,7 @@
                     <div class="card">
                         <div class="badge">SALE</div>
                         <div class="img-area" onclick="window.openViewer(${p.id})">
-                            <img src="${p.f}" onerror="this.src='https://via.placeholder.com/300?text=DISHA'">
+                            <img src="${p.f}" loading="lazy">
                         </div>
                         <div class="details">
                             <div class="p-title">${p.name}</div>
@@ -271,31 +234,22 @@
             });
         }
 
-        // التنقل بين الصفحات
         window.goPage = function(pageId) {
             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
-            
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById('btn-' + pageId);
             if(btn) btn.classList.add('active');
-            
             window.scrollTo(0,0);
         }
 
-        // فتح العرض
         window.openViewer = function(id) {
             currentP = products.find(p => p.id === id);
             if(!currentP) return;
-
             document.getElementById('vName').innerText = currentP.name;
             document.getElementById('vPrice').innerText = currentP.price + " ج.م";
             document.getElementById('vImg').src = currentP.f;
             document.getElementById('viewer').style.display = 'flex';
-            
-            // تصفير الزوم
-            document.getElementById('vImg').style.transform = 'scale(1)';
-            document.getElementById('vImg').style.cursor = 'zoom-in';
         }
 
         window.closeViewer = function() {
@@ -304,36 +258,9 @@
 
         window.changeSide = function(side) {
             if(!currentP) return;
-            const img = document.getElementById('vImg');
-            const btnF = document.getElementById('btnF');
-            const btnB = document.getElementById('btnB');
-
-            if(side === 'f') {
-                img.src = currentP.f;
-                btnF.style.borderColor = 'var(--gold)';
-                btnF.style.color = 'var(--gold)';
-                btnB.style.borderColor = '#555';
-                btnB.style.color = 'white';
-            } else {
-                img.src = currentP.b;
-                btnB.style.borderColor = 'var(--gold)';
-                btnB.style.color = 'var(--gold)';
-                btnF.style.borderColor = '#555';
-                btnF.style.color = 'white';
-            }
+            document.getElementById('vImg').src = (side === 'f') ? currentP.f : currentP.b;
         }
 
-        window.toggleZoom = function(img) {
-            if(img.style.transform === 'scale(2)') {
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
-            } else {
-                img.style.transform = 'scale(2)';
-                img.style.cursor = 'zoom-out';
-            }
-        }
-
-        // الطلب
         window.showOrderForm = function() {
             window.closeViewer();
             document.getElementById('orderForm').style.display = 'flex';
@@ -341,16 +268,12 @@
 
         window.sendWhatsapp = function() {
             const n = document.getElementById('cName').value;
-            const g = document.getElementById('cGov').value;
             const a = document.getElementById('cAddr').value;
-            
-            if(!n || !g || !a) { alert('اكتب البيانات كاملة عشان الطلب يوصلك صح'); return; }
-            
-            const txt = `*طلب جديد من الموقع* %0a------------------%0a*المنتج:* ${currentP.name}%0a*السعر:* ${currentP.price} جنيه%0a------------------%0a*العميل:* ${n}%0a*العنوان:* ${g} - ${a}`;
+            if(!n || !a) { alert('اكتب اسمك والعنوان عشان نبعتلك'); return; }
+            const txt = `طلب جديد: ${currentP.name}%0aالسعر: ${currentP.price}%0aالعميل: ${n}%0aالعنوان: ${a}`;
             window.open(`https://wa.me/201284381589?text=${txt}`, '_blank');
             document.getElementById('orderForm').style.display = 'none';
         }
     </script>
 </body>
-        </html>
-    
+</html>
