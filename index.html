@@ -14,107 +14,93 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; overflow-x: hidden; padding-bottom: 80px; padding-top: 70px; }
 
-        /* --- Header --- */
+        /* Header & Nav */
         header { 
             background: rgba(15, 15, 15, 0.98); 
             padding: 0 10px; 
             position: fixed; top: 0; left: 0; width: 100%; 
-            z-index: 1000; 
+            z-index: 9999; /* رقم عالي جداً عشان يفضل فوق */
             border-bottom: 1px solid #333;
             height: 70px;
             display: flex; justify-content: space-between; align-items: center;
         }
         
-        .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
         .logo-img { height: 45px; border-radius: 5px; border: 1px solid var(--gold); }
         .brand-name { font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.2rem; font-weight: bold; }
 
-        /* Navigation Buttons */
-        .nav-links { display: flex; gap: 10px; }
+        /* Navigation Buttons - تحسين التاتش */
+        .nav-links { display: flex; gap: 15px; }
         .nav-btn { 
             background: none; border: none; 
-            color: #aaa; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 0.9rem; 
-            cursor: pointer; padding: 5px 8px; transition: 0.3s; position: relative;
+            color: #aaa; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 1rem; 
+            cursor: pointer; padding: 10px 5px; /* تكبير مساحة اللمس */
+            transition: 0.3s; position: relative;
         }
         .nav-btn.active { color: var(--gold); }
         .nav-btn.active::after {
-            content: ''; position: absolute; bottom: -15px; left: 0; width: 100%; height: 3px; background: var(--gold);
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--gold);
         }
 
-        /* --- Pages --- */
-        .page-section { display: none; padding-top: 10px; animation: fadeIn 0.4s ease-in-out; }
-        .page-section.active { display: block; } /* الكلاس ده مهم للظهور */
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        /* Pages */
+        .page-section { display: none; padding-top: 10px; }
+        .page-section.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- Hero --- */
+        /* Hero Section */
         .hero { 
-            height: 55vh; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'); 
+            height: 50vh; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'); 
             background-size: cover; background-position: center; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
-            margin-bottom: 20px; border-radius: 0 0 20px 20px;
+            margin-bottom: 20px;
         }
-        .hero h1 { font-size: 2.2rem; font-weight: 900; color: white; text-transform: uppercase; font-family: 'Oswald', sans-serif; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
-        .hero p { color: #ddd; margin-bottom: 20px; font-size: 1rem; }
-        .btn-main { padding: 10px 35px; background: var(--gold); color: black; font-weight: bold; border-radius: 30px; cursor: pointer; border: none; font-size: 1rem; }
+        .hero h1 { font-size: 2.5rem; font-weight: 900; color: white; text-transform: uppercase; font-family: 'Oswald', sans-serif; }
+        .btn-main { padding: 10px 40px; background: var(--gold); color: black; font-weight: bold; border-radius: 30px; cursor: pointer; border: none; font-size: 1rem; margin-top: 10px; }
 
-        /* --- Categories --- */
-        .category-banners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px; margin-bottom: 30px; }
-        .cat-card { 
-            height: 120px; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; border: 1px solid #333;
-        }
-        .cat-img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; opacity: 0.6; }
-        .cat-title { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            color: white; font-weight: 900; font-size: 1.1rem; text-shadow: 0 2px 5px black; z-index: 2; width: 100%; text-align: center;
-        }
-
-        /* --- Grid & Cards --- */
+        /* Grid & Cards */
         .container { padding: 10px; max-width: 1200px; margin: 0 auto; }
-        .section-header { margin-bottom: 15px; border-right: 4px solid var(--gold); padding-right: 10px; }
-        .sec-title { font-size: 1.2rem; font-weight: bold; color: white; }
+        .section-header { margin-bottom: 15px; border-right: 4px solid var(--gold); padding-right: 10px; display: flex; align-items: center; justify-content: space-between; }
+        .sec-title { font-size: 1.3rem; font-weight: bold; color: white; }
         
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         @media(min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
-        .card { background: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid #333; }
+        .card { background: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid #333; display: flex; flex-direction: column; }
         .img-box { position: relative; width: 100%; padding-top: 130%; overflow: hidden; }
         .prod-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         .badge { position: absolute; top: 5px; right: 5px; background: #c00; color: white; padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; font-weight: bold; }
         
-        .info { padding: 10px; text-align: center; }
+        .info { padding: 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .p-name { font-size: 0.85rem; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
         .price { color: var(--gold); font-weight: 900; font-size: 1rem; }
         .old-price { text-decoration: line-through; color: #777; font-size: 0.8rem; margin-right: 5px; }
         
         .btn-view {
             width: 100%; padding: 8px; background: var(--green); color: white; border: none; 
-            border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 5px; font-size: 0.9rem;
+            border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 8px; font-size: 0.9rem;
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
 
-        /* --- Viewer Modal --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; display: none; flex-direction: column; overflow-y: auto; }
+        /* Modal */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; display: none; flex-direction: column; overflow-y: auto; }
         .modal-header { padding: 15px; background: #111; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
         .modal-body { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .main-img-box { width: 100%; max-width: 400px; height: 400px; border: 1px solid #333; border-radius: 10px; overflow: hidden; margin-bottom: 15px; position: relative; }
-        .view-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
-        .zoomed { transform: scale(2.5); cursor: zoom-out; }
+        .main-img-box { width: 100%; max-width: 400px; height: 400px; border: 1px solid #333; border-radius: 10px; overflow: hidden; margin-bottom: 15px; }
+        .view-img { width: 100%; height: 100%; object-fit: contain; }
         .ctrl-btns { display: flex; gap: 15px; margin-bottom: 20px; }
         .sw-btn { background: #333; color: white; padding: 8px 25px; border-radius: 20px; border: 1px solid #555; cursor: pointer; }
         .sw-btn.active { border-color: var(--gold); color: var(--gold); }
         .big-btn { width: 100%; padding: 15px; background: var(--gold); color: black; border: none; font-weight: bold; font-size: 1.1rem; border-radius: 8px; cursor: pointer; margin-top: 10px; }
 
-        /* --- Order Modal --- */
-        .form-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; display: none; justify-content: center; align-items: center; }
+        /* Order Form */
+        .form-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 11000; display: none; justify-content: center; align-items: center; }
         .form-content { background: #222; padding: 20px; width: 90%; max-width: 350px; border-radius: 10px; border: 1px solid var(--gold); text-align: center; }
         .inp { width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #444; color: white; border-radius: 5px; }
         .btn-whatsapp { background: var(--green); color: white; padding: 10px; width: 100%; border: none; border-radius: 5px; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
         .btn-call { background: var(--blue); color: white; padding: 10px; width: 100%; border: none; border-radius: 5px; font-weight: bold; display: block; text-decoration: none; margin-bottom: 10px; }
         .btn-close { background: transparent; color: #aaa; border: 1px solid #555; padding: 8px; width: 100%; border-radius: 5px; cursor: pointer; }
 
-        /* --- Footer --- */
         footer { padding: 20px; text-align: center; background: #000; margin-top: 40px; border-top: 1px solid #333; font-size: 0.8rem; }
     </style>
 </head>
@@ -135,27 +121,14 @@
     <div id="page-home" class="page-section active">
         <div class="hero">
             <h1>STREETWEAR <br> <span style="color:var(--gold)">2026</span></h1>
-            <p>أقوى كولكشن شتوي بأسعار زمان</p>
             <button class="btn-main" onclick="showPage('hoodies')">تسوق الآن</button>
-        </div>
-
-        <div class="category-banners">
-            <div class="cat-card" onclick="showPage('hoodies')">
-                <img src="https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg" class="cat-img">
-                <div class="cat-title">هوديز</div>
-            </div>
-            <div class="cat-card" onclick="showPage('pants')">
-                <img src="https://i.postimg.cc/zByvgp1V/IMG-20260210-WA0023.jpg" class="cat-img">
-                <div class="cat-title">بناطيل</div>
-            </div>
         </div>
 
         <div class="container">
             <div class="section-header">
-                <div class="sec-title">اختيارات ديشا (الأكثر طلباً) 🔥</div>
+                <div class="sec-title">ترشيحات ديشا (Best Sellers) 🔥</div>
             </div>
-            <div class="grid" id="homeGrid">
-                </div>
+            <div class="grid" id="homeGrid"></div>
         </div>
     </div>
 
@@ -183,10 +156,9 @@
             <i class="fas fa-times" style="color:white; font-size:1.5rem; cursor:pointer;" onclick="closeModal()"></i>
         </div>
         <div class="modal-body">
-            <div class="main-img-box" onclick="toggleZoom()">
+            <div class="main-img-box">
                 <img src="" id="mImg" class="view-img">
             </div>
-            <p style="color:#777; font-size:0.8rem; margin-bottom:10px;">اضغط على الصورة للتكبير</p>
             <div class="ctrl-btns">
                 <button class="sw-btn active" id="btnFront" onclick="switchImg('front')">الوش</button>
                 <button class="sw-btn" id="btnBack" onclick="switchImg('back')">الضهر</button>
@@ -222,53 +194,47 @@
     </footer>
 
     <script>
-        // --- 1. البيانات (الداتا كلها هنا) ---
+        // Data
         const products = [
-            // الهوديز الجديدة (العظمة)
-            { id: 20, type: 'top', name: "Zip-Up Hoodie (Preface Black)", price: 650, old: 800, f: "https://i.postimg.cc/k4vj4X8h/1000012700.jpg", b: "https://i.postimg.cc/k4vj4X8h/1000012700.jpg" }, // صورة مؤقتة لو معاك الضهر ابعته
-            { id: 21, type: 'top', name: "Zip-Up Hoodie (Preface White)", price: 650, old: 800, f: "https://i.postimg.cc/7Zh0V1P2/1000012701.jpg", b: "https://i.postimg.cc/7Zh0V1P2/1000012701.jpg" },
-            { id: 22, type: 'top', name: "Zip-Up Hoodie (Preface Brown)", price: 650, old: 800, f: "https://i.postimg.cc/CLj6bZzL/1000012702.jpg", b: "https://i.postimg.cc/CLj6bZzL/1000012702.jpg" },
+            // --- الهوديز الجديدة (Best Sellers) ---
+            { id: 20, type: 'top', name: "Zip-Up Hoodie (Preface Black)", price: 650, old: 800, f: "https://i.postimg.cc/k4vj4X8h/1000012700.jpg", b: "https://i.postimg.cc/k4vj4X8h/1000012700.jpg" },
             { id: 23, type: 'top', name: "Hoodie (Dope Shine White)", price: 600, old: 750, f: "https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg", b: "https://i.postimg.cc/GmR2gq4P/1000012717.jpg" },
             { id: 24, type: 'top', name: "Hoodie (Eye & Hand Black)", price: 600, old: 750, f: "https://i.postimg.cc/HWQ7xW1L/1000012695.jpg", b: "https://i.postimg.cc/qRJ1zL9z/1000012696.jpg" },
+            // --- باقي الهوديز ---
+            { id: 21, type: 'top', name: "Zip-Up Hoodie (Preface White)", price: 650, old: 800, f: "https://i.postimg.cc/7Zh0V1P2/1000012701.jpg", b: "https://i.postimg.cc/7Zh0V1P2/1000012701.jpg" },
+            { id: 22, type: 'top', name: "Zip-Up Hoodie (Preface Brown)", price: 650, old: 800, f: "https://i.postimg.cc/CLj6bZzL/1000012702.jpg", b: "https://i.postimg.cc/CLj6bZzL/1000012702.jpg" },
             { id: 25, type: 'top', name: "Hoodie (Angel Wings White)", price: 600, old: 750, f: "https://i.postimg.cc/Qd1n4yqR/1000012698.jpg", b: "https://i.postimg.cc/Prh5xWqL/1000012697.jpg" },
-            
-            // البناطيل الجديدة
-            { id: 14, type: 'bottom', name: "بنطلون جينز (Light Blue)", price: 600, old: 750, f: "https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg", b: "https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg" },
-            { id: 15, type: 'bottom', name: "بنطلون جينز بريميم (Mod 1)", price: 600, old: 750, f: "https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg", b: "https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg" },
-            
-            // باقي الكولكشن القديم
             { id: 1, type: 'top', name: "هودي أسود (Black Skull)", price: 600, old: 750, f: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg", b: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg" },
             { id: 2, type: 'top', name: "هودي أوف وايت (Graphic)", price: 600, old: 750, f: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg", b: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg" },
-            { id: 9, type: 'top', name: "ترنج كامل (أسود)", price: 900, old: 1000, f: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg", b: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg" },
+            { id: 3, type: 'top', name: "هودي رصاصي طباعة", price: 600, old: 700, f: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg", b: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" },
+            { id: 7, type: 'top', name: "سويت شيرت بريميم (أسود)", price: 800, old: 1000, f: "https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg", b: "https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg" },
+            // --- البناطيل ---
+            { id: 14, type: 'bottom', name: "بنطلون جينز (Light Blue)", price: 600, old: 750, f: "https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg", b: "https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg" },
+            { id: 15, type: 'bottom', name: "بنطلون جينز بريميم (Mod 1)", price: 600, old: 750, f: "https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg", b: "https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg" },
             { id: 16, type: 'bottom', name: "بنطلون جينز بريميم (Mod 2)", price: 600, old: 750, f: "https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg", b: "https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg" },
+            { id: 17, type: 'bottom', name: "بنطلون جينز بريميم (Mod 3)", price: 600, old: 750, f: "https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg", b: "https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg" },
+            { id: 18, type: 'bottom', name: "بنطلون جينز بريميم (Mod 4)", price: 600, old: 750, f: "https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg", b: "https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg" },
+            { id: 19, type: 'bottom', name: "بنطلون جينز بريميم (Mod 5)", price: 600, old: 750, f: "https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg", b: "https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg" }
         ];
 
-        const egyptData = {
-            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا", "وسط البلد"],
-            "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر", "الشيخ زايد", "إمبابة"],
-            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر"],
-            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "العبور"],
-            "الشرقية": ["الزقازيق", "العشر من رمضان"],
-            "باقي المحافظات": ["اكتب اسم مدينتك في العنوان"]
-        };
+        const egyptData = { "القاهرة": [], "الجيزة": [], "الإسكندرية": [], "باقي المحافظات": [] };
 
-        // --- 2. تشغيل الموقع ---
+        // --- Init ---
         function init() {
-            // أ) الصفحة الرئيسية: بنختار "كريمة الكريمة" (Preface + Dope Shine + Hand Hoodie + Jeans)
-            // ركزتلك هنا على الحاجات اللي صورها جامدة جداً
-            const homeMix = [
-                products.find(p => p.id === 20), // Preface Black
-                products.find(p => p.id === 23), // Dope Shine White
-                products.find(p => p.id === 24), // Hand & Eye Black
-                products.find(p => p.id === 14)  // Light Blue Jeans
+            // 1. الصفحة الرئيسية: اخترتلك 4 منتجات (هودي أسود، هودي أبيض، هودي رسمة، بنطلون)
+            const homeList = [
+                products.find(p => p.id === 20),
+                products.find(p => p.id === 23),
+                products.find(p => p.id === 24),
+                products.find(p => p.id === 14)
             ];
-            renderGrid(homeMix, 'homeGrid'); 
-            
-            // ب) صفحة الهوديز
+            renderGrid(homeList, 'homeGrid');
+
+            // 2. الهوديز
             const hoodies = products.filter(p => p.type === 'top');
             renderGrid(hoodies, 'hoodiesGrid');
 
-            // ج) صفحة البناطيل
+            // 3. البناطيل
             const pants = products.filter(p => p.type === 'bottom');
             renderGrid(pants, 'pantsGrid');
         }
@@ -277,7 +243,7 @@
             const grid = document.getElementById(containerId);
             grid.innerHTML = '';
             list.forEach(p => {
-                const card = `
+                grid.innerHTML += `
                     <div class="card">
                         <div class="badge">SALE</div>
                         <div class="img-box" onclick="openViewer(${p.id})">
@@ -286,39 +252,38 @@
                         <div class="info">
                             <div class="p-name">${p.name}</div>
                             <div><span class="price">${p.price} ج.م</span> <span class="old-price">${p.old}</span></div>
-                            <button class="btn-view" onclick="openViewer(${p.id})">
-                                <i class="fas fa-eye"></i> التفاصيل
-                            </button>
+                            <button class="btn-view" onclick="openViewer(${p.id})"><i class="fas fa-eye"></i> التفاصيل</button>
                         </div>
                     </div>
                 `;
-                grid.innerHTML += card;
             });
         }
 
-        // --- 3. التنقل بين الصفحات (تم الإصلاح) ---
+        // --- Navigation Logic (Updated) ---
         function showPage(pageId) {
-            // نخفي كل الصفحات
-            document.querySelectorAll('.page-section').forEach(sec => {
-                sec.style.display = 'none'; // ضمان الإخفاء
-                sec.classList.remove('active');
-            });
-
-            // نظهر الصفحة المطلوبة
-            const target = document.getElementById('page-' + pageId);
-            if(target) {
-                target.style.display = 'block'; // ضمان الظهور
-                setTimeout(() => target.classList.add('active'), 10); // عشان الأنيميشن يشتغل
+            // 1. Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            for(let i=0; i<pages.length; i++) {
+                pages[i].style.display = 'none';
+                pages[i].classList.remove('active');
             }
             
-            // تلوين الزرار
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            // 2. Show selected page
+            const target = document.getElementById('page-' + pageId);
+            if(target) {
+                target.style.display = 'block';
+                setTimeout(() => target.classList.add('active'), 10);
+            }
+
+            // 3. Update buttons
+            const btns = document.querySelectorAll('.nav-btn');
+            for(let i=0; i<btns.length; i++) btns[i].classList.remove('active');
             document.getElementById('btn-' + pageId).classList.add('active');
 
             window.scrollTo(0, 0);
         }
 
-        // --- 4. باقي الوظائف (زي ما هي) ---
+        // --- Product Viewer ---
         let selectedProduct = null;
         let isFront = true;
 
@@ -337,4 +302,38 @@
         function updateImage() {
             const img = document.getElementById('mImg');
             img.src = isFront ? selectedProduct.f : selectedProduct.b;
-            img.classList.remove(
+            document.getElementById('btnFront').classList.toggle('active', isFront);
+            document.getElementById('btnBack').classList.toggle('active', !isFront);
+        }
+
+        function switchImg(side) { isFront = (side === 'front'); updateImage(); }
+
+        // --- Order Logic ---
+        function openOrder() {
+            closeModal();
+            document.getElementById('formModal').style.display = 'flex';
+            const sel = document.getElementById('cGov');
+            if (sel.options.length <= 1) {
+                for (let g in egyptData) {
+                    let opt = document.createElement('option');
+                    opt.value = g; opt.innerText = g;
+                    sel.appendChild(opt);
+                }
+            }
+        }
+
+        function closeForm() { document.getElementById('formModal').style.display = 'none'; }
+
+        function loadCities() {
+            const gov = document.getElementById('cGov').value;
+            const citySel = document.getElementById('cCity');
+            citySel.innerHTML = '<option value="">اختر المدينة...</option>';
+            if(gov) citySel.disabled = false; 
+            else citySel.disabled = true;
+        }
+
+        function sendOrder(type) {
+            if (type === 'whatsapp') {
+                const name = document.getElementById('cName').value;
+                const gov = document.getElementById('cGov').value;
+     
