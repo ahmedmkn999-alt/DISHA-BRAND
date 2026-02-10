@@ -320,6 +320,13 @@
             font-weight: bold;
             margin-top: 10px;
             display: inline-block;
+            transition: 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .designer-credit:hover {
+            color: white;
+            border-bottom: 1px solid white;
         }
     </style>
 </head>
@@ -383,15 +390,15 @@
     <footer>
         <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
         <p style="color: #777; margin-top: 10px;">
-            Created by <span class="designer-credit">Ahmed Mohamed</span>
+            Created by <a href="https://wa.me/201128381838" target="_blank" class="designer-credit">Ahmed Mohamed</a>
         </p>
     </footer>
 
     <script>
-        // رقم الواتساب الخاص بك
-        const phoneNumber = "201284381589"; 
+        // رقم الواتساب الخاص بصاحب البراند (للأوردرات)
+        const brandPhone = "201284381589"; 
 
-        // بيانات المحافظات والمدن (قاعدة بيانات مصغرة)
+        // بيانات المحافظات والمدن
         const egyptData = {
             "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع الخامس", "الرحاب", "شبرا", "وسط البلد", "حلوان", "المرج", "عين شمس", "المطرية"],
             "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق", "بولاق الدكرور"],
@@ -479,15 +486,14 @@
 
             const message = `السلام عليكم، طلب جديد من الموقع 🛒%0a%0a*المنتج:* ${currentProduct.name}%0a*السعر:* ${currentProduct.price} جنيه%0a------------------%0a*بيانات الشحن:*%0a👤 *الاسم:* ${name}%0a📍 *المحافظة:* ${gov}%0a🏙️ *المدينة:* ${city}%0a🏠 *العنوان:* ${address}%0a%0aممكن تأكيد الطلب ومعرفة مصاريف الشحن؟`;
             
-            const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
+            const waLink = `https://wa.me/${brandPhone}?text=${message}`;
             window.open(waLink, '_blank');
             closeModal();
         }
 
-        // بيانات المنتجات
+        // --- قائمة المنتجات (تم التأكد منها) ---
         const products = [
             {
-                id: 1,
                 name: "هودي أسود (Black Skull)",
                 price: 600,
                 oldPrice: 750,
@@ -495,7 +501,6 @@
                 imgBack: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
             },
             {
-                id: 2,
                 name: "هودي أوف وايت (Graphic)",
                 price: 600,
                 oldPrice: 750,
@@ -503,7 +508,6 @@
                 imgBack: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
             },
             {
-                id: 3,
                 name: "هودي رصاصي طباعة",
                 price: 600,
                 oldPrice: 700,
@@ -511,7 +515,6 @@
                 imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
             },
             {
-                id: 4,
                 name: "سويت شيرت بيسك (أسود)",
                 price: 650,
                 oldPrice: 800,
@@ -519,7 +522,6 @@
                 imgBack: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
             },
             {
-                id: 5,
                 name: "سويت شيرت بيسك (رصاصي)",
                 price: 650,
                 oldPrice: 800,
@@ -527,7 +529,6 @@
                 imgBack: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
             },
             {
-                id: 6,
                 name: "سويت شيرت بيسك (أوف وايت)",
                 price: 650,
                 oldPrice: 800,
@@ -535,7 +536,6 @@
                 imgBack: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
             },
             {
-                id: 7,
                 name: "سويت شيرت بريميم (أسود)",
                 price: 800,
                 oldPrice: 1000,
@@ -543,7 +543,6 @@
                 imgBack: "https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
             },
             {
-                id: 8,
                 name: "سويت شيرت بريميم (هافان)",
                 price: 800,
                 oldPrice: 1000,
@@ -551,7 +550,6 @@
                 imgBack: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg"
             },
             {
-                id: 9,
                 name: "ترنج كامل (أسود)",
                 price: 900,
                 oldPrice: 1000,
@@ -559,7 +557,6 @@
                 imgBack: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg"
             },
             {
-                id: 10,
                 name: "ترنج كامل (رصاصي)",
                 price: 900,
                 oldPrice: 1000,
@@ -567,7 +564,6 @@
                 imgBack: "https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg"
             },
             {
-                id: 11,
                 name: "سويت شيرت هاي إند (أسود)",
                 price: 1300,
                 oldPrice: 1500,
@@ -575,10 +571,10 @@
                 imgBack: "https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg"
             },
             {
-                id: 12,
                 name: "سويت شيرت هاي إند (بيج)",
                 price: 1300,
                 oldPrice: 1500,
                 imgFront: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg",
                 imgBack: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg"
-    
+            },
+      
