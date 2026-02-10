@@ -14,6 +14,7 @@
             --card-bg: #1a1a1a;
             --gold: #D4AF37;
             --green: #25D366;
+            --blue: #007bff;
             --text: #ffffff;
         }
 
@@ -27,7 +28,7 @@
             padding-bottom: 60px;
         }
 
-        /* --- Header (اللوجو رجع كبير) --- */
+        /* --- Header --- */
         header {
             background-color: rgba(15, 15, 15, 0.95);
             padding: 10px 5%;
@@ -44,7 +45,7 @@
         .logo-container { display: flex; align-items: center; gap: 15px; }
         
         .logo-img {
-            height: 65px; /* كبرنا اللوجو */
+            height: 65px;
             width: auto;
             border-radius: 8px;
             border: 1px solid var(--gold);
@@ -59,9 +60,9 @@
             font-weight: bold;
         }
 
-        /* --- Hero Section (الواجهة رجعت) --- */
+        /* --- Hero Section --- */
         .hero {
-            height: 85vh; /* واجهة طويلة وفخمة */
+            height: 85vh;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg');
             background-size: cover;
             background-position: center;
@@ -111,7 +112,7 @@
         /* الشبكة (Grid) */
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 للموبايل */
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
         @media(min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
@@ -128,7 +129,7 @@
         .img-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 130%; /* طول الصورة */
+            padding-top: 130%;
             overflow: hidden;
             cursor: pointer;
         }
@@ -153,11 +154,12 @@
         .old { color: #777; font-size: 0.8rem; text-decoration: line-through; margin-right: 5px; }
 
         .btn-card {
-            width: 100%; padding: 8px;
+            width: 100%; padding: 10px;
             background: var(--green); color: white;
             border: none; border-radius: 6px;
             font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 5px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 1rem;
         }
 
         /* --- Product Viewer (Modal) --- */
@@ -207,6 +209,24 @@
         .inp-field {
             width: 100%; padding: 12px; margin-bottom: 12px;
             background: #111; border: 1px solid #444; color: white; border-radius: 8px;
+        }
+
+        .action-buttons {
+            display: flex; gap: 10px; margin-top: 15px; flex-direction: column;
+        }
+
+        .btn-call {
+            background: var(--blue);
+            width: 100%; padding: 10px; color: white;
+            border: none; border-radius: 6px;
+            font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none; font-size: 1rem;
+        }
+        
+        .btn-cancel {
+            background: transparent; border: 1px solid #555; color: #aaa;
+            padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 5px;
         }
 
         /* --- Footer --- */
@@ -259,14 +279,16 @@
             <h2 id="vPrice" style="color: var(--gold); margin-bottom: 20px;"></h2>
 
             <button class="btn-card" style="padding: 15px; font-size: 1.2rem;" onclick="openForm()">
-                <i class="fab fa-whatsapp"></i> اطلب الآن
+                <i class="fas fa-shopping-cart"></i> تنفيذ الطلب
             </button>
         </div>
     </div>
 
     <div class="form-overlay" id="orderForm">
         <div class="form-box">
-            <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">بيانات الشحن</h3>
+            <h3 style="color: var(--gold); text-align: center; margin-bottom: 15px;">إتمام الطلب</h3>
+            <p style="color: #aaa; text-align: center; font-size: 0.9rem; margin-bottom: 15px;">أدخل بياناتك واختر طريقة الطلب</p>
+            
             <input type="text" id="cName" class="inp-field" placeholder="الاسم بالكامل">
             <select id="cGov" class="inp-field" onchange="loadCities()">
                 <option value="">اختر المحافظة...</option>
@@ -276,9 +298,16 @@
             </select>
             <input type="text" id="cAddress" class="inp-field" placeholder="العنوان بالتفصيل">
             
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button class="btn-card" onclick="sendOrder()">تأكيد الطلب</button>
-                <button class="btn-card" style="background: transparent; border: 1px solid #555;" onclick="closeForm()">إلغاء</button>
+            <div class="action-buttons">
+                <button class="btn-card" onclick="sendWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> طلب عبر واتساب
+                </button>
+                
+                <a href="tel:01117943368" class="btn-call">
+                    <i class="fas fa-phone"></i> اتصال مباشر
+                </a>
+
+                <button class="btn-cancel" onclick="closeForm()">إلغاء</button>
             </div>
         </div>
     </div>
@@ -291,6 +320,10 @@
     </footer>
 
     <script>
+        // --- أرقام التواصل ---
+        const waPhone = "201284381589"; // رقم الواتساب للأوردرات
+        const callPhone = "01117943368"; // رقم الاتصال
+
         // --- البيانات ---
         const products = [
             { id: 1, name: "هودي أسود (Black Skull)", price: 600, old: 750, front: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg", back: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg" },
@@ -419,7 +452,7 @@
             }
         }
 
-        function sendOrder() {
+        function sendWhatsApp() {
             const name = document.getElementById('cName').value;
             const gov = document.getElementById('cGov').value;
             const city = document.getElementById('cCity').value;
@@ -431,9 +464,5 @@
             }
 
             const msg = `طلب جديد: ${currP.name}%0aالسعر: ${currP.price} جنيه%0a-- بيانات العميل --%0aالاسم: ${name}%0aالعنوان: ${gov} - ${city} - ${addr}`;
-            window.open(`https://wa.me/201284381589?text=${msg}`, '_blank');
-            closeForm();
-        }
-    </script>
-</body>
-</html>
+            window.open(`https://wa.me/${waPhone}?text=${msg}`, '_blank');
+      
