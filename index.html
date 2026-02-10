@@ -9,233 +9,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root {
-            --bg: #0f0f0f;
-            --card-bg: #1a1a1a;
-            --gold: #D4AF37;
-            --green: #25D366;
-            --blue: #007bff;
-            --text: #ffffff;
-        }
-
+        :root { --bg: #0f0f0f; --card-bg: #1a1a1a; --gold: #D4AF37; --green: #25D366; --blue: #007bff; --text: #ffffff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
-            padding-bottom: 60px;
-        }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; overflow-x: hidden; padding-bottom: 60px; }
 
-        /* --- Header --- */
-        header {
-            background-color: rgba(15, 15, 15, 0.95);
-            padding: 10px 5%;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            backdrop-filter: blur(10px);
-        }
-
+        /* Header */
+        header { background-color: rgba(15, 15, 15, 0.95); padding: 10px 5%; position: fixed; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; backdrop-filter: blur(10px); }
         .logo-container { display: flex; align-items: center; gap: 15px; }
-        
-        .logo-img {
-            height: 65px;
-            width: auto;
-            border-radius: 8px;
-            border: 1px solid var(--gold);
-        }
+        .logo-img { height: 65px; width: auto; border-radius: 8px; border: 1px solid var(--gold); }
+        .brand-text { font-family: 'Oswald', sans-serif; font-size: 1.6rem; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; font-weight: bold; }
 
-        .brand-text {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.6rem;
-            letter-spacing: 1px;
-            color: var(--gold);
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 85vh;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 50px;
-            padding-top: 80px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Oswald', sans-serif;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #ddd;
-            margin-bottom: 30px;
-        }
-
-        .btn-hero {
-            padding: 12px 50px;
-            background-color: var(--gold);
-            color: #000;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            transition: 0.3s;
-            border: 2px solid var(--gold);
-        }
-
+        /* Hero */
+        .hero { height: 85vh; background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-bottom: 50px; padding-top: 80px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-family: 'Oswald', sans-serif; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+        .hero p { font-size: 1.3rem; color: #ddd; margin-bottom: 30px; }
+        .btn-hero { padding: 12px 50px; background-color: var(--gold); color: #000; font-weight: bold; text-decoration: none; border-radius: 30px; font-size: 1.2rem; transition: 0.3s; border: 2px solid var(--gold); }
         .btn-hero:hover { background-color: transparent; color: var(--gold); }
 
-        /* --- Products Section --- */
+        /* Products Grid */
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 30px; color: var(--gold); }
-
-        /* الشبكة (Grid) */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media(min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
-        /* الكارت */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #333;
-            position: relative;
-        }
-
-        .img-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 130%;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .product-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-        }
-
-        .badge {
-            position: absolute; top: 8px; right: 8px;
-            background: #d32f2f; color: white;
-            padding: 4px 8px; border-radius: 4px;
-            font-size: 0.7rem; font-weight: bold; z-index: 2;
-        }
-
+        /* Card */
+        .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
+        .img-wrapper { position: relative; width: 100%; padding-top: 130%; overflow: hidden; cursor: pointer; }
+        .product-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 8px; right: 8px; background: #d32f2f; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; z-index: 2; }
         .info { padding: 12px; text-align: center; }
-
         .name { font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
         .price-box { margin-bottom: 10px; }
         .curr { color: var(--gold); font-size: 1.1rem; font-weight: 900; }
         .old { color: #777; font-size: 0.8rem; text-decoration: line-through; margin-right: 5px; }
+        .btn-card { width: 100%; padding: 10px; background: var(--green); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1rem; }
 
-        .btn-card {
-            width: 100%; padding: 10px;
-            background: var(--green); color: white;
-            border: none; border-radius: 6px;
-            font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-size: 1rem;
-        }
-
-        /* --- Product Viewer (Modal) --- */
-        .viewer-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 2000;
-            display: none; flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .viewer-header {
-            padding: 15px; display: flex; justify-content: space-between; align-items: center;
-            background: #111; border-bottom: 1px solid #333;
-        }
-
+        /* Modal Overlay */
+        .viewer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; display: none; flex-direction: column; overflow-y: auto; }
+        .viewer-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; background: #111; border-bottom: 1px solid #333; }
         .viewer-body { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-
-        .main-view-box {
-            width: 100%; max-width: 500px; height: 450px;
-            border: 1px solid #333; border-radius: 10px;
-            margin-bottom: 15px; overflow: hidden; position: relative;
-        }
-
+        .main-view-box { width: 100%; max-width: 500px; height: 450px; border: 1px solid #333; border-radius: 10px; margin-bottom: 15px; overflow: hidden; position: relative; }
         .main-view-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
         .zoomed { transform: scale(2.5); cursor: zoom-out; }
-
         .controls { display: flex; gap: 15px; margin-bottom: 20px; }
-        .ctrl-btn {
-            background: #333; color: white; border: 1px solid #555;
-            padding: 10px 25px; border-radius: 25px; cursor: pointer;
-        }
+        .ctrl-btn { background: #333; color: white; border: 1px solid #555; padding: 10px 25px; border-radius: 25px; cursor: pointer; }
         .ctrl-btn.active { border-color: var(--gold); color: var(--gold); }
 
-        /* --- Order Form Modal --- */
-        .form-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 3000;
-            display: none; justify-content: center; align-items: center;
-            backdrop-filter: blur(5px);
-        }
+        /* Order Form */
+        .form-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .form-box { background: #222; padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; border: 1px solid var(--gold); }
+        .inp-field { width: 100%; padding: 12px; margin-bottom: 12px; background: #111; border: 1px solid #444; color: white; border-radius: 8px; }
+        .action-buttons { display: flex; gap: 10px; margin-top: 15px; flex-direction: column; }
+        .btn-call { background: var(--blue); width: 100%; padding: 10px; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-size: 1rem; }
+        .btn-cancel { background: transparent; border: 1px solid #555; color: #aaa; padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 5px; }
 
-        .form-box {
-            background: #222; padding: 25px; border-radius: 15px;
-            width: 90%; max-width: 400px; border: 1px solid var(--gold);
-        }
-
-        .inp-field {
-            width: 100%; padding: 12px; margin-bottom: 12px;
-            background: #111; border: 1px solid #444; color: white; border-radius: 8px;
-        }
-
-        .action-buttons {
-            display: flex; gap: 10px; margin-top: 15px; flex-direction: column;
-        }
-
-        .btn-call {
-            background: var(--blue);
-            width: 100%; padding: 10px; color: white;
-            border: none; border-radius: 6px;
-            font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            text-decoration: none; font-size: 1rem;
-        }
-        
-        .btn-cancel {
-            background: transparent; border: 1px solid #555; color: #aaa;
-            padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 5px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            margin-top: 50px; padding: 30px; background: #000;
-            text-align: center; border-top: 1px solid #333;
-        }
+        footer { margin-top: 50px; padding: 30px; background: #000; text-align: center; border-top: 1px solid #333; }
         .credit { color: var(--gold); text-decoration: none; font-weight: bold; }
-
     </style>
 </head>
 <body>
@@ -260,16 +89,13 @@
             
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(1)">
-                    <img src="https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg" class="product-img" alt="هودي أسود">
+                <div class="img-wrapper" onclick="window.openViewer(1)">
+                    <img src="https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي أسود (Black Skull)</div>
-                    <div class="price-box">
-                        <span class="curr">600 ج.م</span>
-                        <span class="old">750</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(1)">
+                    <div class="price-box"><span class="curr">600 ج.م</span><span class="old">750</span></div>
+                    <button class="btn-card" onclick="window.openViewer(1)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -277,16 +103,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(2)">
-                    <img src="https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg" class="product-img" alt="هودي أوف وايت">
+                <div class="img-wrapper" onclick="window.openViewer(2)">
+                    <img src="https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي أوف وايت (Graphic)</div>
-                    <div class="price-box">
-                        <span class="curr">600 ج.م</span>
-                        <span class="old">750</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(2)">
+                    <div class="price-box"><span class="curr">600 ج.م</span><span class="old">750</span></div>
+                    <button class="btn-card" onclick="window.openViewer(2)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -294,16 +117,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(3)">
-                    <img src="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" class="product-img" alt="هودي رصاصي">
+                <div class="img-wrapper" onclick="window.openViewer(3)">
+                    <img src="https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">هودي رصاصي طباعة</div>
-                    <div class="price-box">
-                        <span class="curr">600 ج.م</span>
-                        <span class="old">700</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(3)">
+                    <div class="price-box"><span class="curr">600 ج.م</span><span class="old">700</span></div>
+                    <button class="btn-card" onclick="window.openViewer(3)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -311,16 +131,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(4)">
-                    <img src="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg" class="product-img" alt="سويت شيرت بيسك أسود">
+                <div class="img-wrapper" onclick="window.openViewer(4)">
+                    <img src="https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (أسود)</div>
-                    <div class="price-box">
-                        <span class="curr">650 ج.م</span>
-                        <span class="old">800</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(4)">
+                    <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
+                    <button class="btn-card" onclick="window.openViewer(4)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -328,16 +145,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(5)">
-                    <img src="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg" class="product-img" alt="سويت شيرت بيسك رصاصي">
+                <div class="img-wrapper" onclick="window.openViewer(5)">
+                    <img src="https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (رصاصي)</div>
-                    <div class="price-box">
-                        <span class="curr">650 ج.م</span>
-                        <span class="old">800</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(5)">
+                    <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
+                    <button class="btn-card" onclick="window.openViewer(5)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -345,16 +159,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(6)">
-                    <img src="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg" class="product-img" alt="سويت شيرت بيسك أوف وايت">
+                <div class="img-wrapper" onclick="window.openViewer(6)">
+                    <img src="https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بيسك (أوف وايت)</div>
-                    <div class="price-box">
-                        <span class="curr">650 ج.م</span>
-                        <span class="old">800</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(6)">
+                    <div class="price-box"><span class="curr">650 ج.م</span><span class="old">800</span></div>
+                    <button class="btn-card" onclick="window.openViewer(6)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -362,16 +173,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(7)">
-                    <img src="https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg" class="product-img" alt="سويت شيرت بريميم أسود">
+                <div class="img-wrapper" onclick="window.openViewer(7)">
+                    <img src="https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بريميم (أسود)</div>
-                    <div class="price-box">
-                        <span class="curr">800 ج.م</span>
-                        <span class="old">1000</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(7)">
+                    <div class="price-box"><span class="curr">800 ج.م</span><span class="old">1000</span></div>
+                    <button class="btn-card" onclick="window.openViewer(7)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -379,16 +187,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(8)">
-                    <img src="https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg" class="product-img" alt="سويت شيرت بريميم هافان">
+                <div class="img-wrapper" onclick="window.openViewer(8)">
+                    <img src="https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت بريميم (هافان)</div>
-                    <div class="price-box">
-                        <span class="curr">800 ج.م</span>
-                        <span class="old">1000</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(8)">
+                    <div class="price-box"><span class="curr">800 ج.م</span><span class="old">1000</span></div>
+                    <button class="btn-card" onclick="window.openViewer(8)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -396,16 +201,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(9)">
-                    <img src="https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg" class="product-img" alt="ترنج كامل أسود">
+                <div class="img-wrapper" onclick="window.openViewer(9)">
+                    <img src="https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">ترنج كامل (أسود)</div>
-                    <div class="price-box">
-                        <span class="curr">900 ج.م</span>
-                        <span class="old">1000</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(9)">
+                    <div class="price-box"><span class="curr">900 ج.م</span><span class="old">1000</span></div>
+                    <button class="btn-card" onclick="window.openViewer(9)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -413,16 +215,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(10)">
-                    <img src="https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg" class="product-img" alt="ترنج كامل رصاصي">
+                <div class="img-wrapper" onclick="window.openViewer(10)">
+                    <img src="https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">ترنج كامل (رصاصي)</div>
-                    <div class="price-box">
-                        <span class="curr">900 ج.م</span>
-                        <span class="old">1000</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(10)">
+                    <div class="price-box"><span class="curr">900 ج.م</span><span class="old">1000</span></div>
+                    <button class="btn-card" onclick="window.openViewer(10)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -430,16 +229,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(11)">
-                    <img src="https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg" class="product-img" alt="سويت شيرت هاي إند أسود">
+                <div class="img-wrapper" onclick="window.openViewer(11)">
+                    <img src="https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت هاي إند (أسود)</div>
-                    <div class="price-box">
-                        <span class="curr">1300 ج.م</span>
-                        <span class="old">1500</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(11)">
+                    <div class="price-box"><span class="curr">1300 ج.م</span><span class="old">1500</span></div>
+                    <button class="btn-card" onclick="window.openViewer(11)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -447,16 +243,13 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(12)">
-                    <img src="https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg" class="product-img" alt="سويت شيرت هاي إند بيج">
+                <div class="img-wrapper" onclick="window.openViewer(12)">
+                    <img src="https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">سويت شيرت هاي إند (بيج)</div>
-                    <div class="price-box">
-                        <span class="curr">1300 ج.م</span>
-                        <span class="old">1500</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(12)">
+                    <div class="price-box"><span class="curr">1300 ج.م</span><span class="old">1500</span></div>
+                    <button class="btn-card" onclick="window.openViewer(12)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
@@ -464,33 +257,83 @@
 
             <div class="card">
                 <div class="badge">SALE</div>
-                <div class="img-wrapper" onclick="openViewer(13)">
-                    <img src="https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg" class="product-img" alt="بنطلون كارجو">
+                <div class="img-wrapper" onclick="window.openViewer(13)">
+                    <img src="https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg" class="product-img">
                 </div>
                 <div class="info">
                     <div class="name">بنطلون كارجو/جينز</div>
-                    <div class="price-box">
-                        <span class="curr">700 ج.م</span>
-                        <span class="old">800</span>
-                    </div>
-                    <button class="btn-card" onclick="openViewer(13)">
+                    <div class="price-box"><span class="curr">700 ج.م</span><span class="old">800</span></div>
+                    <button class="btn-card" onclick="window.openViewer(13)">
                         <i class="fas fa-eye"></i> عرض التفاصيل
                     </button>
                 </div>
             </div>
-
+            
         </div>
     </section>
 
     <div class="viewer-overlay" id="viewer">
         <div class="viewer-header">
             <h3 id="vName" style="color: var(--gold);">اسم المنتج</h3>
-            <i class="fas fa-times" onclick="closeViewer()" style="font-size: 1.5rem; cursor: pointer; color: white;"></i>
+            <i class="fas fa-times" onclick="window.closeViewer()" style="font-size: 1.5rem; cursor: pointer; color: white;"></i>
         </div>
         <div class="viewer-body">
-            <div class="main-view-box" onclick="toggleZoom()">
+            <div class="main-view-box" onclick="window.toggleZoom()">
                 <img src="" id="vImg" class="main-view-img">
             </div>
             <p style="color: #666; font-size: 0.8rem; margin-bottom: 10px;">اضغط على الصورة للتكبير</p>
             
-            <div class="
+            <div class="controls">
+                <button class="ctrl-btn active" onclick="window.setSide('front')">الوش</button>
+                <button class="ctrl-btn" onclick="window.setSide('back')">الضهر</button>
+            </div>
+
+            <h2 id="vPrice" style="color: var(--gold); margin-bottom: 20px;"></h2>
+
+            <button class="btn-card" style="padding: 15px; font-size: 1.2rem;" onclick="window.openForm()">
+                <i class="fas fa-shopping-cart"></i> تنفيذ الطلب
+            </button>
+        </div>
+    </div>
+
+    <div class="form-overlay" id="orderForm">
+        <div class="form-box">
+            <h3 style="color: var(--gold); text-align: center; margin-bottom: 15px;">إتمام الطلب</h3>
+            <p style="color: #aaa; text-align: center; font-size: 0.9rem; margin-bottom: 15px;">أدخل بياناتك واختر طريقة الطلب</p>
+            
+            <input type="text" id="cName" class="inp-field" placeholder="الاسم بالكامل">
+            <select id="cGov" class="inp-field" onchange="window.loadCities()">
+                <option value="">اختر المحافظة...</option>
+            </select>
+            <select id="cCity" class="inp-field" disabled>
+                <option value="">اختر المدينة...</option>
+            </select>
+            <input type="text" id="cAddress" class="inp-field" placeholder="العنوان بالتفصيل">
+            
+            <div class="action-buttons">
+                <button class="btn-card" onclick="window.sendWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> طلب عبر واتساب
+                </button>
+                
+                <a href="tel:01117943368" class="btn-call">
+                    <i class="fas fa-phone"></i> اتصال مباشر
+                </a>
+
+                <button class="btn-cancel" onclick="window.closeForm()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+        <p style="color: #555; margin-top: 10px;">Created by <a href="https://wa.me/201128381838" class="credit">Ahmed Mohamed</a></p>
+    </footer>
+
+    <script>
+        // المتغيرات والبيانات
+        const waPhone = "201284381589";
+        
+        const productsData = {
+            1: { name: "هودي أسود (Black Skull)", price: 600, front: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg", back: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg" },
+            2: { name: "هودي أوف وايت (Graphic)", price: 600, front: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg", back: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg" },
+            3: { name: "هودي رصاصي طباعة", price: 600, front: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg", back: "https://i.postimg.cc/VNFvCP8W/f7892057f51040
