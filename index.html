@@ -49,7 +49,7 @@
         }
 
         .logo-img {
-            height: 60px; /* حجم اللوجو */
+            height: 60px;
             width: auto;
             border-radius: 5px;
         }
@@ -145,7 +145,7 @@
 
         .img-wrapper {
             width: 100%;
-            aspect-ratio: 3/4; /* نسبة أبعاد مثالية للملابس */
+            aspect-ratio: 3/4;
             position: relative;
             overflow: hidden;
         }
@@ -157,7 +157,6 @@
             transition: opacity 0.4s ease-in-out;
         }
 
-        /* تأثير تبديل الصورة عند الماوس */
         .img-back {
             position: absolute;
             top: 0;
@@ -165,13 +164,8 @@
             opacity: 0;
         }
 
-        .card:hover .img-back {
-            opacity: 1;
-        }
-
-        .card:hover .img-front {
-            opacity: 0; /* تختفي الصورة الأمامية لتظهر الخلفية */
-        }
+        .card:hover .img-back { opacity: 1; }
+        .card:hover .img-front { opacity: 0; }
 
         .badge {
             position: absolute;
@@ -186,16 +180,9 @@
             z-index: 2;
         }
 
-        .info {
-            padding: 15px;
-            text-align: center;
-        }
+        .info { padding: 15px; text-align: center; }
 
-        .name {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+        .name { font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
 
         .prices {
             display: flex;
@@ -205,34 +192,117 @@
             margin-bottom: 15px;
         }
 
-        .current-price {
-            color: var(--gold);
-            font-size: 1.3rem;
-            font-weight: 900;
-        }
-
-        .old-price {
-            color: var(--text-sec);
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }
+        .current-price { color: var(--gold); font-size: 1.3rem; font-weight: 900; }
+        .old-price { color: var(--text-sec); text-decoration: line-through; font-size: 0.9rem; }
 
         .btn-buy {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            background-color: #25D366; /* لون الواتس */
+            background-color: #25D366;
             color: white;
             padding: 10px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
         }
 
-        .btn-buy:hover {
-            background-color: #128C7E;
+        .btn-buy:hover { background-color: #128C7E; }
+
+        /* --- Modal (Popup) Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--gold);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-title {
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .form-group { margin-bottom: 15px; text-align: right; }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-sec);
+            font-size: 0.9rem;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #222;
+            color: white;
+            font-family: inherit;
+        }
+
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-confirm {
+            flex: 2;
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: transparent;
+            color: var(--text-sec);
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         /* --- Footer --- */
@@ -244,15 +314,12 @@
             border-top: 1px solid #333;
         }
 
-        /* Responsive Fixes */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .card { border-radius: 10px; }
-            .info { padding: 10px; }
-            .name { font-size: 0.9rem; }
-            .current-price { font-size: 1.1rem; }
-            .btn-buy { font-size: 0.9rem; padding: 8px; }
+        .designer-credit {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -278,16 +345,146 @@
             </div>
     </section>
 
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <h3 class="modal-title">أدخل بيانات الشحن</h3>
+            
+            <div class="form-group">
+                <label class="form-label">الاسم بالكامل</label>
+                <input type="text" id="customerName" class="form-input" placeholder="اسمك الثنائي">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">المحافظة</label>
+                <select id="governorateSelect" class="form-select" onchange="updateCities()">
+                    <option value="">اختر المحافظة...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">المدينة / المنطقة</label>
+                <select id="citySelect" class="form-select" disabled>
+                    <option value="">اختر المدينة...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العنوان بالتفصيل</label>
+                <input type="text" id="addressDetail" class="form-input" placeholder="اسم الشارع، رقم العمارة، علامة مميزة">
+            </div>
+
+            <div class="modal-buttons">
+                <button onclick="sendToWhatsApp()" class="btn-confirm">تأكيد الطلب <i class="fab fa-whatsapp"></i></button>
+                <button onclick="closeModal()" class="btn-cancel">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
-        <p style="color: #777; margin-top: 10px;">Created for Disha Brand</p>
+        <p style="color: #777; margin-top: 10px;">
+            Created by <span class="designer-credit">Ahmed Mohamed</span>
+        </p>
     </footer>
 
     <script>
         // رقم الواتساب الخاص بك
         const phoneNumber = "201284381589"; 
 
-        // بيانات المنتجات (الصور والأسعار اللي بعتها)
+        // بيانات المحافظات والمدن (قاعدة بيانات مصغرة)
+        const egyptData = {
+            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع الخامس", "الرحاب", "شبرا", "وسط البلد", "حلوان", "المرج", "عين شمس", "المطرية"],
+            "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق", "بولاق الدكرور"],
+            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر", "محطة الرمل", "العصافرة", "فيكتوريا"],
+            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "طوخ", "العبور"],
+            "الدقهلية": ["المنصورة", "ميت غمر", "السنبلاوين", "طلخا"],
+            "الشرقية": ["الزقازيق", "العشر من رمضان", "بلبيس", "فاقوس"],
+            "الغربية": ["طنطا", "المحلة الكبرى", "كفر الزيات"],
+            "المنوفية": ["شبين الكوم", "أشمون", "منوف", "السادات"],
+            "البحيرة": ["دمنهور", "كفر الدوار", "رشيد"],
+            "كفر الشيخ": ["كفر الشيخ", "دسوق", "بلطيم"],
+            "دمياط": ["دمياط", "رأس البر", "دمياط الجديدة"],
+            "بورسعيد": ["بورسعيد", "بورفؤاد"],
+            "الإسماعيلية": ["الإسماعيلية", "فايد", "التل الكبير"],
+            "السويس": ["السويس", "الأربعين"],
+            "بني سويف": ["بني سويف", "الواسطى"],
+            "المنيا": ["المنيا", "ملوي", "بني مزار"],
+            "أسيوط": ["أسيوط", "ديروط", "منفلوط"],
+            "سوهاج": ["سوهاج", "جرجا", "طمه"],
+            "قنا": ["قنا", "نجع حمادي", "أرمنت"],
+            "الأقصر": ["الأقصر", "إسنا"],
+            "أسوان": ["أسوان", "كوم أمبو", "إدفو"],
+            "مطروح": ["مرسى مطروح", "الساحل الشمالي"],
+            "البحر الأحمر": ["الغردقة", "الجونة", "سفاجا"],
+            "جنوب سيناء": ["شرم الشيخ", "دهب"],
+            "شمال سيناء": ["العريش"],
+            "الفيوم": ["الفيوم"],
+            "الوادي الجديد": ["الخارجة"]
+        };
+
+        // تعبئة قائمة المحافظات عند التحميل
+        const govSelect = document.getElementById('governorateSelect');
+        const citySelect = document.getElementById('citySelect');
+        
+        for (let gov in egyptData) {
+            let option = document.createElement('option');
+            option.value = gov;
+            option.text = gov;
+            govSelect.appendChild(option);
+        }
+
+        // تحديث المدن بناءً على المحافظة
+        function updateCities() {
+            const selectedGov = govSelect.value;
+            citySelect.innerHTML = '<option value="">اختر المدينة...</option>';
+            
+            if (selectedGov && egyptData[selectedGov]) {
+                citySelect.disabled = false;
+                egyptData[selectedGov].forEach(city => {
+                    let option = document.createElement('option');
+                    option.value = city;
+                    option.text = city;
+                    citySelect.appendChild(option);
+                });
+            } else {
+                citySelect.disabled = true;
+            }
+        }
+
+        // متغير لتخزين المنتج الحالي المطلوب
+        let currentProduct = {};
+
+        // فتح النافذة
+        function openOrderModal(pName, pPrice) {
+            currentProduct = { name: pName, price: pPrice };
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        // إغلاق النافذة
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // إرسال البيانات للواتساب
+        function sendToWhatsApp() {
+            const name = document.getElementById('customerName').value;
+            const gov = document.getElementById('governorateSelect').value;
+            const city = document.getElementById('citySelect').value;
+            const address = document.getElementById('addressDetail').value;
+
+            if (!name || !gov || !city || !address) {
+                alert("من فضلك أكمل جميع البيانات المطلوبة");
+                return;
+            }
+
+            const message = `السلام عليكم، طلب جديد من الموقع 🛒%0a%0a*المنتج:* ${currentProduct.name}%0a*السعر:* ${currentProduct.price} جنيه%0a------------------%0a*بيانات الشحن:*%0a👤 *الاسم:* ${name}%0a📍 *المحافظة:* ${gov}%0a🏙️ *المدينة:* ${city}%0a🏠 *العنوان:* ${address}%0a%0aممكن تأكيد الطلب ومعرفة مصاريف الشحن؟`;
+            
+            const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(waLink, '_blank');
+            closeModal();
+        }
+
+        // بيانات المنتجات
         const products = [
             {
                 id: 1,
@@ -311,7 +508,7 @@
                 price: 600,
                 oldPrice: 700,
                 imgFront: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg",
-                imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" // نفس الصورة لو مفيش ضهر
+                imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg"
             },
             {
                 id: 4,
@@ -384,48 +581,4 @@
                 oldPrice: 1500,
                 imgFront: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg",
                 imgBack: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg"
-            },
-            {
-                id: 13,
-                name: "بنطلون كارجو/جينز",
-                price: 700,
-                oldPrice: 800,
-                imgFront: "https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg",
-                imgBack: "https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg"
-            }
-        ];
-
-        const grid = document.getElementById('productsGrid');
-
-        products.forEach(product => {
-            // حساب نسبة الخصم
-            const discount = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
-            
-            // تجهيز رسالة الواتساب
-            const message = `السلام عليكم، بخصوص ديشا براند 👑%0aكنت عايز أطلب الموديل ده:%0a*${product.name}*%0aالسعر: ${product.price} جنيه%0a%0aممكن تفاصيل الشحن للمكان ده: ...`;
-            const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="badge">${discount}% OFF</div>
-                <div class="img-wrapper">
-                    <img src="${product.imgFront}" alt="${product.name}" class="product-img img-front">
-                    <img src="${product.imgBack}" alt="${product.name}" class="product-img img-back">
-                </div>
-                <div class="info">
-                    <div class="name">${product.name}</div>
-                    <div class="prices">
-                        <span class="current-price">${product.price} ج.م</span>
-                        <span class="old-price">${product.oldPrice} ج.م</span>
-                    </div>
-                    <a href="${waLink}" target="_blank" class="btn-buy">
-                        <i class="fab fa-whatsapp"></i> اطلب الآن
-                    </a>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-    </script>
-</body>
-</html>
+    
