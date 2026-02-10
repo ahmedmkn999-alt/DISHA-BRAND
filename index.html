@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISHA BRAND | ديشا براند للملابس</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --gold: #D4AF37;
+            --text-main: #ffffff;
+            --text-sec: #aaaaaa;
+            --price-old: #ff4d4d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: rgba(15, 15, 15, 0.95);
+            padding: 10px 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 60px; /* حجم اللوجو */
+            width: auto;
+            border-radius: 5px;
+        }
+
+        .brand-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), var(--bg-color)), url('https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg');
+            background-size: cover;
+            background-position: center top;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            margin-bottom: 30px;
+        }
+
+        .btn-shop {
+            padding: 12px 50px;
+            background-color: var(--gold);
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-shop:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        /* --- Products Grid --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            aspect-ratio: 3/4; /* نسبة أبعاد مثالية للملابس */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        /* تأثير تبديل الصورة عند الماوس */
+        .img-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .card:hover .img-back {
+            opacity: 1;
+        }
+
+        .card:hover .img-front {
+            opacity: 0; /* تختفي الصورة الأمامية لتظهر الخلفية */
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--price-old);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .prices {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .old-price {
+            color: var(--text-sec);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .btn-buy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background-color: #25D366; /* لون الواتس */
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: #128C7E;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 80px;
+            padding: 40px;
+            background-color: #000;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card { border-radius: 10px; }
+            .info { padding: 10px; }
+            .name { font-size: 0.9rem; }
+            .current-price { font-size: 1.1rem; }
+            .btn-buy { font-size: 0.9rem; padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" alt="Disha Brand Logo" class="logo-img">
+            <span class="brand-text">DISHA BRAND</span>
+        </div>
+        <a href="#collection" style="color: white; font-size: 1.5rem;"><i class="fas fa-shopping-bag"></i></a>
+    </header>
+
+    <section class="hero">
+        <h1>STREETWEAR <span style="color: var(--gold)">2026</span></h1>
+        <p>أقوى كولكشن شتوي بأفضل الأسعار</p>
+        <a href="#collection" class="btn-shop">تسوق الآن</a>
+    </section>
+
+    <section id="collection" class="container">
+        <h2 class="section-title">الكولكشن الجديد</h2>
+        <div class="grid" id="productsGrid">
+            </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+        <p style="color: #777; margin-top: 10px;">Created for Disha Brand</p>
+    </footer>
+
+    <script>
+        // رقم الواتساب الخاص بك
+        const phoneNumber = "201284381589"; 
+
+        // بيانات المنتجات (الصور والأسعار اللي بعتها)
+        const products = [
+            {
+                id: 1,
+                name: "هودي أسود (Black Skull)",
+                price: 600,
+                oldPrice: 750,
+                imgFront: "https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg",
+                imgBack: "https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg"
+            },
+            {
+                id: 2,
+                name: "هودي أوف وايت (Graphic)",
+                price: 600,
+                oldPrice: 750,
+                imgFront: "https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg",
+                imgBack: "https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg"
+            },
+            {
+                id: 3,
+                name: "هودي رصاصي طباعة",
+                price: 600,
+                oldPrice: 700,
+                imgFront: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg",
+                imgBack: "https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg" // نفس الصورة لو مفيش ضهر
+            },
+            {
+                id: 4,
+                name: "سويت شيرت بيسك (أسود)",
+                price: 650,
+                oldPrice: 800,
+                imgFront: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg",
+                imgBack: "https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg"
+            },
+            {
+                id: 5,
+                name: "سويت شيرت بيسك (رصاصي)",
+                price: 650,
+                oldPrice: 800,
+                imgFront: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg",
+                imgBack: "https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg"
+            },
+            {
+                id: 6,
+                name: "سويت شيرت بيسك (أوف وايت)",
+                price: 650,
+                oldPrice: 800,
+                imgFront: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg",
+                imgBack: "https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg"
+            },
+            {
+                id: 7,
+                name: "سويت شيرت بريميم (أسود)",
+                price: 800,
+                oldPrice: 1000,
+                imgFront: "https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg",
+                imgBack: "https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg"
+            },
+            {
+                id: 8,
+                name: "سويت شيرت بريميم (هافان)",
+                price: 800,
+                oldPrice: 1000,
+                imgFront: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg",
+                imgBack: "https://i.postimg.cc/tTT6R4VK/a39d6283e92042bbaa0871b553e9fbef.jpg"
+            },
+            {
+                id: 9,
+                name: "ترنج كامل (أسود)",
+                price: 900,
+                oldPrice: 1000,
+                imgFront: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg",
+                imgBack: "https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg"
+            },
+            {
+                id: 10,
+                name: "ترنج كامل (رصاصي)",
+                price: 900,
+                oldPrice: 1000,
+                imgFront: "https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg",
+                imgBack: "https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg"
+            },
+            {
+                id: 11,
+                name: "سويت شيرت هاي إند (أسود)",
+                price: 1300,
+                oldPrice: 1500,
+                imgFront: "https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg",
+                imgBack: "https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg"
+            },
+            {
+                id: 12,
+                name: "سويت شيرت هاي إند (بيج)",
+                price: 1300,
+                oldPrice: 1500,
+                imgFront: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg",
+                imgBack: "https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg"
+            },
+            {
+                id: 13,
+                name: "بنطلون كارجو/جينز",
+                price: 700,
+                oldPrice: 800,
+                imgFront: "https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg",
+                imgBack: "https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg"
+            }
+        ];
+
+        const grid = document.getElementById('productsGrid');
+
+        products.forEach(product => {
+            // حساب نسبة الخصم
+            const discount = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+            
+            // تجهيز رسالة الواتساب
+            const message = `السلام عليكم، بخصوص ديشا براند 👑%0aكنت عايز أطلب الموديل ده:%0a*${product.name}*%0aالسعر: ${product.price} جنيه%0a%0aممكن تفاصيل الشحن للمكان ده: ...`;
+            const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="badge">${discount}% OFF</div>
+                <div class="img-wrapper">
+                    <img src="${product.imgFront}" alt="${product.name}" class="product-img img-front">
+                    <img src="${product.imgBack}" alt="${product.name}" class="product-img img-back">
+                </div>
+                <div class="info">
+                    <div class="name">${product.name}</div>
+                    <div class="prices">
+                        <span class="current-price">${product.price} ج.م</span>
+                        <span class="old-price">${product.oldPrice} ج.م</span>
+                    </div>
+                    <a href="${waLink}" target="_blank" class="btn-buy">
+                        <i class="fab fa-whatsapp"></i> اطلب الآن
+                    </a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
