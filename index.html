@@ -10,18 +10,18 @@
     <script src="https://pl28692420.effectivegatecpm.com/0f/62/cc/0f62cc9ba1a0f4918384261a49a38e8f.js"></script>
 
     <style>
-        /* --- التصميم --- */
+        /* --- التصميم (Luxury Dark Theme) --- */
         :root { --bg: #000; --card: #111; --gold: #D4AF37; --text: #fff; }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-top: 60px; padding-bottom: 50px; }
 
-        /* --- الهيدر --- */
+        /* الهيدر */
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: 60px;
             background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
             z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
         }
-        .logo-area { display: flex; align-items: center; gap: 5px; }
+        .logo-area { display: flex; align-items: center; gap: 5px; cursor: pointer; }
         .logo-img { height: 35px; border: 1px solid var(--gold); border-radius: 5px; }
         .brand { font-family: 'Oswald'; color: var(--gold); font-size: 1.2rem; font-weight: bold; display: none; }
         @media (min-width: 350px) { .brand { display: block; } }
@@ -33,7 +33,7 @@
         }
         .nav-btn.active { background: var(--gold); color: black; border-color: var(--gold); }
 
-        /* --- الفيديو --- */
+        /* منطقة الفيديو */
         .hero {
             position: relative; height: 40vh; width: 100%; overflow: hidden; border-bottom: 3px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
@@ -60,18 +60,17 @@
             box-shadow: 0 0 20px rgba(212,175,55,0.5); pointer-events: auto;
         }
 
-        /* --- المنتجات --- */
+        /* المنتجات */
         .section-title { padding: 10px 15px; color: var(--gold); font-size: 1.1rem; font-weight: bold; border-right: 4px solid var(--gold); margin: 20px 0; background: linear-gradient(90deg, #111, transparent); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; min-height: 200px; }
+        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; position: relative; animation: fadeIn 0.5s; }
         
         .img-box { position: relative; padding-top: 125%; background: #222; overflow: hidden; }
         .img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        
         .badge { position: absolute; top: 5px; right: 5px; background: #c00; color: white; padding: 2px 6px; font-size: 0.7rem; border-radius: 3px; font-weight: bold; z-index: 2; }
         
         .info { padding: 8px; text-align: center; }
-        .p-name { font-size: 0.8rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
+        .p-name { font-size: 0.8rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; font-weight: bold; }
         .price { color: var(--gold); font-weight: 900; font-size: 0.95rem; }
         .old-price { text-decoration: line-through; color: #777; font-size: 0.75rem; margin-right: 5px; }
         
@@ -80,7 +79,10 @@
             padding: 5px; margin-top: 5px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.85rem;
         }
 
-        /* --- الصفحات والمودال --- */
+        /* حالة التحميل */
+        .loader { text-align: center; width: 200%; color: #777; margin-top: 20px; font-size: 0.9rem; }
+
+        /* الصفحات والمودال */
         .page { display: none; animation: fadeIn 0.4s; }
         .page.active { display: block; }
         @keyframes fadeIn { from {opacity:0} to {opacity:1} }
@@ -99,21 +101,20 @@
         select.inp { background: #222; }
 
         footer { background: #000; padding: 20px; text-align: center; border-top: 1px solid #333; margin-top: 30px; font-size: 0.8rem; color: #666; }
-        footer span { color: var(--gold); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-area" onclick="go('home')">
+        <div class="logo-area" onclick="window.go('home')">
             <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" class="logo-img">
             <span class="brand">DISHA</span>
         </div>
         <div class="nav-links">
-            <button class="nav-btn active" id="b-home" onclick="go('home')">الرئيسية</button>
-            <button class="nav-btn" id="b-hoodies" onclick="go('hoodies')">هوديز</button>
-            <button class="nav-btn" id="b-pants" onclick="go('pants')">بناطيل</button>
-            <button class="nav-btn" id="b-tracks" onclick="go('tracks')">ترنجات</button>
+            <button class="nav-btn active" id="b-home" onclick="window.go('home')">الرئيسية</button>
+            <button class="nav-btn" id="b-hoodies" onclick="window.go('hoodies')">هوديز</button>
+            <button class="nav-btn" id="b-pants" onclick="window.go('pants')">بناطيل</button>
+            <button class="nav-btn" id="b-tracks" onclick="window.go('tracks')">ترنجات</button>
         </div>
     </header>
 
@@ -125,46 +126,35 @@
             <div class="hero-content">
                 <h1>STREETWEAR</h1>
                 <h2>2026</h2>
-                <button class="hero-btn" onclick="go('hoodies')">تسوق الآن</button>
+                <button class="hero-btn" onclick="window.go('hoodies')">تسوق الآن</button>
             </div>
         </div>
         
-        <div class="section-title">الأكثر مبيعاً 🔥</div>
-        <div class="grid" id="grid-home"></div>
-        <footer>
-            <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
-        </footer>
+        <div class="section-title">أحدث المنتجات 🔥</div>
+        <div class="grid" id="grid-home">
+            <p class="loader">جاري تحميل المنتجات...</p>
+        </div>
+        <footer><p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p></footer>
     </div>
 
-    <div id="hoodies" class="page">
-        <div class="section-title">قسم الهوديز</div>
-        <div class="grid" id="grid-hoodies"></div>
-    </div>
-
-    <div id="pants" class="page">
-        <div class="section-title">قسم البناطيل</div>
-        <div class="grid" id="grid-pants"></div>
-    </div>
-
-    <div id="tracks" class="page">
-        <div class="section-title">قسم الترنجات</div>
-        <div class="grid" id="grid-tracks"></div>
-    </div>
+    <div id="hoodies" class="page"><div class="section-title">قسم الهوديز</div><div class="grid" id="grid-hoodies"><p class="loader">جاري التحميل...</p></div></div>
+    <div id="pants" class="page"><div class="section-title">قسم البناطيل</div><div class="grid" id="grid-pants"><p class="loader">جاري التحميل...</p></div></div>
+    <div id="tracks" class="page"><div class="section-title">قسم الترنجات</div><div class="grid" id="grid-tracks"><p class="loader">جاري التحميل...</p></div></div>
 
     <div id="viewer" class="modal">
         <div class="modal-head">
             <span style="color:var(--gold); font-weight:bold;" id="vName"></span>
-            <span style="color:white; font-size:1.5rem; cursor:pointer;" onclick="closeM('viewer')">✕</span>
+            <span style="color:white; font-size:1.5rem; cursor:pointer;" onclick="window.closeM('viewer')">✕</span>
         </div>
         <div class="modal-body">
-            <img src="" id="vImg" class="big-img" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA+BRAND'">
+            <img src="" id="vImg" class="big-img" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA'">
             <div id="btns-sw" class="ctrl-btns">
-                <button class="sw-btn active" id="btn-f" onclick="swImg('f')">الوش</button>
-                <button class="sw-btn" id="btn-b" onclick="swImg('b')">الضهر</button>
+                <button class="sw-btn active" id="btn-f" onclick="window.swImg('f')">الوش</button>
+                <button class="sw-btn" id="btn-b" onclick="window.swImg('b')">الضهر</button>
             </div>
             <h2 style="color:var(--gold); margin-bottom:5px;" id="vPrice"></h2>
             <span style="color:#777; text-decoration:line-through;" id="vOld"></span>
-            <button class="btn-buy" onclick="openForm()">اطلب الآن (واتساب)</button>
+            <button class="btn-buy" onclick="window.openForm()">اطلب الآن (واتساب)</button>
         </div>
     </div>
 
@@ -172,122 +162,105 @@
         <div style="background:#151515; padding:20px; width:90%; border:1px solid var(--gold); border-radius:10px; margin:auto;">
             <h3 style="color:var(--gold); text-align:center;">بيانات الشحن</h3>
             <input id="fName" class="inp" type="text" placeholder="الاسم">
-            <select id="fGov" class="inp" onchange="loadCity()"><option value="">اختر المحافظة...</option></select>
+            <select id="fGov" class="inp" onchange="window.loadCity()"><option value="">اختر المحافظة...</option></select>
             <select id="fCity" class="inp" disabled><option value="">اختر المدينة...</option></select>
             <input id="fAddr" class="inp" type="text" placeholder="العنوان">
-            <button class="btn-buy" onclick="sendWa()">تأكيد الطلب</button>
-            <button onclick="closeM('form')" style="width:100%; padding:10px; background:transparent; border:1px solid #555; color:#ccc; margin-top:10px; border-radius:5px;">إلغاء</button>
+            <button class="btn-buy" onclick="window.sendWa()">تأكيد الطلب</button>
+            <button onclick="window.closeM('form')" style="width:100%; padding:10px; background:transparent; border:1px solid #555; color:#ccc; margin-top:10px; border-radius:5px;">إلغاء</button>
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        // 🔥 استيراد مكتبات فايربيس (v9)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // 🔥 تهيئة المشروع (بالبيانات اللي أنت بعتها)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQuVtULU8APTurAmlkQ9gNyFG_N1Jvq48",
+            authDomain: "disha-brand.firebaseapp.com",
+            projectId: "disha-brand",
+            storageBucket: "disha-brand.firebasestorage.app",
+            messagingSenderId: "170505241014",
+            appId: "1:170505241014:web:b3cbea5dcb06624e93c117",
+            measurementId: "G-XL3C1JY6MF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // متغيرات عامة
+        let allProducts = [];
+        let curr = null;
         const govs = { "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي"], "الجيزة": ["الهرم", "فيصل", "6 أكتوبر"], "الإسكندرية": ["سموحة", "ميامي"], "باقي المحافظات": ["أخرى"] };
 
-        // 🔥🔥 الداتا (تم نقل الترنجات للقسم الجديد) 🔥🔥
-        const items = [
-            // --- هوديز (Top) ---
-            {id:1, t:'top', n:'Hoodie Skull Black', p:600, o:750, 
-             f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', 
-             b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            
-            {id:2, t:'top', n:'Sweatshirt Basic White', p:650, o:800, 
-             f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', 
-             b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-             
-            {id:3, t:'top', n:'Hoodie Graphic Off-White', p:600, o:750, 
-             f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', 
-             b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
+        // 1. جلب المنتجات من قاعدة البيانات
+        async function fetchProducts() {
+            try {
+                // ترتيب حسب التاريخ (الأحدث أولاً)
+                const q = query(collection(db, "products"), orderBy("date", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                allProducts = [];
+                querySnapshot.forEach((doc) => {
+                    let d = doc.data();
+                    d.id = doc.id;
+                    allProducts.push(d);
+                });
 
-            {id:4, t:'top', n:'Sweatshirt Basic Grey', p:650, o:800, 
-             f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', 
-             b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
+                renderAll();
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                document.getElementById('grid-home').innerHTML = '<p style="text-align:center;color:red;">حدث خطأ في التحميل، تأكد من الإنترنت.</p>';
+            }
+        }
 
-            {id:5, t:'top', n:'Sweatshirt Basic Black', p:650, o:800, 
-             f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', 
-             b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
-
-            {id:23, t:'top', n:'Hoodie Shine', p:600, o:750, 
-             f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', 
-             b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
-
-            // --- ترنجات (Track) ---
-            {id:8, t:'track', n:'Tracksuit Full Set Black', p:900, o:1000, 
-             f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', 
-             b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
-
-            {id:9, t:'track', n:'Tracksuit Full Set Grey', p:900, o:1000, 
-             f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', 
-             b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
-
-            // ⚠️ تم النقل لقسم الترنجات حسب طلبك ⚠️
-            {id:10, t:'track', n:'High-End Sweatshirt Set', p:1300, o:1500, 
-             f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', 
-             b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
-            
-            // ⚠️ تم النقل لقسم الترنجات ⚠️
-            {id:7, t:'track', n:'Premium Sweatshirt Set Beige', p:800, o:1000, 
-             f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', 
-             b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
-
-            // --- بناطيل (Bottom) ---
-            {id:11, t:'bottom', n:'Cargo Pants', p:700, o:800, 
-             f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', 
-             b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
-            {id:12, t:'bottom', n:'Jeans Light Blue', p:600, o:750, 
-             f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', 
-             b:'https://i.postimg.cc/j5D27vrD/IMG_20260210_WA0022.jpg'},
-            {id:13, t:'bottom', n:'Jeans Mod 1', p:600, o:750, 
-             f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', 
-             b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:14, t:'bottom', n:'Jeans Mod 2', p:600, o:750, 
-             f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', 
-             b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-            {id:15, t:'bottom', n:'Jeans Mod 3', p:600, o:750, 
-             f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', 
-             b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-            {id:16, t:'bottom', n:'Jeans Mod 4', p:600, o:750, 
-             f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', 
-             b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:17, t:'bottom', n:'Jeans Mod 5', p:600, o:750, 
-             f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', 
-             b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
-        ];
-
-        let curr = null;
-
-        window.onload = function() {
+        // 2. عرض المنتجات في الأقسام
+        function renderAll() {
+            // تحميل المحافظات
             const s = document.getElementById('fGov');
+            s.innerHTML = '<option value="">اختر المحافظة...</option>';
             for(let g in govs) { let o = document.createElement('option'); o.value=g; o.innerText=g; s.appendChild(o); }
 
-            // عرض المنتجات (الرئيسية: أهم 4 منتجات)
-            render(items.filter(i => [1, 8, 12, 17].includes(i.id)), 'grid-home');
+            // الرئيسية: نعرض أحدث 6 منتجات
+            render(allProducts.slice(0, 6), 'grid-home');
             
-            // عرض الصفحات
-            render(items.filter(i => i.t === 'top'), 'grid-hoodies');
-            render(items.filter(i => i.t === 'bottom'), 'grid-pants');
-            render(items.filter(i => i.t === 'track'), 'grid-tracks');
-        };
+            // باقي الأقسام
+            render(allProducts.filter(i => i.t === 'top'), 'grid-hoodies');
+            render(allProducts.filter(i => i.t === 'bottom'), 'grid-pants');
+            render(allProducts.filter(i => i.t === 'track'), 'grid-tracks');
+        }
 
         function render(arr, id) {
             const el = document.getElementById(id);
             if(!el) return;
             el.innerHTML = '';
+            
+            if(arr.length === 0) {
+                el.innerHTML = '<p style="text-align:center; width:200%; color:#555; padding:20px;">لا توجد منتجات حالياً ⏳</p>';
+                return;
+            }
+
             arr.forEach(i => {
+                // التأكد من الصور
+                let img = i.f ? i.f : 'https://placehold.co/400x400/222/D4AF37?text=Coming+Soon';
+                
                 el.innerHTML += `
                 <div class="card">
-                    <div class="badge">SALE</div>
-                    <div class="img-box" onclick="show(${i.id})">
-                        <img src="${i.f}" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA'" loading="lazy">
+                    <div class="badge">جديد</div>
+                    <div class="img-box" onclick="window.show('${i.id}')">
+                        <img src="${img}" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA'" loading="lazy">
                     </div>
                     <div class="info">
                         <div class="p-name">${i.n}</div>
-                        <div><span class="price">${i.p}</span> <span class="old-price">${i.o}</span></div>
-                        <button class="btn-details" onclick="show(${i.id})">التفاصيل</button>
+                        <div><span class="price">${i.p} ج.م</span> <span class="old-price">${i.o ? i.o : ''}</span></div>
+                        <button class="btn-details" onclick="window.show('${i.id}')">التفاصيل</button>
                     </div>
                 </div>`;
             });
         }
 
+        // --- دوال التحكم (Windows Scope) ---
         window.go = function(id) {
             document.querySelectorAll('.page').forEach(p => p.style.display='none');
             document.getElementById(id).style.display='block';
@@ -297,15 +270,19 @@
         }
 
         window.show = function(id) {
-            curr = items.find(x => x.id === id);
+            curr = allProducts.find(x => x.id === id);
+            if(!curr) return;
+
             document.getElementById('vName').innerText = curr.n;
             document.getElementById('vPrice').innerText = curr.p + " ج.م";
-            document.getElementById('vOld').innerText = curr.o;
+            document.getElementById('vOld').innerText = curr.o || "";
             document.getElementById('vImg').src = curr.f;
             
             const btns = document.getElementById('btns-sw');
-            if(curr.f === curr.b) btns.style.display='none';
-            else {
+            // لو مفيش صورة ضهر، أو صورة الضهر هي هي الوش -> نخفي الزراير
+            if(!curr.b || curr.f === curr.b) {
+                btns.style.display='none';
+            } else {
                 btns.style.display='flex';
                 document.getElementById('btn-f').classList.add('active');
                 document.getElementById('btn-b').classList.remove('active');
@@ -316,12 +293,13 @@
         window.closeM = function(id) { document.getElementById(id).style.display='none'; }
         
         window.swImg = function(s) {
-            document.getElementById('vImg').src = (s==='f') ? curr.f : curr.b;
+            if(!curr) return;
+            document.getElementById('vImg').src = (s==='f') ? curr.f : (curr.b || curr.f);
             document.getElementById('btn-f').classList.toggle('active', s==='f');
             document.getElementById('btn-b').classList.toggle('active', s==='b');
         }
         
-        window.openForm = function() { closeM('viewer'); document.getElementById('form').style.display='flex'; }
+        window.openForm = function() { window.closeM('viewer'); document.getElementById('form').style.display='flex'; }
 
         window.loadCity = function() {
             const g = document.getElementById('fGov').value;
@@ -340,8 +318,13 @@
             const c=document.getElementById('fCity').value;
             const a=document.getElementById('fAddr').value;
             if(!n || !g || !c || !a) { alert('من فضلك أكمل البيانات'); return; }
-            window.open(`https://wa.me/201284381589?text=طلب: ${curr.n}%0aالسعر: ${curr.p}%0aالعميل: ${n}%0aالعنوان: ${g}-${c}-${a}`, '_blank');
+            const msg = `طلب جديد: ${curr.n}%0aالسعر: ${curr.p}%0aالعميل: ${n}%0aالعنوان: ${g}-${c}-${a}`;
+            window.open(`https://wa.me/201284381589?text=${msg}`, '_blank');
         }
+
+        // بدء التشغيل
+        fetchProducts();
     </script>
 </body>
-</html>
+                </html>
+                
