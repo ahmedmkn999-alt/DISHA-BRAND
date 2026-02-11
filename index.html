@@ -9,25 +9,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- التصميم (Luxury Theme) --- */
-        :root { --bg: #050505; --card-bg: #121212; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
+        /* --- الألوان (Dark & Gold) --- */
+        :root { --bg: #000000; --card-bg: #111; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
         
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-bottom: 60px; padding-top: 60px; overflow-x: hidden; }
 
         /* --- الهيدر --- */
         header { 
-            background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
+            background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold);
             position: fixed; top: 0; left: 0; width: 100%; height: 60px; z-index: 99999;
             display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
+            backdrop-filter: blur(10px);
         }
-        .logo-area { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .logo-area { display: flex; align-items: center; gap: 8px; }
         .logo-img { height: 40px; border: 1px solid var(--gold); border-radius: 5px; }
         .brand-name { font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.2rem; font-weight: bold; }
 
         .nav-links { display: flex; gap: 5px; }
         .nav-btn {
-            background: none; border: none; color: #bbb; font-weight: bold; font-size: 0.85rem;
+            background: none; border: none; color: #ccc; font-weight: bold; font-size: 0.85rem;
             cursor: pointer; padding: 5px 10px; font-family: 'Cairo'; transition: 0.3s;
         }
         .nav-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
@@ -37,10 +38,10 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- الفيديو (تم الإصلاح: حجم أصغر + زراير شغالة) --- */
+        /* --- الفيديو (تم عمل Zoom لإخفاء شعار يوتيوب) --- */
         .hero-container {
             position: relative; 
-            height: 40vh; /* الفيديو واخد 40% بس من الشاشة */
+            height: 40vh; /* ارتفاع مناسب للموبايل */
             width: 100%; 
             overflow: hidden; 
             background: #000;
@@ -49,21 +50,20 @@
         
         .video-wrapper {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* عشان الفيديو ميتداسش عليه */
+            pointer-events: none; /* لمنع الضغط على الفيديو */
             z-index: 0;
         }
         
         .video-wrapper iframe {
-            width: 100vw; height: 56.25vw; 
-            min-height: 100%; min-width: 100%;
+            width: 300%; height: 180%; /* تكبير الفيديو جداً لإخفاء الحواف */
             position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%) scale(1.3);
+            transform: translate(-50%, -50%); /* توسيط الفيديو بعد التكبير */
+            opacity: 0.6; /* تخفيف الإضاءة عشان الكلام يبان */
         }
 
-        /* الطبقة اللي فيها الكلام والزرار */
+        /* طبقة الكلام */
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); 
             z-index: 2;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
@@ -77,15 +77,13 @@
             text-shadow: 0 2px 10px black; pointer-events: none;
         }
         
-        /* الزرار (واخد أولوية قصوى في اللمس) */
         .hero-btn {
             background: linear-gradient(45deg, var(--gold), var(--gold-light)); 
             border: none; padding: 10px 40px; 
             font-weight: 900; font-size: 1rem; color: black;
             border-radius: 50px; cursor: pointer; margin-top: 15px;
             box-shadow: 0 0 15px rgba(212,175,55,0.6);
-            z-index: 100; /* رقم عالي عشان يشتغل */
-            pointer-events: auto; 
+            z-index: 10; pointer-events: auto;
         }
 
         /* --- الشبكة (Grid) --- */
@@ -93,8 +91,12 @@
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; max-width: 1200px; margin: 0 auto; }
         
         .card { background: var(--card-bg); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-        .img-area { position: relative; padding-top: 125%; cursor: pointer; }
+        
+        .img-area { position: relative; padding-top: 125%; cursor: pointer; background: #222; }
         .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        /* صورة احتياطية تظهر لو الصورة الأصلية باظت */
+        .img-area img.error { object-fit: contain; padding: 20px; } 
+
         .badge { position: absolute; top: 5px; right: 5px; background: #c00; color: white; padding: 2px 6px; font-size: 0.7rem; border-radius: 3px; font-weight: bold; }
         
         .details { padding: 8px; text-align: center; }
@@ -104,14 +106,14 @@
         .buy-btn { width: 100%; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 6px; margin-top: 5px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
         /* --- Footer --- */
-        footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #333; margin-top: 30px; font-size: 0.8rem; color: #666; }
-        footer span { color: var(--gold); }
+        footer { background: #000; padding: 20px; text-align: center; border-top: 1px solid #333; margin-top: 30px; font-size: 0.8rem; color: #666; }
+        footer span { color: var(--gold); font-weight: bold; }
 
         /* --- Modals --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; flex-direction: column; overflow-y: auto; }
         .modal-head { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; background: #111; border-bottom: 1px solid #333; }
         .modal-content { padding: 15px; text-align: center; }
-        .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 10px; border-radius: 5px; }
+        .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 10px; border-radius: 5px; background: #000; }
         .action-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; }
         .whatsapp { background: var(--green); color: white; }
         .call { background: #007bff; color: white; }
@@ -136,7 +138,7 @@
     <div id="home" class="page active">
         <div class="hero-container">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/7ldPYcZ-oaU?autoplay=1&mute=1&controls=0&loop=1&playlist=7ldPYcZ-oaU&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/7ldPYcZ-oaU?autoplay=1&mute=1&controls=0&loop=1&playlist=7ldPYcZ-oaU&playsinline=1&modestbranding=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
             <div class="hero-overlay">
                 <h1>STREETWEAR</h1>
@@ -172,7 +174,7 @@
             <button onclick="window.closeViewer()" style="background: none; border: none; color: white; font-size: 1.5rem;">✕</button>
         </div>
         <div class="modal-content">
-            <img src="" id="vImg" class="main-img">
+            <img src="" id="vImg" class="main-img" onerror="this.src='https://placehold.co/400x400/111/D4AF37?text=DISHA+BRAND'">
             <div id="imgControls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
                 <button onclick="window.changeSide('f')" style="padding: 8px 25px; background: #222; color: white; border: 1px solid #444; border-radius: 20px;">الوش</button>
                 <button onclick="window.changeSide('b')" style="padding: 8px 25px; background: #222; color: white; border: 1px solid #444; border-radius: 20px;">الضهر</button>
@@ -204,9 +206,8 @@
             "باقي المحافظات": ["أخرى"]
         };
 
-        // --- البيانات كاملة بالصور الصحيحة ---
+        // الروابط اللي حضرتك بعتها
         const products = [
-            // الهوديز (Hoodies)
             {id:1, type:'top', name:'Hoodie Skull (Black)', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
             {id:2, type:'top', name:'Sweatshirt Basic (White)', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
             {id:3, type:'top', name:'Hoodie Graphic (Off-White)', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
@@ -217,22 +218,24 @@
             {id:8, type:'top', name:'Tracksuit Full Set (Black)', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
             {id:9, type:'top', name:'Tracksuit Full Set (Grey)', price:900, old:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
             {id:10, type:'top', name:'High-End Sweatshirt (Black)', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
-            {id:18, type:'top', name:'Hoodie Printed (Grey)', price:600, old:750, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
-
-            // البناطيل (Pants)
             {id:11, type:'bottom', name:'Cargo/Jeans Pants', price:700, old:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
             {id:12, type:'bottom', name:'Jeans Light Blue', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
             {id:13, type:'bottom', name:'Jeans Mod 1', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
             {id:14, type:'bottom', name:'Jeans Mod 2', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
             {id:15, type:'bottom', name:'Jeans Mod 3', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
             {id:16, type:'bottom', name:'Jeans Mod 4', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:17, type:'bottom', name:'Jeans Mod 5', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
+            {id:17, type:'bottom', name:'Jeans Mod 5', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'},
+            {id:18, type:'top', name:'Hoodie Printed (Grey)', price:600, old:750, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
+            // New Zip-Ups (تأكد من هذه الروابط في المرة القادمة)
+            {id:20, type:'top', name:'Zip-Up Preface (Black)', price:650, old:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
+            {id:23, type:'top', name:'Hoodie Dope Shine (White)', price:600, old:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
+            {id:24, type:'top', name:'Hoodie Eye & Hand (Black)', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'}
         ];
 
         let currentP = null;
 
         window.onload = function() {
-            // تحميل المحافظات
+            // المحافظات
             const govSel = document.getElementById('cGov');
             for (let gov in egyptGovs) {
                 let opt = document.createElement('option');
@@ -240,7 +243,7 @@
                 govSel.appendChild(opt);
             }
 
-            // عرض المنتجات في الرئيسية (أهم 4)
+            // عرض المنتجات (الرئيسية: أهم 4)
             window.render(products.filter(p => [1, 8, 12, 13].includes(p.id)), 'home-grid');
             
             // عرض الصفحات
@@ -272,7 +275,7 @@
                     <div class="card">
                         <div class="badge">SALE</div>
                         <div class="img-area" onclick="window.openViewer(${p.id})">
-                            <img src="${p.f}" loading="lazy">
+                            <img src="${p.f}" onerror="this.src='https://placehold.co/400x400/111/D4AF37?text=DISHA+BRAND'" loading="lazy">
                         </div>
                         <div class="details">
                             <div class="p-title">${p.name}</div>
@@ -304,19 +307,4 @@
             if(currentP.f === currentP.b) controls.style.display = 'none';
             else controls.style.display = 'flex';
             
-            document.getElementById('viewer').style.display = 'flex';
-        }
-
-        window.closeViewer = function() { document.getElementById('viewer').style.display = 'none'; }
-        window.changeSide = function(side) { document.getElementById('vImg').src = (side === 'f') ? currentP.f : currentP.b; }
-        window.showOrderForm = function() { window.closeViewer(); document.getElementById('orderForm').style.display = 'flex'; }
-
-        window.sendWhatsapp = function() {
-            const n = document.getElementById('cName').value;
-            const gov = document.getElementById('cGov').value;
-            const city = document.getElementById('cCity').value;
-            const addr = document.getElementById('cAddr').value;
-            
-            if(!n || !gov || !city || !addr) { alert('من فضلك أكمل البيانات'); return; }
-            
-            c
+            document.getElementById(
