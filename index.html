@@ -8,40 +8,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="https://pl28692420.effectivegatecpm.com/0f/62/cc/0f62cc9ba1a0f4918384261a49a38e8f.js"></script>
-    
+
     <style>
         /* --- التصميم --- */
         :root { --bg: #000; --card: #111; --gold: #D4AF37; --text: #fff; }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-top: 60px; padding-bottom: 50px; }
 
-        /* --- الهيدر (تم إضافة زرار الترنجات) --- */
+        /* --- الهيدر --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: 60px;
             background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
-            z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 0 5px;
+            z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
         }
         .logo-area { display: flex; align-items: center; gap: 5px; }
         .logo-img { height: 35px; border: 1px solid var(--gold); border-radius: 5px; }
-        .brand { font-family: 'Oswald'; color: var(--gold); font-size: 1.2rem; font-weight: bold; display: none; } 
-        /* أخفيت الاسم في الموبايل عشان الأزرار تكفي */
+        .brand { font-family: 'Oswald'; color: var(--gold); font-size: 1.2rem; font-weight: bold; display: none; }
         @media (min-width: 350px) { .brand { display: block; } }
 
-        .nav-links { display: flex; gap: 3px; }
+        .nav-links { display: flex; gap: 5px; }
         .nav-btn { 
-            background: none; border: none; color: #ccc; font-weight: bold; font-size: 0.8rem; 
-            cursor: pointer; padding: 5px; transition: 0.3s; white-space: nowrap;
+            background: none; border: 1px solid #333; color: #ccc; font-weight: bold; font-size: 0.8rem; 
+            cursor: pointer; padding: 5px 8px; border-radius: 5px; transition: 0.3s;
         }
-        .nav-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+        .nav-btn.active { background: var(--gold); color: black; border-color: var(--gold); }
 
-        /* --- الفيديو --- */
+        /* --- الفيديو (تم الإصلاح) --- */
         .hero {
             position: relative; height: 40vh; width: 100%; overflow: hidden; border-bottom: 3px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
         }
         .video-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; 
+            z-index: 0; pointer-events: none; /* الفيديو غير قابل للمس */
         }
         .video-bg iframe {
             width: 300%; height: 150%; 
@@ -51,14 +50,14 @@
         .hero-content {
             position: relative; z-index: 10; text-align: center; width: 100%; pointer-events: none;
         }
-        .hero-content h1 { font-family: 'Oswald'; font-size: 3rem; margin: 0; text-shadow: 0 5px 15px black; line-height: 1; }
+        .hero-content h1 { font-family: 'Oswald'; font-size: 3rem; margin: 0; text-shadow: 0 5px 15px black; line-height: 1; color: white; }
         .hero-content h2 { color: var(--gold); font-family: 'Oswald'; font-size: 1.8rem; margin: 0; text-shadow: 0 5px 10px black; }
         
         .hero-btn {
             background: var(--gold); color: #000; border: none;
             padding: 10px 30px; font-size: 1rem; font-weight: bold;
             border-radius: 50px; margin-top: 15px; cursor: pointer;
-            box-shadow: 0 0 20px rgba(212,175,55,0.5); pointer-events: auto;
+            box-shadow: 0 0 20px rgba(212,175,55,0.5); pointer-events: auto; /* الزرار شغال */
         }
 
         /* --- المنتجات --- */
@@ -67,7 +66,7 @@
         .card { background: var(--card); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
         
         .img-box { position: relative; padding-top: 125%; background: #222; overflow: hidden; }
-        .img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         
         .badge { position: absolute; top: 5px; right: 5px; background: #c00; color: white; padding: 2px 6px; font-size: 0.7rem; border-radius: 3px; font-weight: bold; z-index: 2; }
         
@@ -81,12 +80,11 @@
             padding: 5px; margin-top: 5px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.85rem;
         }
 
-        /* --- الصفحات --- */
+        /* --- الصفحات والمودال --- */
         .page { display: none; animation: fadeIn 0.4s; }
         .page.active { display: block; }
         @keyframes fadeIn { from {opacity:0} to {opacity:1} }
 
-        /* --- المودال --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; flex-direction: column; }
         .modal-head { padding: 15px; display: flex; justify-content: space-between; background: #111; border-bottom: 1px solid #333; }
         .modal-body { padding: 20px; text-align: center; }
@@ -115,7 +113,8 @@
             <button class="nav-btn active" id="b-home" onclick="go('home')">الرئيسية</button>
             <button class="nav-btn" id="b-hoodies" onclick="go('hoodies')">هوديز</button>
             <button class="nav-btn" id="b-pants" onclick="go('pants')">بناطيل</button>
-            <button class="nav-btn" id="b-tracks" onclick="go('tracks')">ترنجات</button> </div>
+            <button class="nav-btn" id="b-tracks" onclick="go('tracks')">ترنجات</button>
+        </div>
     </header>
 
     <div id="home" class="page active">
@@ -134,26 +133,22 @@
         <div class="grid" id="grid-home"></div>
         <footer>
             <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
-            <p>Designed by <span>Ahmed Mohamed</span></p>
         </footer>
     </div>
 
     <div id="hoodies" class="page">
-        <div class="section-title">قسم الهوديز & سويت شيرت</div>
+        <div class="section-title">قسم الهوديز</div>
         <div class="grid" id="grid-hoodies"></div>
-        <footer><p>Designed by <span>Ahmed Mohamed</span></p></footer>
     </div>
 
     <div id="pants" class="page">
-        <div class="section-title">قسم البناطيل & جينز</div>
+        <div class="section-title">قسم البناطيل</div>
         <div class="grid" id="grid-pants"></div>
-        <footer><p>Designed by <span>Ahmed Mohamed</span></p></footer>
     </div>
 
     <div id="tracks" class="page">
-        <div class="section-title">قسم الترنجات (طقم كامل)</div>
+        <div class="section-title">قسم الترنجات</div>
         <div class="grid" id="grid-tracks"></div>
-        <footer><p>Designed by <span>Ahmed Mohamed</span></p></footer>
     </div>
 
     <div id="viewer" class="modal">
@@ -162,86 +157,56 @@
             <span style="color:white; font-size:1.5rem; cursor:pointer;" onclick="closeM('viewer')">✕</span>
         </div>
         <div class="modal-body">
-            <img src="" id="vImg" class="big-img" onerror="this.src='https://placehold.co/400x400/111/D4AF37?text=DISHA+BRAND+2026'">
-            
+            <img src="" id="vImg" class="big-img" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA+BRAND'">
             <div id="btns-sw" class="ctrl-btns">
                 <button class="sw-btn active" id="btn-f" onclick="swImg('f')">الوش</button>
                 <button class="sw-btn" id="btn-b" onclick="swImg('b')">الضهر</button>
             </div>
-
             <h2 style="color:var(--gold); margin-bottom:5px;" id="vPrice"></h2>
             <span style="color:#777; text-decoration:line-through;" id="vOld"></span>
-            
-            <button class="btn-buy" onclick="openForm()">
-                <i class="fab fa-whatsapp"></i> اطلب الآن
-            </button>
+            <button class="btn-buy" onclick="openForm()">اطلب الآن (واتساب)</button>
         </div>
     </div>
 
     <div id="form" class="modal" style="justify-content:center;">
-        <div style="background:#151515; padding:25px; width:90%; max-width:400px; border:1px solid var(--gold); border-radius:10px; margin:auto;">
-            <h3 style="color:var(--gold); text-align:center; margin-bottom:20px;">بيانات الشحن</h3>
-            <input id="fName" class="inp" type="text" placeholder="الاسم بالكامل">
+        <div style="background:#151515; padding:20px; width:90%; border:1px solid var(--gold); border-radius:10px; margin:auto;">
+            <h3 style="color:var(--gold); text-align:center;">بيانات الشحن</h3>
+            <input id="fName" class="inp" type="text" placeholder="الاسم">
             <select id="fGov" class="inp" onchange="loadCity()"><option value="">اختر المحافظة...</option></select>
             <select id="fCity" class="inp" disabled><option value="">اختر المدينة...</option></select>
-            <input id="fAddr" class="inp" type="text" placeholder="العنوان بالتفصيل">
-            <button class="btn-buy" onclick="sendWa()">تأكيد واتساب</button>
-            <button onclick="closeM('form')" style="width:100%; padding:12px; background:transparent; border:1px solid #555; color:#ccc; margin-top:10px; border-radius:5px; cursor:pointer;">إلغاء</button>
+            <input id="fAddr" class="inp" type="text" placeholder="العنوان">
+            <button class="btn-buy" onclick="sendWa()">تأكيد الطلب</button>
+            <button onclick="closeM('form')" style="width:100%; padding:10px; background:transparent; border:1px solid #555; color:#ccc; margin-top:10px; border-radius:5px;">إلغاء</button>
         </div>
     </div>
 
     <script>
-        const govs = {
-            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا"],
-            "الجيزة": ["الهرم", "فيصل", "الدقي", "6 أكتوبر", "الشيخ زايد"],
-            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي"],
-            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "العبور"],
-            "باقي المحافظات": ["أخرى"]
-        };
+        const govs = { "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي"], "الجيزة": ["الهرم", "فيصل", "6 أكتوبر"], "الإسكندرية": ["سموحة", "ميامي"], "باقي المحافظات": ["أخرى"] };
 
+        // الروابط الأصلية (مهمة جداً)
         const items = [
-            // الهوديز (Top)
-            {id:1, t:'top', n:'Hoodie Skull (Black)', p:600, o:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            {id:2, t:'top', n:'Sweatshirt Basic (White)', p:650, o:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-            {id:3, t:'top', n:'Hoodie Graphic (Off-White)', p:600, o:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
-            {id:4, t:'top', n:'Sweatshirt Basic (Grey)', p:650, o:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
-            {id:5, t:'top', n:'Sweatshirt Basic (Black)', p:650, o:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
-            {id:6, t:'top', n:'Premium Sweatshirt (Black)', p:800, o:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
-            {id:7, t:'top', n:'Premium Sweatshirt (Beige)', p:800, o:1000, f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
-            {id:10, t:'top', n:'High-End Sweatshirt (Black)', p:1300, o:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
-            {id:18, t:'top', n:'Hoodie Printed (Grey)', p:600, o:750, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
-            {id:20, t:'top', n:'Zip-Up Preface (Black)', p:650, o:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
-            {id:23, t:'top', n:'Hoodie Dope Shine', p:600, o:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
-            {id:24, t:'top', n:'Hoodie Eye & Hand', p:600, o:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
-            
-            // الترنجات (Tracksuits) - قسم جديد
-            {id:8, t:'track', n:'Tracksuit Full Set (Black)', p:900, o:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
-            {id:9, t:'track', n:'Tracksuit Full Set (Grey)', p:900, o:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
-
-            // البناطيل (Bottom)
-            {id:11, t:'bottom', n:'Cargo/Jeans Pants', p:700, o:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
+            {id:1, t:'top', n:'Hoodie Skull', p:600, o:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
+            {id:2, t:'top', n:'Sweatshirt White', p:650, o:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
+            {id:3, t:'top', n:'Hoodie Off-White', p:600, o:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
+            {id:4, t:'top', n:'Sweatshirt Grey', p:650, o:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
+            {id:5, t:'top', n:'Sweatshirt Black', p:650, o:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
+            {id:8, t:'track', n:'Tracksuit Black', p:900, o:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
+            {id:9, t:'track', n:'Tracksuit Grey', p:900, o:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
+            {id:11, t:'bottom', n:'Cargo Pants', p:700, o:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
             {id:12, t:'bottom', n:'Jeans Light Blue', p:600, o:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
-            {id:13, t:'bottom', n:'Jeans Mod 1', p:600, o:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:14, t:'bottom', n:'Jeans Mod 2', p:600, o:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-            {id:15, t:'bottom', n:'Jeans Mod 3', p:600, o:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-            {id:16, t:'bottom', n:'Jeans Mod 4', p:600, o:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:17, t:'bottom', n:'Jeans Mod 5', p:600, o:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
+            {id:23, t:'top', n:'Hoodie Shine', p:600, o:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'}
         ];
 
         let curr = null;
 
         window.onload = function() {
-            // المحافظات
             const s = document.getElementById('fGov');
             for(let g in govs) { let o = document.createElement('option'); o.value=g; o.innerText=g; s.appendChild(o); }
 
-            // عرض المنتجات (الرئيسية: أهم 4 منتجات من كل نوع)
             render(items.filter(i => [1, 8, 12, 23].includes(i.id)), 'grid-home');
-            
-            // عرض الصفحات
             render(items.filter(i => i.t === 'top'), 'grid-hoodies');
             render(items.filter(i => i.t === 'bottom'), 'grid-pants');
-            render(items.filter(i => i.t === 'track'), 'grid-tracks'); // القسم الجديد
+            render(items.filter(i => i.t === 'track'), 'grid-tracks');
         };
 
         function render(arr, id) {
@@ -249,19 +214,16 @@
             if(!el) return;
             el.innerHTML = '';
             arr.forEach(i => {
-                // هنا بنحط كود onerror عشان لو الصورة باظت، تظهر صورة بديلة مكتوب عليها اسم البراند
                 el.innerHTML += `
                 <div class="card">
                     <div class="badge">SALE</div>
                     <div class="img-box" onclick="show(${i.id})">
-                        <img src="${i.f}" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA+BRAND'" loading="lazy">
+                        <img src="${i.f}" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA'" loading="lazy">
                     </div>
                     <div class="info">
                         <div class="p-name">${i.n}</div>
-                        <div><span class="price">${i.p} ج.م</span> <span class="old-price">${i.o}</span></div>
-                        <button class="btn-details" onclick="show(${i.id})">
-                            <i class="fas fa-eye"></i> التفاصيل
-                        </button>
+                        <div><span class="price">${i.p}</span> <span class="old-price">${i.o}</span></div>
+                        <button class="btn-details" onclick="show(${i.id})">التفاصيل</button>
                     </div>
                 </div>`;
             });
@@ -319,5 +281,8 @@
             const c=document.getElementById('fCity').value;
             const a=document.getElementById('fAddr').value;
             if(!n || !g || !c || !a) { alert('من فضلك أكمل البيانات'); return; }
-            const msg = `طلب جديد: ${curr.n}%0aالسعر: ${curr.p}%0aالعميل: ${n}%0aالعنوان: ${g} - ${c} - ${a}`;
-  
+            window.open(`https://wa.me/201284381589?text=طلب: ${curr.n}%0aالسعر: ${curr.p}%0aالعميل: ${n}%0aالعنوان: ${g}-${c}-${a}`, '_blank');
+        }
+    </script>
+</body>
+</html>
