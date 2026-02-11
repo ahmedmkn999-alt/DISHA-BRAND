@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- الألوان (Black & Gold Theme) --- */
+        /* --- الألوان (Dark & Gold Theme) --- */
         :root { --bg: #050505; --card-bg: #121212; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
         
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -37,10 +37,10 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- الفيديو (تم تصغيره وإصلاح الزراير) --- */
+        /* --- الفيديو (تم الإصلاح ليعمل كخلفية فقط) --- */
         .hero-container {
             position: relative; 
-            height: 40vh; /* تصغير الارتفاع لـ 40% من الشاشة */
+            height: 50vh; /* ارتفاع متوسط ومناسب */
             width: 100%; 
             overflow: hidden; 
             background: #000;
@@ -49,22 +49,22 @@
         
         .video-wrapper {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* عشان الفيديو ميتداسش عليه ويوقف */
+            pointer-events: none; /* سحر الكود: بيمنع اللمس ع الفيديو عشان الزراير تشتغل */
             z-index: 0;
         }
         
         .video-wrapper iframe {
-            width: 100vw; height: 56.25vw; /* نسبة 16:9 */
+            width: 100vw; height: 56.25vw; 
             min-height: 100%; min-width: 100%;
             position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%) scale(1.3); /* تكبير عشان يشيل الحواف السوداء */
+            transform: translate(-50%, -50%) scale(1.3);
         }
 
         /* طبقة الكلام والزراير */
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); /* تغميق بسيط */
-            z-index: 2; /* رفع الطبقة فوق الفيديو */
+            background: rgba(0,0,0,0.3); 
+            z-index: 2;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
@@ -77,14 +77,15 @@
             text-shadow: 0 2px 10px black; pointer-events: none;
         }
         
+        /* زرار التسوق (تم التأكد من عمله) */
         .hero-btn {
             background: linear-gradient(45deg, var(--gold), var(--gold-light)); 
-            border: none; padding: 10px 40px; 
+            border: none; padding: 12px 45px; 
             font-weight: 900; font-size: 1rem; color: black;
             border-radius: 50px; cursor: pointer; margin-top: 15px;
             box-shadow: 0 0 15px rgba(212,175,55,0.6);
-            z-index: 10; /* تأكيد إن الزرار شغال */
-            pointer-events: auto; /* تفعيل اللمس */
+            z-index: 10; 
+            pointer-events: auto; /* تفعيل اللمس للزرار */
         }
 
         /* --- الشبكة (Grid) --- */
@@ -111,7 +112,6 @@
         .modal-head { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; background: #111; border-bottom: 1px solid #333; }
         .modal-content { padding: 15px; text-align: center; }
         .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 10px; border-radius: 5px; }
-        
         .action-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; }
         .whatsapp { background: var(--green); color: white; }
         .call { background: #007bff; color: white; }
@@ -141,7 +141,7 @@
             <div class="hero-overlay">
                 <h1>STREETWEAR</h1>
                 <h2>2026</h2>
-                <button class="hero-btn" onclick="window.goPage('hoodies')">تسوق الآن</button>
+                <button class="hero-btn" onclick="window.goPage('hoodies')">تسوق الكولكشن</button>
             </div>
         </div>
         
@@ -204,34 +204,30 @@
             "باقي المحافظات": ["أخرى"]
         };
 
-        // --- البيانات المحدثة بالصور الجديدة ---
+        // --- جميع المنتجات ---
         const products = [
-            // Zip-Up Hoodies (Preface)
+            // Preface Hoodies
             {id:1, type:'top', name:'Zip-Up Preface (Black)', price:650, old:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
             {id:2, type:'top', name:'Zip-Up Preface (White)', price:650, old:800, f:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg', b:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg'},
             {id:3, type:'top', name:'Zip-Up Preface (Brown)', price:650, old:800, f:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg', b:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg'},
-            
-            // Graphic Hoodies
+            // Dope Shine
             {id:4, type:'top', name:'Hoodie Dope Shine (White)', price:600, old:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
-            {id:5, type:'top', name:'Hoodie Eye & Hand (Black)', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
-            {id:6, type:'top', name:'Hoodie Angel Wings (White)', price:600, old:750, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
-            {id:7, type:'top', name:'Hoodie Hands (White)', price:600, old:750, f:'https://i.postimg.cc/1X9X9X9X/placeholder.jpg', b:'https://i.postimg.cc/1X9X9X9X/placeholder.jpg'}, // Placeholder if needed
+            // Graphic Hoodies
+            {id:5, type:'top', name:'Hoodie Eye & Hand', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
+            {id:6, type:'top', name:'Hoodie Angel Wings', price:600, old:750, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
             {id:8, type:'top', name:'Hoodie Skull (Black)', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
             {id:9, type:'top', name:'Hoodie Graphic (Off-White)', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
             {id:10, type:'top', name:'Hoodie Printed (Grey)', price:600, old:750, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
-
-            // Basic Sweatshirts
+            // Basics
             {id:11, type:'top', name:'Sweatshirt Basic (Black)', price:650, old:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
             {id:12, type:'top', name:'Sweatshirt Basic (Grey)', price:650, old:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
             {id:13, type:'top', name:'Sweatshirt Basic (White)', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-
-            // Premium Sweatshirts & Tracksuits
+            // Premium & Tracksuits
             {id:14, type:'top', name:'Premium Sweatshirt (Black)', price:800, old:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
             {id:15, type:'top', name:'Premium Sweatshirt (Beige)', price:800, old:1000, f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
             {id:16, type:'top', name:'Tracksuit Full Set (Black)', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
             {id:17, type:'top', name:'Tracksuit Full Set (Grey)', price:900, old:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
-            {id:18, type:'top', name:'High-End Sweatshirt (Black)', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
-
+            {id:18, type:'top', name:'High-End Sweatshirt', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
             // Pants
             {id:19, type:'bottom', name:'Cargo Pants', price:700, old:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
             {id:20, type:'bottom', name:'Jeans Light Blue', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
@@ -245,7 +241,7 @@
         let currentP = null;
 
         window.onload = function() {
-            // المحافظات
+            // تحميل المحافظات
             const govSel = document.getElementById('cGov');
             for (let gov in egyptGovs) {
                 let opt = document.createElement('option');
@@ -253,10 +249,10 @@
                 govSel.appendChild(opt);
             }
 
-            // عرض المنتجات (الرئيسية: أهم 4 منتجات متنوعة)
+            // عرض المنتجات في الرئيسية
             window.render(products.filter(p => [1, 4, 16, 20].includes(p.id)), 'home-grid');
             
-            // الهوديز والبناطيل
+            // عرض الصفحات
             window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
             window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
         };
@@ -303,4 +299,12 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + pageId).classList.add('active');
             window.scrollTo(0,0);
-      
+        }
+
+        window.openViewer = function(id) {
+            currentP = products.find(p => p.id === id);
+            if(!currentP) return;
+            document.getElementById('vName').innerText = currentP.name;
+            document.getElementById('vPrice').innerText = currentP.price + " ج.م";
+            document.getElementById('vImg').src = currentP.f;
+  
