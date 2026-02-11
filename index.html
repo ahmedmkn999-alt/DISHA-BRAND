@@ -183,89 +183,71 @@
     <script>
         const govs = { "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي"], "الجيزة": ["الهرم", "فيصل", "6 أكتوبر"], "الإسكندرية": ["سموحة", "ميامي"], "باقي المحافظات": ["أخرى"] };
 
-        // 🔥🔥 الداتا الجديدة بالصور اللي أنت بعتها بالظبط 🔥🔥
+        // 🔥🔥 الداتا (تم نقل الترنجات للقسم الجديد) 🔥🔥
         const items = [
-            // 1. Hoodie Skull (له وش وضهر)
+            // --- هوديز (Top) ---
             {id:1, t:'top', n:'Hoodie Skull Black', p:600, o:750, 
              f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', 
              b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-
-            // 2. Sweatshirt White
+            
             {id:2, t:'top', n:'Sweatshirt Basic White', p:650, o:800, 
              f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', 
              b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-
-            // 3. Hoodie Off-White (له وش وضهر)
+             
             {id:3, t:'top', n:'Hoodie Graphic Off-White', p:600, o:750, 
              f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', 
              b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
 
-            // 4. Sweatshirt Grey
             {id:4, t:'top', n:'Sweatshirt Basic Grey', p:650, o:800, 
              f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', 
              b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
 
-            // 5. Sweatshirt Black Basic
             {id:5, t:'top', n:'Sweatshirt Basic Black', p:650, o:800, 
              f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', 
              b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
 
-            // 6. Premium Black (وش وضهر - تخمين ترتيبك)
-            {id:6, t:'top', n:'Premium Sweatshirt Black', p:800, o:1000, 
-             f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', 
-             b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
+            {id:23, t:'top', n:'Hoodie Shine', p:600, o:750, 
+             f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', 
+             b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
 
-            // 7. Beige
-            {id:7, t:'top', n:'Premium Sweatshirt Beige', p:800, o:1000, 
-             f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', 
-             b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
-
-            // 8. Tracksuit Black (ترنج)
+            // --- ترنجات (Track) ---
             {id:8, t:'track', n:'Tracksuit Full Set Black', p:900, o:1000, 
              f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', 
              b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
 
-            // 9. Tracksuit Grey (ترنج)
             {id:9, t:'track', n:'Tracksuit Full Set Grey', p:900, o:1000, 
              f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', 
              b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
 
-            // 10. High End
-            {id:10, t:'top', n:'High-End Sweatshirt', p:1300, o:1500, 
+            // ⚠️ تم النقل لقسم الترنجات حسب طلبك ⚠️
+            {id:10, t:'track', n:'High-End Sweatshirt Set', p:1300, o:1500, 
              f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', 
              b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
+            
+            // ⚠️ تم النقل لقسم الترنجات ⚠️
+            {id:7, t:'track', n:'Premium Sweatshirt Set Beige', p:800, o:1000, 
+             f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', 
+             b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
 
-            // 11. Cargo
+            // --- بناطيل (Bottom) ---
             {id:11, t:'bottom', n:'Cargo Pants', p:700, o:800, 
              f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', 
              b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
-
-            // 12. Jeans Light Blue (له وش وضهر)
             {id:12, t:'bottom', n:'Jeans Light Blue', p:600, o:750, 
              f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', 
              b:'https://i.postimg.cc/j5D27vrD/IMG_20260210_WA0022.jpg'},
-
-            // 13. Mod 1
             {id:13, t:'bottom', n:'Jeans Mod 1', p:600, o:750, 
              f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', 
              b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-
-            // 14. Mod 2
             {id:14, t:'bottom', n:'Jeans Mod 2', p:600, o:750, 
              f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', 
              b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-
-            // 15. Mod 3
             {id:15, t:'bottom', n:'Jeans Mod 3', p:600, o:750, 
              f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', 
              b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-
-            // 16. Mod 4
             {id:16, t:'bottom', n:'Jeans Mod 4', p:600, o:750, 
              f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', 
              b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-
-            // 17. Mod 5 (له وش وضهر)
             {id:17, t:'bottom', n:'Jeans Mod 5', p:600, o:750, 
              f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', 
              b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
@@ -362,5 +344,4 @@
         }
     </script>
 </body>
-                </html>
-                
+</html>
