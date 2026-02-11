@@ -11,8 +11,9 @@
     <style>
         :root { --bg: #050505; --card-bg: #111; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-bottom: 80px; padding-top: 70px; overflow-x: hidden; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-bottom: 50px; padding-top: 70px; overflow-x: hidden; }
 
+        /* Header */
         header { 
             background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
             position: fixed; top: 0; left: 0; width: 100%; height: 75px; z-index: 99999;
@@ -30,42 +31,33 @@
         }
         .nav-btn.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
-        .page { display: none; width: 100%; animation: fadeIn 0.5s; }
+        /* Pages */
+        .page { display: none; width: 100%; animation: fadeIn 0.5s; min-height: 80vh; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- Hero Video Section (YouTube Edition) --- */
+        /* Hero Video (YouTube) */
         .hero-container {
-            position: relative;
-            height: 70vh; 
-            width: 100%;
-            overflow: hidden;
-            background: #000;
-            border-bottom: 4px solid var(--gold);
+            position: relative; height: 70vh; width: 100%; overflow: hidden; background: #000; border-bottom: 4px solid var(--gold);
         }
         .video-foreground, .hero-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            transform: scale(1.3); /* تكبير عشان يشيل الحواف */
         }
-        #heroVideo { transform: scale(1.5); } /* زوم عشان يشيل الحواف السوداء */
-
         .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 2;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        .hero-overlay h1 { color: white; font-family: 'Oswald'; font-size: 3.5rem; margin: 0; }
-        .hero-overlay h2 { color: var(--gold); font-family: 'Oswald'; font-size: 2rem; margin: 0; }
+        .hero-overlay h1 { color: white; font-family: 'Oswald'; font-size: 3.5rem; margin: 0; text-shadow: 0 0 20px black; }
+        .hero-overlay h2 { color: var(--gold); font-family: 'Oswald'; font-size: 2rem; margin: 0; text-shadow: 0 0 10px black; }
         .hero-btn {
             background: linear-gradient(45deg, var(--gold), var(--gold-light)); 
             border: none; padding: 12px 50px; font-weight: 900; font-size: 1.2rem; color: black;
             border-radius: 50px; cursor: pointer; margin-top: 20px; box-shadow: 0 0 20px rgba(212,175,55,0.5);
         }
 
-        /* --- Grid & Cards --- */
+        /* Grid */
         .sec-title { padding: 0 15px; margin: 25px 0 15px 0; border-right: 5px solid var(--gold); color: var(--gold); font-weight: 900; font-size: 1.4rem; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 10px; max-width: 1200px; margin: 0 auto; }
         .card { background: var(--card-bg); border: 1px solid #333; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
@@ -77,7 +69,14 @@
         .old-price { text-decoration: line-through; color: #777; font-size: 0.8rem; margin-right: 5px; }
         .buy-btn { width: 100%; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px; margin-top: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* --- Modals --- */
+        /* Footer */
+        footer {
+            background: #000; padding: 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px;
+        }
+        footer p { color: #555; margin: 5px 0; font-size: 0.9rem; }
+        footer span { color: var(--gold); font-weight: bold; }
+
+        /* Modals */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; flex-direction: column; overflow-y: auto; }
         .modal-head { padding: 15px; display: flex; justify-content: space-between; align-items: center; background: #111; border-bottom: 1px solid #333; }
         .modal-content { padding: 20px; text-align: center; }
@@ -106,7 +105,7 @@
     <div id="home" class="page active">
         <div class="hero-container">
             <div class="video-foreground">
-                <iframe id="heroVideo" src="https://www.youtube.com/embed/7ldPYcZ-oaU?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=7ldPYcZ-oaU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/7ldPYcZ-oaU?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=7ldPYcZ-oaU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
             <div class="hero-overlay">
                 <h1>STREETWEAR</h1>
@@ -116,16 +115,29 @@
         </div>
         <div class="sec-title">الأكثر مبيعاً 🔥</div>
         <div class="grid" id="home-grid"></div>
+        
+        <footer>
+            <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+            <p>Designed by <span>Ahmed Mohamed</span></p>
+        </footer>
     </div>
 
     <div id="hoodies" class="page">
-        <div class="sec-title" style="margin-top: 25px;">قسم الهوديز & سويت شيرت</div>
+        <div class="sec-title" style="margin-top: 25px;">كل الهوديز & سويت شيرت</div>
         <div class="grid" id="hoodies-grid"></div>
+        <footer>
+            <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+            <p>Designed by <span>Ahmed Mohamed</span></p>
+        </footer>
     </div>
 
     <div id="pants" class="page">
-        <div class="sec-title" style="margin-top: 25px;">قسم البناطيل & جينز</div>
+        <div class="sec-title" style="margin-top: 25px;">كل البناطيل & جينز</div>
         <div class="grid" id="pants-grid"></div>
+        <footer>
+            <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+            <p>Designed by <span>Ahmed Mohamed</span></p>
+        </footer>
     </div>
 
     <div id="viewer" class="modal">
@@ -158,32 +170,69 @@
 
     <script>
         const egyptGovs = {
-            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "وسط البلد"],
-            "الجيزة": ["الدقي", "المهندسين", "الهرم", "فيصل", "6 أكتوبر"],
-            "الإسكندرية": ["سموحة", "ميامي", "المنتزه"],
+            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا", "وسط البلد", "المرج", "حلوان"],
+            "الجيزة": ["الهرم", "فيصل", "الدقي", "المهندسين", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق"],
+            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر", "فيكتوريا"],
+            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "العبور", "الخانكة"],
+            "الدقهلية": ["المنصورة", "ميت غمر", "السنبلاوين", "طلخا"],
+            "الشرقية": ["الزقازيق", "العشر من رمضان", "بلبيس", "منيا القمح"],
+            "الغربية": ["طنطا", "المحلة الكبرى", "كفر الزيات"],
+            "المنوفية": ["شبين الكوم", "السادات", "منوف", "أشمون"],
             "باقي المحافظات": ["أخرى"]
         };
 
+        // --- كل المنتجات (تم إضافة كل الروابط) ---
         const products = [
-            {id:1, type:'top', name:'هودي أسود Skull', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            {id:2, type:'top', name:'سويت شيرت Basic White', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-            {id:3, type:'top', name:'هودي أوف وايت Graphic', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
-            {id:10, type:'bottom', name:'بنطلون Light Blue', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
-            {id:11, type:'bottom', name:'بنطلون Mod 1', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:12, type:'bottom', name:'بنطلون Mod 2', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'}
+            // الهوديز الجديدة
+            {id:20, type:'top', name:'Zip-Up Preface (Black)', price:650, old:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
+            {id:21, type:'top', name:'Zip-Up Preface (White)', price:650, old:800, f:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg', b:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg'},
+            {id:22, type:'top', name:'Zip-Up Preface (Brown)', price:650, old:800, f:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg', b:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg'},
+            {id:23, type:'top', name:'Hoodie Dope Shine (White)', price:600, old:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
+            {id:24, type:'top', name:'Hoodie Eye & Hand (Black)', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
+            {id:25, type:'top', name:'Hoodie Angel Wings (White)', price:600, old:750, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
+            
+            // الكولكشن القديم
+            {id:1, type:'top', name:'Hoodie Skull (Black)', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
+            {id:2, type:'top', name:'Hoodie Graphic (Off-White)', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
+            {id:3, type:'top', name:'Hoodie Printed (Grey)', price:600, old:750, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
+            {id:4, type:'top', name:'Sweatshirt Basic (Black)', price:650, old:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
+            {id:5, type:'top', name:'Sweatshirt Basic (Grey)', price:650, old:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
+            {id:6, type:'top', name:'Sweatshirt Basic (White)', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
+            {id:7, type:'top', name:'Premium Sweatshirt (Black)', price:800, old:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
+            {id:8, type:'top', name:'Premium Sweatshirt (Beige)', price:800, old:1000, f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
+            {id:9, type:'top', name:'Tracksuit Full Set (Black)', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
+            {id:10, type:'top', name:'Tracksuit Full Set (Grey)', price:900, old:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
+            {id:11, type:'top', name:'High-End Sweatshirt (Black)', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
+
+            // البناطيل
+            {id:13, type:'bottom', name:'بنطلون كارجو/جينز', price:700, old:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
+            {id:14, type:'bottom', name:'بنطلون جينز Light Blue', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
+            {id:15, type:'bottom', name:'بنطلون جينز Mod 1', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
+            {id:16, type:'bottom', name:'بنطلون جينز Mod 2', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
+            {id:17, type:'bottom', name:'بنطلون جينز Mod 3', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
+            {id:18, type:'bottom', name:'بنطلون جينز Mod 4', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
+            {id:19, type:'bottom', name:'بنطلون جينز Mod 5', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
         ];
 
         let currentP = null;
 
         window.onload = function() {
+            // تعبئة المحافظات
             const govSel = document.getElementById('cGov');
             for (let gov in egyptGovs) {
                 let opt = document.createElement('option');
                 opt.value = gov; opt.innerText = gov;
                 govSel.appendChild(opt);
             }
-            window.render(products.filter(p => [1, 2, 10, 11].includes(p.id)), 'home-grid');
+
+            // عرض المنتجات
+            // الرئيسية: أفضل 4 منتجات (هودي أسود، أبيض، ترنج، بنطلون)
+            window.render(products.filter(p => [20, 23, 9, 14].includes(p.id)), 'home-grid');
+            
+            // صفحة الهوديز: كل الـ tops
             window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
+            
+            // صفحة البناطيل: كل الـ bottoms
             window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
         };
 
@@ -209,8 +258,9 @@
             list.forEach(p => {
                 container.innerHTML += `
                     <div class="card">
+                        <div class="badge">SALE</div>
                         <div class="img-area" onclick="window.openViewer(${p.id})">
-                            <img src="${p.f}">
+                            <img src="${p.f}" loading="lazy">
                         </div>
                         <div class="details">
                             <div class="p-title">${p.name}</div>
@@ -236,24 +286,12 @@
             document.getElementById('vName').innerText = currentP.name;
             document.getElementById('vPrice').innerText = currentP.price + " ج.م";
             document.getElementById('vImg').src = currentP.f;
-            document.getElementById('imgControls').style.display = (currentP.f === currentP.b) ? 'none' : 'flex';
+            
+            const controls = document.getElementById('imgControls');
+            if(currentP.f === currentP.b) controls.style.display = 'none';
+            else controls.style.display = 'flex';
+            
             document.getElementById('viewer').style.display = 'flex';
         }
 
-        window.closeViewer = function() { document.getElementById('viewer').style.display = 'none'; }
-        window.changeSide = function(side) { document.getElementById('vImg').src = (side === 'f') ? currentP.f : currentP.b; }
-        window.showOrderForm = function() { window.closeViewer(); document.getElementById('orderForm').style.display = 'flex'; }
-
-        window.sendWhatsapp = function() {
-            const n = document.getElementById('cName').value;
-            const gov = document.getElementById('cGov').value;
-            const city = document.getElementById('cCity').value;
-            const addr = document.getElementById('cAddr').value;
-            if(!n || !gov || !city || !addr) { alert('أكمل البيانات'); return; }
-            const txt = `طلب جديد: ${currentP.name}%0aالسعر: ${currentP.price}%0aالعميل: ${n}%0aالعنوان: ${gov} - ${city} - ${addr}`;
-            window.open(`https://wa.me/201284381589?text=${txt}`, '_blank');
-        }
-    </script>
-</body>
-    </html>
-    
+        window.closeViewer = function() { document.getElementById('viewer').style.d
