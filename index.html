@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- التصميم والألوان --- */
-        :root { --bg: #0a0a0a; --card-bg: #141414; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #ffffff; }
+        /* --- الألوان والتصميم (Luxury) --- */
+        :root { --bg: #050505; --card-bg: #111; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
         
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-bottom: 80px; padding-top: 70px; overflow-x: hidden; }
@@ -20,29 +20,29 @@
             background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
             position: fixed; top: 0; left: 0; width: 100%; height: 75px; z-index: 99999;
             display: flex; justify-content: space-between; align-items: center; padding: 0 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
         }
         
-        .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-img { height: 50px; border: 2px solid var(--gold); border-radius: 8px; box-shadow: 0 0 10px var(--gold); }
-        .brand-name { font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.4rem; font-weight: bold; letter-spacing: 1px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-img { height: 50px; border: 2px solid var(--gold); border-radius: 8px; }
+        .brand-name { font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.4rem; font-weight: bold; }
 
         .nav-links { display: flex; gap: 5px; }
         .nav-btn {
-            background: none; border: none; color: #ccc; font-weight: bold; font-size: 0.95rem;
-            cursor: pointer; padding: 8px 10px; font-family: 'Cairo'; transition: 0.3s;
+            background: none; border: none; color: #bbb; font-weight: bold; font-size: 0.9rem;
+            cursor: pointer; padding: 8px; font-family: 'Cairo'; transition: 0.3s;
         }
         .nav-btn.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
         /* --- الصفحات --- */
-        .page { display: none; width: 100%; animation: fadeIn 0.5s ease-in-out; }
+        .page { display: none; width: 100%; animation: fadeIn 0.5s; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- الفيديو (خلفية متحركة) --- */
+        /* --- الفيديو (Hero Section) --- */
         .hero-container {
             position: relative;
-            height: 65vh; /* ارتفاع الفيديو */
+            height: 65vh; 
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -50,10 +50,10 @@
             align-items: center;
             border-bottom: 4px solid var(--gold);
             margin-bottom: 30px;
-            background: #000;
+            background: #000; /* لون خلفية عشان لو الفيديو اتأخر */
         }
 
-        /* الفيديو نفسه */
+        /* إصلاح الفيديو */
         #heroVideo {
             position: absolute;
             top: 50%; left: 50%;
@@ -62,10 +62,9 @@
             width: auto; height: auto;
             z-index: 1;
             object-fit: cover;
-            filter: brightness(0.6); /* تغميق عشان الكلام يوضح */
+            filter: brightness(0.5); /* تغميق الفيديو عشان الكلام يبان */
         }
 
-        /* الكلام فوق الفيديو */
         .hero-content {
             position: relative;
             z-index: 5;
@@ -75,10 +74,9 @@
 
         .hero-content h1 { 
             color: white; font-family: 'Oswald'; font-size: 3.5rem; margin: 0; line-height: 1;
-            text-transform: uppercase; letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        .hero-content h2 { color: var(--gold); font-family: 'Oswald'; font-size: 2.5rem; margin: 0; }
-        .hero-content p { color: #ddd; font-size: 1.2rem; margin-top: 10px; font-weight: bold; }
+        .hero-content h2 { color: var(--gold); font-family: 'Oswald'; font-size: 2rem; margin: 0; }
         
         .hero-btn {
             background: linear-gradient(45deg, var(--gold), var(--gold-light)); 
@@ -86,44 +84,38 @@
             font-weight: 900; font-size: 1.2rem; color: black;
             border-radius: 50px; cursor: pointer; margin-top: 20px;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            transition: 0.3s;
         }
-        .hero-btn:active { transform: scale(0.95); }
 
-        /* --- الشبكة (Grid) والكروت --- */
+        /* --- الكروت --- */
         .sec-title { 
             padding: 0 15px; margin-bottom: 20px; 
             border-right: 5px solid var(--gold); 
-            color: var(--gold); font-weight: 900; font-size: 1.5rem; 
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+            color: var(--gold); font-weight: 900; font-size: 1.4rem; 
         }
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 10px; max-width: 1200px; margin: 0 auto; }
         
         .card { 
             background: var(--card-bg); border: 1px solid #333; border-radius: 12px; overflow: hidden; 
-            display: flex; flex-direction: column; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
         
-        .img-area { position: relative; padding-top: 125%; cursor: pointer; overflow: hidden; }
-        .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        
-        .badge { position: absolute; top: 10px; right: 10px; background: #c00; color: white; padding: 3px 10px; font-size: 0.8rem; border-radius: 4px; font-weight: bold; z-index: 2; box-shadow: 0 2px 5px black; }
+        .img-area { position: relative; padding-top: 130%; cursor: pointer; }
+        .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 10px; right: 10px; background: #c00; color: white; padding: 2px 8px; font-size: 0.7rem; border-radius: 4px; font-weight: bold; z-index: 2; }
 
         .details { padding: 12px; text-align: center; }
-        .p-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 1rem; margin-bottom: 5px; color: #fff; }
-        .price { color: var(--gold); font-weight: 900; font-size: 1.2rem; }
-        .old-price { text-decoration: line-through; color: #777; font-size: 0.9rem; margin-right: 5px; }
+        .p-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; color: #fff; }
+        .price { color: var(--gold); font-weight: 900; font-size: 1.1rem; }
+        .old-price { text-decoration: line-through; color: #777; font-size: 0.8rem; margin-right: 5px; }
         
         .buy-btn {
-            width: 100%; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 8px;
+            width: 100%; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px;
             margin-top: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem;
-            display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-        .buy-btn:hover { background: var(--gold); color: black; }
 
-        /* --- النافذة المنبثقة (Modal) --- */
+        /* --- المودال --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
             z-index: 100000; display: none; flex-direction: column; overflow-y: auto;
@@ -133,13 +125,14 @@
         .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 15px; border-radius: 10px; background: #000; }
         
         .action-btn { width: 100%; padding: 15px; margin-top: 15px; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        .whatsapp { background: var(--green); color: white; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); }
+        .whatsapp { background: var(--green); color: white; }
         .call { background: #007bff; color: white; }
         .cancel { background: transparent; border: 1px solid #555; color: #ccc; }
-        .inp { width: 100%; padding: 15px; background: #222; border: 1px solid var(--gold); color: white; margin-bottom: 15px; border-radius: 8px; font-size: 1rem; text-align: center; }
-
-        /* --- Footer --- */
-        footer { text-align: center; padding: 20px; background: #000; margin-top: 40px; border-top: 1px solid #333; color: #555; font-size: 0.8rem; }
+        
+        /* استايل الفورم الجديد */
+        .inp { width: 100%; padding: 15px; background: #222; border: 1px solid #555; color: white; margin-bottom: 15px; border-radius: 8px; font-size: 1rem; text-align: right; }
+        .inp:focus { border-color: var(--gold); outline: none; }
+        select.inp { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: left 10px center; background-size: 20px; }
 
     </style>
 </head>
@@ -165,16 +158,12 @@
             <div class="hero-content">
                 <h1>STREETWEAR</h1>
                 <h2>2026</h2>
-                <p>أقوى كولكشن شتوي في مصر بأسعار زمان</p>
                 <button class="hero-btn" onclick="window.goPage('hoodies')">تسوق الآن</button>
             </div>
         </div>
 
         <div class="sec-title">الأكثر مبيعاً 🔥</div>
         <div class="grid" id="home-grid"></div>
-        <footer>
-            <p>© 2026 DISHA BRAND. All Rights Reserved.</p>
-        </footer>
     </div>
 
     <div id="hoodies" class="page">
@@ -196,8 +185,8 @@
             <img src="" id="vImg" class="main-img">
             
             <div id="imgControls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-                <button onclick="window.changeSide('f')" style="padding: 10px 30px; background: #222; color: white; border: 1px solid #444; border-radius: 30px; font-weight:bold;">الوش</button>
-                <button onclick="window.changeSide('b')" style="padding: 10px 30px; background: #222; color: white; border: 1px solid #444; border-radius: 30px; font-weight:bold;">الضهر</button>
+                <button onclick="window.changeSide('f')" style="padding: 10px 30px; background: #222; color: white; border: 1px solid #444; border-radius: 30px;">الوش</button>
+                <button onclick="window.changeSide('b')" style="padding: 10px 30px; background: #222; color: white; border: 1px solid #444; border-radius: 30px;">الضهر</button>
             </div>
 
             <h2 style="color: var(--gold); margin-bottom: 10px; font-size: 2rem;" id="vPrice">000</h2>
@@ -208,8 +197,18 @@
     <div id="orderForm" class="modal" style="background: rgba(0,0,0,0.95); justify-content: center;">
         <div style="background: #141414; padding: 30px; width: 90%; max-width: 400px; border: 2px solid var(--gold); border-radius: 20px; margin: auto; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);">
             <h3 style="color: var(--gold); text-align: center; margin-bottom: 25px; font-size: 1.5rem;">بيانات الشحن</h3>
+            
             <input type="text" id="cName" class="inp" placeholder="الاسم بالكامل">
-            <input type="text" id="cAddr" class="inp" placeholder="العنوان ورقم التليفون">
+            
+            <select id="cGov" class="inp" onchange="window.loadCities()">
+                <option value="">اختر المحافظة...</option>
+            </select>
+            
+            <select id="cCity" class="inp" disabled>
+                <option value="">اختر المدينة...</option>
+            </select>
+            
+            <input type="text" id="cAddr" class="inp" placeholder="العنوان بالتفصيل ورقم التليفون">
             
             <button class="action-btn whatsapp" onclick="window.sendWhatsapp()">تأكيد الطلب واتساب</button>
             <button class="action-btn call" onclick="window.open('tel:01117943368')">اتصال هاتفي</button>
@@ -218,48 +217,86 @@
     </div>
 
     <script>
-        // --- داتا المنتجات (الروابط اللي أنت بعتها بالظبط) ---
+        // --- 1. بيانات المحافظات والمدن ---
+        const egyptGovs = {
+            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا", "وسط البلد", "المرج", "عين شمس"],
+            "الجيزة": ["الهرم", "فيصل", "الدقي", "المهندسين", "6 أكتوبر", "الشيخ زايد", "إمبابة", "الوراق"],
+            "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي", "سيدي جابر", "محرم بك"],
+            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "العبور", "الخانكة"],
+            "الدقهلية": ["المنصورة", "ميت غمر", "السنبلاوين"],
+            "الشرقية": ["الزقازيق", "العشر من رمضان", "بلبيس"],
+            "الغربية": ["طنطا", "المحلة الكبرى"],
+            "المنوفية": ["شبين الكوم", "السادات", "منوف"],
+            "البحيرة": ["دمنهور", "كفر الدوار"],
+            "باقي المحافظات": ["أخرى"]
+        };
+
+        // --- 2. بيانات المنتجات (بالروابط الشغالة) ---
         const products = [
-            // الهوديز
-            {id:1, type:'top', name:'هودي أسود (Skull)', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            {id:2, type:'top', name:'سويت شيرت (Basic White)', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
-            {id:3, type:'top', name:'هودي أوف وايت (Graphic)', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
-            {id:4, type:'top', name:'سويت شيرت (Basic Grey)', price:650, old:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
-            {id:5, type:'top', name:'سويت شيرت (Basic Black)', price:650, old:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
-            {id:6, type:'top', name:'سويت شيرت بريميم (Black)', price:800, old:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
-            {id:7, type:'top', name:'سويت شيرت بريميم (Beige)', price:800, old:1000, f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
-            {id:8, type:'top', name:'ترنج كامل (Black)', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
-            {id:9, type:'top', name:'ترنج كامل (Grey)', price:900, old:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
-            {id:10, type:'top', name:'سويت شيرت هاي إند (Black)', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
+            // الهوديز (Best Sellers)
+            {id:1, type:'top', name:'Zip-Up Hoodie (Preface Black)', price:650, old:800, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
+            {id:2, type:'top', name:'Hoodie (Dope Shine White)', price:600, old:750, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
+            {id:3, type:'top', name:'Zip-Up Hoodie (Preface White)', price:650, old:800, f:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg', b:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg'},
+            
+            // باقي الهوديز
+            {id:4, type:'top', name:'Zip-Up Hoodie (Preface Brown)', price:650, old:800, f:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg', b:'https://i.postimg.cc/CLj6bZzL/1000012702.jpg'},
+            {id:5, type:'top', name:'Hoodie (Eye Black)', price:600, old:750, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
+            {id:6, type:'top', name:'Hoodie (Angel Wings White)', price:600, old:750, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
+            {id:7, type:'top', name:'Hoodie (Hands White)', price:600, old:750, f:'https://i.postimg.cc/1X9X9X9X/placeholder.jpg', b:'https://i.postimg.cc/1X9X9X9X/placeholder.jpg'}, 
 
             // البناطيل
-            {id:11, type:'bottom', name:'بنطلون كارجو/جينز', price:700, old:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
-            {id:12, type:'bottom', name:'بنطلون جينز (Light Blue)', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
-            {id:13, type:'bottom', name:'بنطلون جينز (Mod 1)', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:14, type:'bottom', name:'بنطلون جينز (Mod 2)', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-            {id:15, type:'bottom', name:'بنطلون جينز (Mod 3)', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-            {id:16, type:'bottom', name:'بنطلون جينز (Mod 4)', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:17, type:'bottom', name:'بنطلون جينز (Mod 5)', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
+            {id:10, type:'bottom', name:'بنطلون جينز (Light Blue)', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
+            {id:11, type:'bottom', name:'بنطلون جينز (Mod 1)', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
+            {id:12, type:'bottom', name:'بنطلون جينز (Mod 2)', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
+            {id:13, type:'bottom', name:'بنطلون جينز (Mod 3)', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
+            {id:14, type:'bottom', name:'بنطلون جينز (Mod 4)', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
+            {id:15, type:'bottom', name:'بنطلون جينز (Mod 5)', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
         ];
 
         let currentP = null;
 
         // --- تشغيل الموقع ---
         window.onload = function() {
-            try {
-                // 1. الرئيسية: اخترنا أقوى المنتجات (هودي + ترنج + بنطلون)
-                window.render(products.filter(p => [1, 8, 12, 13].includes(p.id)), 'home-grid');
-                
-                // 2. الأقسام
-                window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
-                window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
-                
-                // تشغيل الفيديو
-                const vid = document.getElementById('heroVideo');
-                if(vid) vid.play().catch(e => console.log("Autoplay blocked:", e));
+            // تعبئة قائمة المحافظات
+            const govSel = document.getElementById('cGov');
+            for (let gov in egyptGovs) {
+                let opt = document.createElement('option');
+                opt.value = gov;
+                opt.innerText = gov;
+                govSel.appendChild(opt);
+            }
 
-            } catch(e) { console.error(e); }
+            // عرض المنتجات
+            window.render(products.filter(p => [1, 2, 10, 11].includes(p.id)), 'home-grid');
+            window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
+            window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
+            
+            // تشغيل الفيديو بقوة
+            const vid = document.getElementById('heroVideo');
+            if(vid) {
+                vid.muted = true; // لازم يكون مكتوم
+                vid.play().catch(e => console.log("Video Error:", e));
+            }
         };
+
+        // دالة تغيير المدن
+        window.loadCities = function() {
+            const gov = document.getElementById('cGov').value;
+            const citySel = document.getElementById('cCity');
+            
+            citySel.innerHTML = '<option value="">اختر المدينة...</option>';
+            citySel.disabled = true;
+
+            if (gov && egyptGovs[gov]) {
+                citySel.disabled = false;
+                egyptGovs[gov].forEach(city => {
+                    let opt = document.createElement('option');
+                    opt.value = city;
+                    opt.innerText = city;
+                    citySel.appendChild(opt);
+                });
+            }
+        }
 
         window.render = function(list, id) {
             const container = document.getElementById(id);
@@ -300,14 +337,12 @@
             document.getElementById('vPrice').innerText = currentP.price + " ج.م";
             document.getElementById('vImg').src = currentP.f;
             
-            // لو المنتج ليه صورة واحدة (الوش زي الضهر)، نخفي الزراير
             const controls = document.getElementById('imgControls');
             if (currentP.f === currentP.b) {
                 controls.style.display = 'none';
             } else {
                 controls.style.display = 'flex';
             }
-
             document.getElementById('viewer').style.display = 'flex';
         }
 
@@ -327,9 +362,13 @@
 
         window.sendWhatsapp = function() {
             const n = document.getElementById('cName').value;
-            const a = document.getElementById('cAddr').value;
-            if(!n || !a) { alert('من فضلك اكتب اسمك وعنوانك'); return; }
-            const txt = `طلب جديد: ${currentP.name}%0aالسعر: ${currentP.price}%0aالعميل: ${n}%0aالعنوان: ${a}`;
+            const gov = document.getElementById('cGov').value;
+            const city = document.getElementById('cCity').value;
+            const addr = document.getElementById('cAddr').value;
+
+            if(!n || !gov || !city || !addr) { alert('من فضلك أكمل كل البيانات المطلوبة'); return; }
+            
+            const txt = `*طلب جديد* %0a------------------%0a*المنتج:* ${currentP.name}%0a*السعر:* ${currentP.price} جنيه%0a------------------%0a*العميل:* ${n}%0a*العنوان:* ${gov} - ${city}%0a*تفاصيل:* ${addr}`;
             window.open(`https://wa.me/201284381589?text=${txt}`, '_blank');
             document.getElementById('orderForm').style.display = 'none';
         }
