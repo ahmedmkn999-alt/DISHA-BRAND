@@ -9,268 +9,309 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- الأساسيات (Dark & Gold Theme) --- */
-        :root { --bg: #000; --card: #111; --gold: #D4AF37; --text: #fff; }
+        /* --- الألوان (Dark & Gold Theme) --- */
+        :root { --bg: #050505; --card-bg: #121212; --gold: #D4AF37; --gold-light: #F4CF57; --green: #25D366; --text: #fff; }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-top: 60px; padding-bottom: 50px; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding-bottom: 60px; padding-top: 60px; overflow-x: hidden; }
 
         /* --- الهيدر --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+        header { 
             background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold);
-            z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 0 15px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px; z-index: 99999;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
         }
-        .brand { font-family: 'Oswald'; color: var(--gold); font-size: 1.4rem; font-weight: bold; border: 1px solid var(--gold); padding: 2px 8px; border-radius: 5px; }
-        .nav-btn { background: none; border: none; color: #aaa; font-weight: bold; font-size: 0.9rem; margin-left: 5px; cursor: pointer; padding: 5px; }
+        .logo-area { display: flex; align-items: center; gap: 8px; }
+        .logo-img { height: 40px; border: 1px solid var(--gold); border-radius: 5px; }
+        .brand-name { font-family: 'Oswald', sans-serif; color: var(--gold); font-size: 1.2rem; font-weight: bold; }
+
+        .nav-links { display: flex; gap: 5px; }
+        .nav-btn {
+            background: none; border: none; color: #bbb; font-weight: bold; font-size: 0.85rem;
+            cursor: pointer; padding: 5px 10px; font-family: 'Cairo'; transition: 0.3s;
+        }
         .nav-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
 
-        /* --- منطقة الفيديو (تم الإصلاح) --- */
-        .hero {
-            position: relative; height: 45vh; /* ارتفاع مناسب */
-            width: 100%; overflow: hidden; border-bottom: 3px solid var(--gold);
-            display: flex; align-items: center; justify-content: center;
-        }
-        
-        /* الفيديو في الخلفية تماماً */
-        .video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* سحر الكود: بيخلي الفيديو غير قابل للمس */
-            z-index: 0; opacity: 0.6;
-        }
-        .video-bg iframe {
-            width: 300%; height: 150%; /* تكبير لإخفاء الشعار */
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-
-        /* المحتوى فوق الفيديو */
-        .hero-content {
-            position: relative; z-index: 10; /* طبقة عالية جداً */
-            text-align: center; width: 100%;
-        }
-        .hero-content h1 { font-family: 'Oswald'; font-size: 3rem; margin: 0; text-shadow: 0 5px 15px black; line-height: 1; }
-        .hero-content h2 { color: var(--gold); font-family: 'Oswald'; font-size: 2rem; margin: 0; text-shadow: 0 5px 10px black; }
-        
-        /* زرار التسوق (شغال 100%) */
-        .hero-btn {
-            background: var(--gold); color: #000; border: none;
-            padding: 12px 40px; font-size: 1.1rem; font-weight: bold;
-            border-radius: 50px; margin-top: 15px; cursor: pointer;
-            box-shadow: 0 0 20px rgba(212,175,55,0.5);
-            pointer-events: auto; /* تفعيل الزرار غصب عن الفيديو */
-        }
-
-        /* --- المنتجات --- */
-        .section-title { padding: 15px; color: var(--gold); font-size: 1.3rem; font-weight: bold; border-right: 4px solid var(--gold); margin: 20px 0; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        
-        .card { background: var(--card); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-        
-        /* مكان الصورة */
-        .img-box { position: relative; padding-top: 125%; background: #222; }
-        .img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        
-        .info { padding: 10px; text-align: center; }
-        .p-name { font-size: 0.85rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
-        .price { color: var(--gold); font-weight: bold; font-size: 1rem; }
-        
-        .btn-details {
-            width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold);
-            padding: 8px; margin-top: 5px; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
-
         /* --- الصفحات --- */
-        .page { display: none; animation: fadeIn 0.4s; }
+        .page { display: none; width: 100%; animation: fadeIn 0.5s; min-height: 80vh; }
         .page.active { display: block; }
-        @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- المودال --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; flex-direction: column; overflow-y: auto; }
-        .modal-head { padding: 15px; display: flex; justify-content: space-between; background: #111; border-bottom: 1px solid #333; }
-        .modal-body { padding: 20px; text-align: center; }
-        .big-img { width: 100%; height: 400px; object-fit: contain; background: #000; border: 1px solid #333; border-radius: 10px; margin-bottom: 15px; }
-        .btn-buy { width: 100%; padding: 15px; background: #25D366; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; margin-top: 10px; cursor: pointer; }
+        /* --- الفيديو (خلفية) --- */
+        .hero-container {
+            position: relative; 
+            height: 45vh; 
+            width: 100%; 
+            overflow: hidden; 
+            background: #000;
+            border-bottom: 3px solid var(--gold);
+        }
         
-        /* فورم الطلب */
-        .inp { width: 100%; padding: 12px; margin-bottom: 10px; background: #222; border: 1px solid #555; color: white; border-radius: 5px; text-align: right; }
-        select.inp { background: #222; }
+        .video-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; /* الفيديو غير قابل للمس */
+            z-index: 0;
+        }
+        
+        .video-wrapper iframe {
+            width: 100vw; height: 56.25vw; 
+            min-height: 100%; min-width: 100%;
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) scale(1.35); /* زوم لإخفاء شعار يوتيوب */
+            opacity: 0.6;
+        }
+
+        /* طبقة المحتوى */
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+
+        .hero-overlay h1 { 
+            color: white; font-family: 'Oswald'; font-size: 2.5rem; margin: 0; 
+            text-shadow: 0 2px 10px black; pointer-events: none;
+        }
+        .hero-overlay h2 { 
+            color: var(--gold); font-family: 'Oswald'; font-size: 1.5rem; margin: 0; 
+            text-shadow: 0 2px 10px black; pointer-events: none;
+        }
+        
+        /* زرار التسوق */
+        .hero-btn {
+            background: linear-gradient(45deg, var(--gold), var(--gold-light)); 
+            border: none; padding: 10px 40px; 
+            font-weight: 900; font-size: 1rem; color: black;
+            border-radius: 50px; cursor: pointer; margin-top: 15px;
+            box-shadow: 0 0 15px rgba(212,175,55,0.6);
+            z-index: 10; pointer-events: auto;
+        }
+
+        /* --- الشبكة (Grid) --- */
+        .sec-title { padding: 0 10px; margin: 20px 0 10px 0; border-right: 4px solid var(--gold); color: var(--gold); font-weight: 900; font-size: 1.2rem; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; max-width: 1200px; margin: 0 auto; }
+        
+        .card { background: var(--card-bg); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+        
+        .img-area { position: relative; padding-top: 125%; cursor: pointer; background: #222; }
+        .img-area img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        .badge { position: absolute; top: 5px; right: 5px; background: #c00; color: white; padding: 2px 6px; font-size: 0.7rem; border-radius: 3px; font-weight: bold; }
+        
+        .details { padding: 8px; text-align: center; }
+        .p-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 0.85rem; margin-bottom: 5px; color: #fff; }
+        .price { color: var(--gold); font-weight: 900; font-size: 1rem; }
+        .old-price { text-decoration: line-through; color: #777; font-size: 0.8rem; margin-right: 5px; }
+        .buy-btn { width: 100%; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 6px; margin-top: 5px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+
+        /* --- Footer --- */
+        footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #333; margin-top: 30px; font-size: 0.8rem; color: #666; }
+        footer span { color: var(--gold); font-weight: bold; }
+
+        /* --- Modals --- */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; flex-direction: column; overflow-y: auto; }
+        .modal-head { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; background: #111; border-bottom: 1px solid #333; }
+        .modal-content { padding: 15px; text-align: center; }
+        .main-img { width: 100%; height: 400px; object-fit: contain; border: 1px solid #333; margin-bottom: 10px; border-radius: 5px; background: #000; }
+        .action-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+        .whatsapp { background: var(--green); color: white; }
+        .call { background: #007bff; color: white; }
+        .cancel { background: transparent; border: 1px solid #555; color: #ccc; }
+        .inp { width: 100%; padding: 12px; background: #222; border: 1px solid #555; color: white; margin-bottom: 10px; border-radius: 5px; font-size: 0.9rem; text-align: right; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand" onclick="go('home')">DISHA</div>
-        <nav>
-            <button class="nav-btn active" id="b-home" onclick="go('home')">الرئيسية</button>
-            <button class="nav-btn" id="b-hoodies" onclick="go('hoodies')">هوديز</button>
-            <button class="nav-btn" id="b-pants" onclick="go('pants')">بناطيل</button>
-        </nav>
+        <div class="logo-area" onclick="window.goPage('home')">
+            <img src="https://i.postimg.cc/Qd4nxHBK/IMG-20260210-192113.png" class="logo-img">
+            <span class="brand-name">DISHA</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="window.goPage('home')" id="btn-home">الرئيسية</button>
+            <button class="nav-btn" onclick="window.goPage('hoodies')" id="btn-hoodies">هوديز</button>
+            <button class="nav-btn" onclick="window.goPage('pants')" id="btn-pants">بناطيل</button>
+        </div>
     </header>
 
     <div id="home" class="page active">
-        <div class="hero">
-            <div class="video-bg">
-                <iframe src="https://www.youtube.com/embed/7ldPYcZ-oaU?autoplay=1&mute=1&controls=0&loop=1&playlist=7ldPYcZ-oaU&playsinline=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        <div class="hero-container">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/7ldPYcZ-oaU?autoplay=1&mute=1&controls=0&loop=1&playlist=7ldPYcZ-oaU&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-            <div class="hero-content">
+            <div class="hero-overlay">
                 <h1>STREETWEAR</h1>
                 <h2>2026</h2>
-                <button class="hero-btn" onclick="go('hoodies')">تسوق الآن</button>
+                <button class="hero-btn" onclick="window.goPage('hoodies')">تسوق الكولكشن</button>
             </div>
         </div>
-        <div class="section-title">الأكثر مبيعاً 🔥</div>
-        <div class="grid" id="grid-home"></div>
+        
+        <div class="sec-title">الأكثر مبيعاً 🔥</div>
+        <div class="grid" id="home-grid"></div>
+        
+        <footer>
+            <p>جميع الحقوق محفوظة © 2026 DISHA BRAND</p>
+            <p>Designed by <span>Ahmed Mohamed</span></p>
+        </footer>
     </div>
 
     <div id="hoodies" class="page">
-        <div class="section-title" style="margin-top: 20px;">قسم الهوديز</div>
-        <div class="grid" id="grid-hoodies"></div>
+        <div class="sec-title" style="margin-top: 20px;">الهوديز & السويت شيرت</div>
+        <div class="grid" id="hoodies-grid"></div>
+        <footer><p>Designed by <span>Ahmed Mohamed</span></p></footer>
     </div>
 
     <div id="pants" class="page">
-        <div class="section-title" style="margin-top: 20px;">قسم البناطيل</div>
-        <div class="grid" id="grid-pants"></div>
+        <div class="sec-title" style="margin-top: 20px;">البناطيل & الجينز</div>
+        <div class="grid" id="pants-grid"></div>
+        <footer><p>Designed by <span>Ahmed Mohamed</span></p></footer>
     </div>
 
     <div id="viewer" class="modal">
         <div class="modal-head">
-            <span style="color:var(--gold); font-weight:bold; font-size:1.1rem" id="vName">اسم المنتج</span>
-            <span style="color:white; font-size:1.5rem; cursor:pointer;" onclick="closeM('viewer')">✕</span>
+            <h3 style="color: var(--gold); margin:0;" id="vName">اسم المنتج</h3>
+            <button onclick="window.closeViewer()" style="background: none; border: none; color: white; font-size: 1.5rem;">✕</button>
         </div>
-        <div class="modal-body">
-            <img src="" id="vImg" class="big-img" onerror="this.src='https://placehold.co/400x400/111/D4AF37?text=DISHA'">
-            
-            <div id="btns-sw" style="display:flex; gap:10px; justify-content:center; margin-bottom:15px;">
-                <button onclick="swImg('f')" style="padding:10px 20px; background:#333; color:white; border:none; border-radius:5px;">الوش</button>
-                <button onclick="swImg('b')" style="padding:10px 20px; background:#333; color:white; border:none; border-radius:5px;">الضهر</button>
+        <div class="modal-content">
+            <img src="" id="vImg" class="main-img" onerror="this.src='https://placehold.co/400x400/111/D4AF37?text=LOADING...'">
+            <div id="imgControls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                <button onclick="window.changeSide('f')" style="padding: 8px 25px; background: #222; color: white; border: 1px solid #444; border-radius: 20px;">الوش</button>
+                <button onclick="window.changeSide('b')" style="padding: 8px 25px; background: #222; color: white; border: 1px solid #444; border-radius: 20px;">الضهر</button>
             </div>
-
-            <h2 style="color:var(--gold); margin-bottom:10px;" id="vPrice">000</h2>
-            <button class="btn-buy" onclick="openForm()">اطلب الآن (واتساب)</button>
+            <h2 style="color: var(--gold); margin-bottom: 10px; font-size: 2rem;" id="vPrice">000</h2>
+            <button class="action-btn whatsapp" onclick="window.showOrderForm()"><i class="fab fa-whatsapp"></i> اطلب الآن</button>
         </div>
     </div>
 
-    <div id="form" class="modal" style="justify-content:center;">
-        <div style="background:#151515; padding:20px; width:90%; max-width:400px; border:1px solid var(--gold); border-radius:10px; margin:auto;">
-            <h3 style="color:var(--gold); text-align:center; margin-bottom:20px;">بيانات الشحن</h3>
-            <input id="fName" class="inp" type="text" placeholder="الاسم بالكامل">
-            <select id="fGov" class="inp" onchange="loadCity()"><option value="">اختر المحافظة...</option></select>
-            <select id="fCity" class="inp" disabled><option value="">اختر المدينة...</option></select>
-            <input id="fAddr" class="inp" type="text" placeholder="العنوان بالتفصيل">
-            <button class="btn-buy" onclick="sendWa()">إرسال الطلب</button>
-            <button onclick="closeM('form')" style="width:100%; padding:10px; background:transparent; border:1px solid #555; color:#ccc; margin-top:10px; border-radius:5px;">إلغاء</button>
+    <div id="orderForm" class="modal" style="background: rgba(0,0,0,0.95); justify-content: center;">
+        <div style="background: #141414; padding: 20px; width: 90%; max-width: 400px; border: 2px solid var(--gold); border-radius: 15px; margin: auto;">
+            <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">بيانات الشحن</h3>
+            <input type="text" id="cName" class="inp" placeholder="الاسم بالكامل">
+            <select id="cGov" class="inp" onchange="window.loadCities()"><option value="">اختر المحافظة...</option></select>
+            <select id="cCity" class="inp" disabled><option value="">اختر المدينة...</option></select>
+            <input type="text" id="cAddr" class="inp" placeholder="العنوان بالتفصيل ورقم التليفون">
+            <button class="action-btn whatsapp" onclick="window.sendWhatsapp()">تأكيد واتساب</button>
+            <button class="action-btn call" onclick="window.open('tel:01117943368')">اتصال هاتفي</button>
+            <button class="action-btn cancel" onclick="document.getElementById('orderForm').style.display='none'">إلغاء</button>
         </div>
     </div>
 
     <script>
-        // داتا المحافظات
-        const govs = {
-            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا"],
-            "الجيزة": ["الهرم", "فيصل", "الدقي", "6 أكتوبر", "الشيخ زايد"],
+        const egyptGovs = {
+            "القاهرة": ["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع", "شبرا", "وسط البلد", "المرج"],
+            "الجيزة": ["الهرم", "فيصل", "الدقي", "المهندسين", "6 أكتوبر", "الشيخ زايد", "إمبابة"],
             "الإسكندرية": ["سموحة", "ميامي", "المنتزه", "العجمي"],
-            "القليوبية": ["بنها", "شبرا الخيمة", "العبور"],
+            "القليوبية": ["بنها", "شبرا الخيمة", "قليوب", "العبور"],
             "باقي المحافظات": ["أخرى"]
         };
 
-        // داتا المنتجات (تم وضع روابطك + كود حماية للصور)
-        const items = [
-            {id:1, t:'top', n:'Hoodie Skull Black', p:600, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
-            {id:2, t:'top', n:'Hoodie Dope Shine', p:600, f:'https://i.postimg.cc/Xv0Xy5Qj/1000012716.jpg', b:'https://i.postimg.cc/GmR2gq4P/1000012717.jpg'},
-            {id:3, t:'top', n:'Zip-Up Preface Black', p:650, f:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg', b:'https://i.postimg.cc/k4vj4X8h/1000012700.jpg'},
-            {id:4, t:'top', n:'Zip-Up Preface White', p:650, f:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg', b:'https://i.postimg.cc/7Zh0V1P2/1000012701.jpg'},
-            {id:5, t:'bottom', n:'Jeans Light Blue', p:600, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
-            {id:6, t:'bottom', n:'Jeans Mod 1', p:600, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
-            {id:7, t:'top', n:'Hoodie Eye & Hand', p:600, f:'https://i.postimg.cc/HWQ7xW1L/1000012695.jpg', b:'https://i.postimg.cc/qRJ1zL9z/1000012696.jpg'},
-            {id:8, t:'top', n:'Hoodie Angel Wings', p:600, f:'https://i.postimg.cc/Qd1n4yqR/1000012698.jpg', b:'https://i.postimg.cc/Prh5xWqL/1000012697.jpg'},
-            {id:9, t:'top', n:'Hoodie Graphic', p:600, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
-            {id:10, t:'top', n:'Tracksuit Black', p:900, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
-            {id:11, t:'top', n:'Premium Sweatshirt', p:800, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
-            {id:12, t:'bottom', n:'Jeans Mod 2', p:600, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
-            {id:13, t:'bottom', n:'Jeans Mod 3', p:600, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
-            {id:14, t:'bottom', n:'Jeans Mod 4', p:600, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
-            {id:15, t:'bottom', n:'Jeans Mod 5', p:600, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'},
-            {id:16, t:'top', n:'Sweatshirt Basic', p:650, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'}
+        // --- جميع المنتجات (تم وضع روابطك الأصلية من Postimg) ---
+        const products = [
+            // الهوديز (Top)
+            {id:1, type:'top', name:'هودي أسود Skull', price:600, old:750, f:'https://i.postimg.cc/5tmyCWVq/ddf7ab69bd3b4107acc21fe160cecc8e.jpg', b:'https://i.postimg.cc/jjh27Ybc/6e9c779330a243aa9726ab1264d436b7.jpg'},
+            {id:2, type:'top', name:'سويت شيرت أبيض Basic', price:650, old:800, f:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg', b:'https://i.postimg.cc/ydYdhp1j/81b107ef7281417dad506780ee8cdd5d.jpg'},
+            {id:3, type:'top', name:'هودي أوف وايت Graphic', price:600, old:750, f:'https://i.postimg.cc/MGYHQJSD/913fce38965c45a6a297f01e01ddd50b.jpg', b:'https://i.postimg.cc/25xyZND0/acbeec02f32e4d6eb68a1c323fed0dda.jpg'},
+            {id:4, type:'top', name:'سويت شيرت رصاصي Basic', price:650, old:800, f:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg', b:'https://i.postimg.cc/0Q2QGXkf/c603bcbcda67413a83ebcffb745fd8d1.jpg'},
+            {id:5, type:'top', name:'سويت شيرت أسود Basic', price:650, old:800, f:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg', b:'https://i.postimg.cc/N0xFHvcb/ef64e6c8b8fe4c388e355eaf81ca510d.jpg'},
+            {id:6, type:'top', name:'سويت شيرت بريميم أسود', price:800, old:1000, f:'https://i.postimg.cc/3w9pHvdY/fdf4556fed264436ad7d20d231c3c0ff.jpg', b:'https://i.postimg.cc/hjjm4t7H/b99d7c0aa746486eb9e54f8e1e309cef.jpg'},
+            {id:7, type:'top', name:'سويت شيرت بريميم بيج', price:800, old:1000, f:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg', b:'https://i.postimg.cc/xdqHndH8/a31bad4a4c794a1ba0098a7fd72eb982.jpg'},
+            {id:8, type:'top', name:'ترنج كامل أسود', price:900, old:1000, f:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg', b:'https://i.postimg.cc/TPhmfPmd/d42e2e329d3e4c049e3e0c887dce5463.jpg'},
+            {id:9, type:'top', name:'ترنج كامل رصاصي', price:900, old:1000, f:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg', b:'https://i.postimg.cc/pdy8Rd8d/eccd0f68a93241ed84eda8827c2bba92.jpg'},
+            {id:10, type:'top', name:'سويت شيرت High End', price:1300, old:1500, f:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg', b:'https://i.postimg.cc/bvdbpvbN/ff9b3cbaab694db8bcf404a4c3c63868.jpg'},
+            {id:18, type:'top', name:'هودي رصاصي طباعة', price:600, old:700, f:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg', b:'https://i.postimg.cc/VNFvCP8W/f7892057f51040328974bff228367d1f.jpg'},
+            // البناطيل (Bottom)
+            {id:11, type:'bottom', name:'بنطلون كارجو/جينز', price:700, old:800, f:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg', b:'https://i.postimg.cc/SK0qNTYx/69f03da0d15e42ce878cd7818fa0b75f.jpg'},
+            {id:12, type:'bottom', name:'جينز Light Blue', price:600, old:750, f:'https://i.postimg.cc/zByvgp1V/IMG_20260210_WA0023.jpg', b:'https://i.postimg.cc/j5D27vrD/IMG-20260210-WA0022.jpg'},
+            {id:13, type:'bottom', name:'جينز Mod 1', price:600, old:750, f:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg', b:'https://i.postimg.cc/TPzMtcWZ/IMG_20260211_WA0000.jpg'},
+            {id:14, type:'bottom', name:'جينز Mod 2', price:600, old:750, f:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg', b:'https://i.postimg.cc/d0kcRfLP/IMG_20260211_WA0001.jpg'},
+            {id:15, type:'bottom', name:'جينز Mod 3', price:600, old:750, f:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg', b:'https://i.postimg.cc/8C2QZbr3/IMG_20260211_WA0002.jpg'},
+            {id:16, type:'bottom', name:'جينز Mod 4', price:600, old:750, f:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg', b:'https://i.postimg.cc/bv7cmR24/IMG_20260211_WA0003.jpg'},
+            {id:17, type:'bottom', name:'جينز Mod 5', price:600, old:750, f:'https://i.postimg.cc/XJb1Z15q/IMG_20260211_WA0004.jpg', b:'https://i.postimg.cc/Kz2pKpTR/IMG_20260211_WA0005.jpg'}
         ];
 
-        let curr = null;
+        let currentP = null;
 
-        // التشغيل
         window.onload = function() {
-            // ملء المحافظات
-            const s = document.getElementById('fGov');
-            for(let g in govs) { let o = document.createElement('option'); o.value=g; o.innerText=g; s.appendChild(o); }
+            // تحميل المحافظات
+            const govSel = document.getElementById('cGov');
+            for (let gov in egyptGovs) {
+                let opt = document.createElement('option');
+                opt.value = gov; opt.innerText = gov;
+                govSel.appendChild(opt);
+            }
 
-            // عرض المنتجات
-            render(items.filter(i => [3, 2, 5, 10].includes(i.id)), 'grid-home');
-            render(items.filter(i => i.t === 'top'), 'grid-hoodies');
-            render(items.filter(i => i.t === 'bottom'), 'grid-pants');
+            // عرض المنتجات في الرئيسية (أهم 4 منتجات)
+            // اخترنا هودي، ترنج، بنطلون، سويت شيرت
+            window.render(products.filter(p => [1, 8, 12, 18].includes(p.id)), 'home-grid');
+            
+            // عرض الصفحات الأخرى
+            window.render(products.filter(p => p.type === 'top'), 'hoodies-grid');
+            window.render(products.filter(p => p.type === 'bottom'), 'pants-grid');
         };
 
-        function render(arr, id) {
-            const el = document.getElementById(id);
-            el.innerHTML = '';
-            arr.forEach(i => {
-                el.innerHTML += `
-                <div class="card">
-                    <div class="img-box" onclick="show(${i.id})">
-                        <img src="${i.f}" onerror="this.src='https://placehold.co/600x600/111/D4AF37?text=DISHA+BRAND'">
+        window.loadCities = function() {
+            const gov = document.getElementById('cGov').value;
+            const citySel = document.getElementById('cCity');
+            citySel.innerHTML = '<option value="">اختر المدينة...</option>';
+            citySel.disabled = true;
+            if (gov && egyptGovs[gov]) {
+                citySel.disabled = false;
+                egyptGovs[gov].forEach(city => {
+                    let opt = document.createElement('option');
+                    opt.value = city; opt.innerText = city;
+                    citySel.appendChild(opt);
+                });
+            }
+        }
+
+        window.render = function(list, id) {
+            const container = document.getElementById(id);
+            if(!container) return;
+            container.innerHTML = '';
+            list.forEach(p => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="badge">SALE</div>
+                        <div class="img-area" onclick="window.openViewer(${p.id})">
+                            <img src="${p.f}" loading="lazy" onerror="this.src='https://placehold.co/400x400/222/D4AF37?text=DISHA'">
+                        </div>
+                        <div class="details">
+                            <div class="p-title">${p.name}</div>
+                            <div><span class="price">${p.price} ج.م</span> <span class="old-price">${p.old}</span></div>
+                            <button class="buy-btn" onclick="window.openViewer(${p.id})">التفاصيل</button>
+                        </div>
                     </div>
-                    <div class="info">
-                        <div class="p-name">${i.n}</div>
-                        <div class="price">${i.p} ج.م</div>
-                        <button class="btn-details" onclick="show(${i.id})">التفاصيل</button>
-                    </div>
-                </div>`;
+                `;
             });
         }
 
-        // التنقل
-        window.go = function(id) {
-            document.querySelectorAll('.page').forEach(p => p.style.display='none');
-            document.getElementById(id).style.display='block';
+        window.goPage = function(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            if(document.getElementById('b-'+id)) document.getElementById('b-'+id).classList.add('active');
+            document.getElementById('btn-' + pageId).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // المودال
-        window.show = function(id) {
-            curr = items.find(x => x.id === id);
-            document.getElementById('vName').innerText = curr.n;
-            document.getElementById('vPrice').innerText = curr.p + " ج.م";
-            document.getElementById('vImg').src = curr.f;
+        window.openViewer = function(id) {
+            currentP = products.find(p => p.id === id);
+            if(!currentP) return;
+            document.getElementById('vName').innerText = currentP.name;
+            document.getElementById('vPrice').innerText = currentP.price + " ج.م";
+            document.getElementById('vImg').src = currentP.f;
             
-            // إخفاء زراير التبديل لو الصور زي بعض
-            document.getElementById('btns-sw').style.display = (curr.f === curr.b) ? 'none' : 'flex';
+            const controls = document.getElementById('imgControls');
+            if (currentP.f === currentP.b) controls.style.display = 'none';
+            else controls.style.display = 'flex';
             
             document.getElementById('viewer').style.display = 'flex';
         }
 
-        window.closeM = function(id) { document.getElementById(id).style.display='none'; }
-        window.swImg = function(s) { document.getElementById('vImg').src = (s==='f') ? curr.f : curr.b; }
-        window.openForm = function() { closeM('viewer'); document.getElementById('form').style.display='flex'; }
+        window.closeViewer = function() { document.getElementById('viewer').style.display = 'none'; }
+        window.changeSide = function(side) { document.getElementById('vImg').src = (side === 'f') ? currentP.f : currentP.b; }
+        window.showOrderForm = function() { window.closeViewer(); document.getElementById('orderForm').style.display = 'flex'; }
 
-        window.loadCity = function() {
-            const g = document.getElementById('fGov').value;
-            const c = document.getElementById('fCity');
-            c.innerHTML = '<option>اختر المدينة...</option>';
-            c.disabled = true;
-            if(govs[g]) {
-                c.disabled = false;
-                govs[g].forEach(x => { let o=document.createElement('option'); o.value=x; o.innerText=x; c.appendChild(o); });
-            }
-        }
-
-        window.sendWa = function() {
-            const n=document.getElementById('fName').value;
-            const g=document.getElementById('fGov').value;
-            const c=document.getElementById('fCity').value;
-            const a=document.getElementById('fAddr').value;
-            
-            if(!n || !g || !c || !a) { alert('من فضلك أكمل البيانات'); return; }
-            
-            const msg = `طلب جديد: ${curr.n}%0aالسعر: ${curr.p}%0aالعميل: ${n}%0aالعنوان: ${g} - ${c} - ${a}`;
-            window.open(`https://wa.me/201284381589?text=${msg}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+        window.sendWhatsapp = function() {
+            const n = document.getElementById('cName').value;
+            const gov = document
+                    
